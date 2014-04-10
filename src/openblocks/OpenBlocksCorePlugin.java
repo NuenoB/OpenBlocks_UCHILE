@@ -32,7 +32,6 @@ public class OpenBlocksCorePlugin implements IFMLLoadingPlugin {
 	@Override
 	public void injectData(Map<String, Object> data) {}
 
-	@Override
 	@Deprecated
 	public String[] getLibraryRequestClass() {
 		return null;
