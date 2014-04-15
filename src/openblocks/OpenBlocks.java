@@ -270,6 +270,10 @@ public class OpenBlocks {
 
 		@RegisterItem(name = "wallpaper")
 		public static ItemWallpaper wallpaper;
+		
+		//NUEVO ITEM
+		@RegisterItem(name = "Dagger")
+		public static ItemDagger dagger;
 
 	}
 

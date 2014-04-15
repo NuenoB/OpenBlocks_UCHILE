@@ -224,6 +224,10 @@ public class Config {
 	@ItemId(description = "The id of wallpaper")
 	public static int itemWallpaperId = 15000;
 
+	//NUEVO ITEM
+	@ItemId(description = "The id of a dagger")
+	public static int itemDagger=15001;
+	
 	@OnLineModifiable
 	@ConfigProperty(category = "dropblock", name = "searchDistance", comment = "The range of the drop block")
 	public static int elevatorTravelDistance = 20;
