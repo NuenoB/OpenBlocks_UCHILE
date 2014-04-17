@@ -226,7 +226,7 @@ public class Config {
 
 	//NUEVO ITEM
 	@ItemId(description = "The id of a dagger")
-	public static int itemDagger=15001;
+	public static int itemDaggerId=15001;
 	
 	@OnLineModifiable
 	@ConfigProperty(category = "dropblock", name = "searchDistance", comment = "The range of the drop block")
@@ -803,6 +803,10 @@ public class Config {
 
 		}
 
+		//Nuevo item
+		if (itemDaggerId > 0){
+			OpenBlocks.Items.dagger = new ItemDagger();
+		}
 		final String modId = "openblocks";
 		ConfigProcessing.registerItems(OpenBlocks.Items.class, modId);
 		ConfigProcessing.registerBlocks(OpenBlocks.Blocks.class, modId);

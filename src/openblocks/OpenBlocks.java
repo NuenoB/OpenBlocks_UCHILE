@@ -272,7 +272,7 @@ public class OpenBlocks {
 		public static ItemWallpaper wallpaper;
 		
 		//NUEVO ITEM
-		@RegisterItem(name = "Dagger")
+		@RegisterItem(name = "Dagger", unlocalizedName= "dagger")
 		public static ItemDagger dagger;
 
 	}
