@@ -14,7 +14,8 @@ import net.minecraftforge.event.world.BlockEvent;
 import openmods.OpenMods;
 import openmods.utils.BlockProperties;
 import openmods.utils.Coord;
-import openmods.utils.OpenModsFakePlayer;
+//import openmods.utils.OpenModsFakePlayer;
+import openmods.fakeplayer.OpenModsFakePlayer;
 
 public class EntityAIBreakBlock extends EntityAIBase {
 
@@ -81,7 +82,7 @@ public class EntityAIBreakBlock extends EntityAIBase {
 		if (!world.isRemote && blockCoord != null && canHarvestBlock(blockCoord)) {
 			if (entity.getDistance(0.5 + blockCoord.x, 0.5 + blockCoord.y, 0.5 + blockCoord.z) < 1.0) {
 
-				EntityPlayer fakePlayer = new OpenModsFakePlayer(world);
+				EntityPlayer fakePlayer = new OpenModsFakePlayer(world,0);//agrga un int
 				fakePlayer.inventory.currentItem = 0;
 
 				Block block = BlockProperties.getBlock(blockCoord, world);

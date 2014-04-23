@@ -15,7 +15,8 @@ import openmods.include.IExtendable;
 import openmods.include.IncludeInterface;
 import openmods.tileentity.OpenTileEntity;
 import openmods.utils.InventoryUtils;
-import openmods.utils.OpenModsFakePlayer;
+//import openmods.utils.OpenModsFakePlayer;
+import openmods.fakeplayer.OpenModsFakePlayer;
 
 public class TileEntityItemDropper extends OpenTileEntity implements INeighbourAwareTile, IInventoryProvider, IExtendable, IHasGui {
 	static final int BUFFER_SIZE = 9;
@@ -47,7 +48,7 @@ public class TileEntityItemDropper extends OpenTileEntity implements INeighbourA
 				inventory.setInventorySlotContents(i, null);
 			}
 
-			OpenModsFakePlayer player = new OpenModsFakePlayer(worldObj);
+			OpenModsFakePlayer player = new OpenModsFakePlayer(worldObj,0);
 			player.dropItemAt(dropped, xCoord, yCoord, zCoord, ForgeDirection.DOWN);
 			player.setDead();
 

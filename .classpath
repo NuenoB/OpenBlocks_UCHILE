@@ -4,6 +4,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="integration"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Minecraft"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/openmodslib"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/OpenModsLib"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

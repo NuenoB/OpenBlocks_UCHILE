@@ -17,7 +17,7 @@ import openmods.include.IExtendable;
 import openmods.include.IncludeInterface;
 import openmods.tileentity.OpenTileEntity;
 import openmods.utils.InventoryUtils;
-import openmods.utils.OpenModsFakePlayer;
+import openmods.fakeplayer.OpenModsFakePlayer;
 
 public class TileEntityBlockPlacer extends OpenTileEntity implements INeighbourAwareTile, IHasGui, IExtendable, IInventoryProvider {
 
@@ -47,7 +47,7 @@ public class TileEntityBlockPlacer extends OpenTileEntity implements INeighbourA
 		for (int i = 0, l = inventory.getSizeInventory(); i < l; i++) {
 			ItemStack stack = inventory.getStackInSlot(i);
 			if (stack == null || stack.stackSize == 0) continue;
-			OpenModsFakePlayer fakePlayer = new OpenModsFakePlayer(worldObj);
+			OpenModsFakePlayer fakePlayer = new OpenModsFakePlayer(worldObj,0);
 			ItemStack newStack = fakePlayer.equipWithAndRightClick(stack,
 					Vec3.createVectorHelper(xCoord, yCoord, zCoord),
 					Vec3.createVectorHelper(x, y - 1, z),

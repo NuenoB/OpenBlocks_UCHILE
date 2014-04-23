@@ -25,7 +25,8 @@ import openmods.sync.SyncableBoolean;
 import openmods.tileentity.SyncedTileEntity;
 import openmods.utils.BlockUtils;
 import openmods.utils.InventoryUtils;
-import openmods.utils.OpenModsFakePlayer;
+//import openmods.utils.OpenModsFakePlayer;
+import openmods.fakeplayer.OpenModsFakePlayer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -90,7 +91,7 @@ public class TileEntityBlockBreaker extends SyncedTileEntity implements INeighbo
 			if (block != null) {
 				int metadata = worldObj.getBlockMetadata(x, y, z);
 				if (block != Block.bedrock && block.getBlockHardness(worldObj, z, y, z) > -1.0F) {
-					EntityPlayer fakePlayer = new OpenModsFakePlayer(worldObj);
+					EntityPlayer fakePlayer = new OpenModsFakePlayer(worldObj,0);
 					fakePlayer.inventory.currentItem = 0;
 					fakePlayer.inventory.setInventorySlotContents(0, new ItemStack(Item.pickaxeDiamond, 0, 0));
 
