@@ -283,6 +283,9 @@ item.openblocks.tuned_crystal.name=Tuned Crystal
 
 item.openblocks.wallpaper.name=Wallpaper
 
+item.openblocks.dagger.name=Dagger
+item.openblocks.fire_dagger.name=Fire Dagger
+
 itemGroup.tabOpenBlocks=OpenBlocks
 
 entity.OpenBlocks.Luggage.name=Luggage

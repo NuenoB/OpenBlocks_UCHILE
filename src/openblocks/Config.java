@@ -32,6 +32,7 @@ import openmods.utils.ColorUtils.ColorMeta;
 
 public class Config {
 
+	/** Tipo de item junto a su ID**/
 	@BlockId(description = "The id of the ladder")
 	public static int blockLadderId = 2540;
 
@@ -224,9 +225,13 @@ public class Config {
 	@ItemId(description = "The id of wallpaper")
 	public static int itemWallpaperId = 15000;
 
-	//NUEVO ITEM
+	//Daga
 	@ItemId(description = "The id of a dagger")
-	public static int itemDaggerId=15001;
+	private static int itemDaggerId=15001;
+	
+	//Daga de Fuego
+	@ItemId(description = "The id of a fire dagger")
+	private static int itemFireDaggerId=15002;
 	
 	@OnLineModifiable
 	@ConfigProperty(category = "dropblock", name = "searchDistance", comment = "The range of the drop block")
@@ -402,6 +407,7 @@ public class Config {
 	@ConfigProperty(category = "fan", name = "isRedstoneActivated", comment = "Is fan force controlled by redstone current")
 	public static boolean redstoneActivatedFan = true;
 
+	/** Registrar un nuevo item**/
 	public static void register() {
 
 		MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
@@ -803,10 +809,9 @@ public class Config {
 
 		}
 
-		//Nuevo item
-		if (itemDaggerId > 0){
-			OpenBlocks.Items.dagger = new ItemDagger();
-		}
+		//Daga
+		OpenBlocks.Items.dagger = new ItemDagger(itemDaggerId);
+		OpenBlocks.Items.fireDagger = new ItemFireDagger(itemFireDaggerId);
 		final String modId = "openblocks";
 		ConfigProcessing.registerItems(OpenBlocks.Items.class, modId);
 		ConfigProcessing.registerBlocks(OpenBlocks.Blocks.class, modId);

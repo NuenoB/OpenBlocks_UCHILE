@@ -191,6 +191,7 @@ public class OpenBlocks {
 		public static BlockGoldenEgg goldenEgg;
 	}
 
+	/** Clase que contiene una instancia de todos los items **/
 	public static class Items {
 
 		@RegisterItem(name = "hangglider")
@@ -271,9 +272,13 @@ public class OpenBlocks {
 		@RegisterItem(name = "wallpaper")
 		public static ItemWallpaper wallpaper;
 		
-		//NUEVO ITEM
+		//Daga
 		@RegisterItem(name = "Dagger", unlocalizedName= "dagger")
 		public static ItemDagger dagger;
+		
+		//Daga de Fuego
+		@RegisterItem(name = "FireDagger", unlocalizedName= "fire_dagger")
+		public static ItemDagger fireDagger;
 
 	}
 
