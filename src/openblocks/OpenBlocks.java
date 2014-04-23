@@ -81,6 +81,9 @@ public class OpenBlocks {
 
 		@RegisterBlock(name = "guide", tileEntity = TileEntityGuide.class)
 		public static BlockGuide guide;
+		
+		@RegisterBlock(name = "myguide", tileEntity = TileEntityMyGuide.class)
+		public static BlockMyGuide myguide;
 
 		@RegisterBlock(name = "elevator", tileEntity = TileEntityElevator.class)
 		public static BlockElevator elevator;
