@@ -27,11 +27,16 @@ public interface IShapeGen extends IShapeGenerator{
 	 * Define ciertos detalles a la figura generada
 	 * @param entityPos Las coordenadas de la entidad
 	 * @param worldObj El worldObject
-	 * @return El arreglo con los BlockRepresetation de los detalles a agregar
+	 * @return El arreglo con los BlockRepresentation de los detalles a agregar
 	 */
 	public ArrayList<BlockRepresentation> fill(ChunkCoordinates entityPos, World worldObj);
 	
+	/**
+	 * Devuelve un array con la representación de los bloques que requiere de condición para ejecutar 
+	 * el llenado de la figura
+	 * @param entityPos Las coordenadas de la entidad
+	 * @return El arreglo con los BlockRepresentation que representan las posibles condiciones
+	 */
 	public ArrayList<BlockRepresentation> fillConditions(ChunkCoordinates entityPos); 
-
 
 }
