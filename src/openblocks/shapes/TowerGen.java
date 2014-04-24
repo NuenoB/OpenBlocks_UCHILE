@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 import openblocks.common.tileentity.TileEntityRopeLadder;
 import openmods.shapes.IShapeGenerator;
 import openmods.shapes.IShapeable;
+import openmods.shapes.ShapeEquilateral2dGenerator;
 import openmods.utils.BlockNotifyFlags;
 import openmods.utils.MathUtils;
 
@@ -24,6 +25,17 @@ public class TowerGen implements IShapeGen {
 
 		new ShapeCylinderGen().generateShape(depth, height, width, shapeable);
 		new ShapeXPlaneGen().generateShape(depth, height, width, shapeable);
+		new ShapeEquilateralSquareGen().generateShape(depth, height+1, width, shapeable);
+		
+		shapeable.setBlock(0, height+2, width);
+		shapeable.setBlock(0, height+2, -width);
+		shapeable.setBlock(depth, height+2, 0);
+		shapeable.setBlock(-depth, height+2, 0);
+		
+		shapeable.setBlock(-depth, height+2, width);
+		shapeable.setBlock(depth, height+2, width);
+		shapeable.setBlock(depth, height+2, -width);
+		shapeable.setBlock(-depth, height+2, -width);
 	}
 	
 
