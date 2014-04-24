@@ -82,7 +82,7 @@ public class OpenBlocks {
 		@RegisterBlock(name = "guide", tileEntity = TileEntityGuide.class)
 		public static BlockGuide guide;
 		
-		@RegisterBlock(name = "mine", tileEntity = TileEntityGuide.class)
+		@RegisterBlock(name = "mine", tileEntity = TileEntityMine.class)
 		public static BlockMine mine;
 
 		@RegisterBlock(name = "elevator", tileEntity = TileEntityElevator.class)
@@ -193,8 +193,7 @@ public class OpenBlocks {
 		@RegisterBlock(name = "goldenEgg", tileEntity = TileEntityGoldenEgg.class)
 		public static BlockGoldenEgg goldenEgg;
 		
-		//@RegisterBlock(name = "blockmine",tileEn
-		
+
 		
 	}
 

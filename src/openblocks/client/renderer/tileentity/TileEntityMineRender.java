@@ -10,24 +10,25 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import openblocks.OpenBlocks;
 import openblocks.common.tileentity.TileEntityGuide;
+import openblocks.common.tileentity.TileEntityMine;
 
 import org.lwjgl.opengl.GL11;
 
-public class TileEntityMine extends TileEntitySpecialRenderer {
+public class TileEntityMineRender extends TileEntitySpecialRenderer {
 
 	private final RenderBlocks renderBlocks = new RenderBlocks();
 	private static final ResourceLocation texture = new ResourceLocation("openblocks", "textures/blocks/guide.png");
 
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
-		TileEntityGuide guide = (TileEntityGuide)tileentity;
+		TileEntityMine mine = (TileEntityMine)tileentity;
 
 		bindTexture(TextureMap.locationBlocksTexture);
 
-		float scaleDelta = guide.getTimeSinceChange();
-		renderShape(guide.getShape(), guide.getHeight(), guide.getWidth(), guide.getDepth(), x, y, z, scaleDelta);
+		float scaleDelta = mine.getTimeSinceChange();
+		renderShape(mine.getShape(), mine.getHeight(), mine.getWidth(), mine.getDepth(), x, y, z, scaleDelta);
 		if (scaleDelta < 1.0) {
-			renderShape(guide.getPreviousShape(), guide.getHeight(), guide.getWidth(), guide.getDepth(), x, y, z, 1.0f - scaleDelta);
+			renderShape(mine.getPreviousShape(), mine.getHeight(), mine.getWidth(), mine.getDepth(), x, y, z, 1.0f - scaleDelta);
 		}
 	}
 

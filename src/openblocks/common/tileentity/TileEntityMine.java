@@ -13,6 +13,7 @@ import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraftforge.common.ForgeDirection;
 import openblocks.api.IShapeProvider;
+import openblocks.shapes.BuildingShapes;
 import openblocks.shapes.GuideShape;
 import openmods.Log;
 import openmods.api.IActivateAwareTile;
@@ -24,7 +25,7 @@ import openmods.utils.BlockNotifyFlags;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TileEntityGuide extends SyncedTileEntity implements IShapeable, IShapeProvider, IActivateAwareTile {
+public class TileEntityMine extends SyncedTileEntity implements IShapeable, IShapeProvider, IActivateAwareTile {
 
 	private boolean shape[][][];
 	private boolean previousShape[][][];
@@ -34,15 +35,19 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 	protected SyncableInt height;
 	protected SyncableInt depth;
 	protected SyncableInt mode;
+	
+	private int mMaxW = 8;
+	private int mMaxH = 8;
+	private int mMaxD = 8;
 
-	public TileEntityGuide() {}
+	public TileEntityMine() {}
 
 	@Override
 	protected void createSyncedFields() {
-		width = new SyncableInt(8);
-		height = new SyncableInt(8);
-		depth = new SyncableInt(8);
-		mode = new SyncableInt(1);
+		width = new SyncableInt(0);
+		height = new SyncableInt(0);
+		depth = new SyncableInt(0);
+		mode = new SyncableInt(0);
 	}
 
 	public int getWidth() {
@@ -58,19 +63,22 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 	}
 
 	public void setWidth(int w) {
+
 		width.setValue(w);
 	}
 
 	public void setDepth(int d) {
+
 		depth.setValue(d);
 	}
 
 	public void setHeight(int h) {
+		mMaxH = h > mMaxH? h: mMaxH;
 		height.setValue(h);
 	}
 
-	public GuideShape getCurrentMode() {
-		return GuideShape.values()[mode.getValue()];
+	public BuildingShapes getCurrentMode() {
+		return BuildingShapes.values()[0];
 	}
 
 	@Override
@@ -88,7 +96,8 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 
 	private void recreateShape() {
 		previousShape = shape;
-		shape = new boolean[getHeight() * 2 + 1][getWidth() * 2 + 1][getDepth() * 2 + 1];
+		shape = new boolean[mMaxH * 2 + 1][mMaxW * 2 + 1][mMaxD * 2 + 1];
+
 		getCurrentMode().generator.generateShape(getWidth(), getHeight(), getDepth(), this);
 		timeSinceChange = 0;
 	}
@@ -96,9 +105,9 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 	@Override
 	public void setBlock(int x, int y, int z) {
 		try {
-			shape[getHeight() + y][getWidth() + x][getDepth() + z] = true;
+			shape[mMaxH + y][mMaxW + x][mMaxD + z] = true;
 		} catch (IndexOutOfBoundsException iobe) {
-			Log.warn(iobe, "Index out of bounds setting block at %d,%d,%d", x, y, z);
+			Log.warn(iobe, "Index out of bounds setting block at %d,%d,%d %d,%d,%d", x, y, z, shape.length, shape[0].length,shape[0][0].length);
 		}
 	}
 
@@ -142,17 +151,17 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 	}
 
 	private void changeDimensions(ForgeDirection orientation) {
-		if (width.getValue() > 0 && orientation == ForgeDirection.EAST) {
+		if (width.getValue() + 13> 0 && orientation == ForgeDirection.EAST) {
 			width.modify(-1);
 		} else if (orientation == ForgeDirection.WEST) {
 			width.modify(1);
 		} else if (orientation == ForgeDirection.NORTH) {
 			depth.modify(1);
-		} else if (depth.getValue() > 0 && orientation == ForgeDirection.SOUTH) {
+		} else if (depth.getValue() + 13 > 0 && orientation == ForgeDirection.SOUTH) {
 			depth.modify(-1);
 		} else if (orientation == ForgeDirection.UP) {
 			height.modify(1);
-		} else if (height.getValue() > 0 && orientation == ForgeDirection.DOWN) {
+		} else if (height.getValue() + 13> 0 && orientation == ForgeDirection.DOWN) {
 			height.modify(-1);
 		}
 		if (getCurrentMode().fixedRatio) {
@@ -170,6 +179,8 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 				height.setValue(d);
 			}
 		}
+		mMaxD = Math.abs(depth.getValue()) + 5 < mMaxD? mMaxD: Math.abs(depth.getValue()) + 6;
+		mMaxW = Math.abs(width.getValue()) + 5 < mMaxW? mMaxW: Math.abs(width.getValue()) + 6;
 		recreateShape();
 		if (!worldObj.isRemote) {
 			sync();
