@@ -13,6 +13,7 @@ import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraftforge.common.ForgeDirection;
 import openblocks.api.IShapeProvider;
+import openblocks.shapes.BlockRepresentation;
 import openblocks.shapes.MyGuideShape;
 import openmods.Log;
 import openmods.api.IActivateAwareTile;
@@ -256,7 +257,10 @@ public class TileEntityMyGuide extends SyncedTileEntity implements IShapeable, I
 			worldObj.setBlock(coord.posX, coord.posY, coord.posZ, itemBlock.getBlockID(), itemBlock.getMetadata(held.getItemDamage()), BlockNotifyFlags.ALL);
 		}
 		
-		getCurrentMode().fill(new ChunkCoordinates(xCoord, yCoord, zCoord), worldObj);
+		for(BlockRepresentation b :getCurrentMode().fill(new ChunkCoordinates(xCoord, yCoord, zCoord), worldObj)){
+			worldObj.setBlock(b.getCoord().posX, b.getCoord().posY, b.getCoord().posZ,
+					b.getBlockId(), b.getMetaData(), b.getFlags());
+		}
 		
 	}
 
@@ -276,6 +280,6 @@ public class TileEntityMyGuide extends SyncedTileEntity implements IShapeable, I
 	 * @return True si se cumplen las condiciones
 	 */
 	private boolean isInFillMode() {
-		return worldObj.getBlockId(xCoord, yCoord + 1, zCoord) == Block.obsidian.blockID;
+		return worldObj.getBlockId(xCoord, yCoord + 1, zCoord) == Block.blockEmerald.blockID;
 	}
 }

@@ -1,5 +1,7 @@
 package openblocks.shapes;
 
+import java.util.ArrayList;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemBlockWithMetadata;
@@ -10,7 +12,7 @@ import openmods.shapes.IShapeable;
 import openmods.utils.BlockNotifyFlags;
 import openmods.utils.MathUtils;
 
-public class ShapeRoofCylinderGen implements IShapebleGen {
+public class ShapeCylinderGen implements IShapeGen {
 
 	@Override
 	public void generateShape(int radiusX, int height, int radiusZ, IShapeable shapeable) {
@@ -52,16 +54,6 @@ public class ShapeRoofCylinderGen implements IShapebleGen {
 					shapeable.setBlock(-x, y, z);
 					shapeable.setBlock(x, y, -z);
 					shapeable.setBlock(-x, y, -z);
-//					if(y==height-1){
-//						for(int i=0; i<=radiusX; i++){
-//							for(int j=0; j<=radiusZ; j++){
-//								shapeable.setBlock(i, y, j);
-//								shapeable.setBlock(-i, y, j);
-//								shapeable.setBlock(i, y, -j);
-//								shapeable.setBlock(-i, y, -j);
-//							}
-//						}
-//					}
 				}
 			}
 		}
@@ -70,10 +62,16 @@ public class ShapeRoofCylinderGen implements IShapebleGen {
 	
 
 	@Override
-	public void fill(ChunkCoordinates coord, World worldObj) {
+	public ArrayList<BlockRepresentation> fill(ChunkCoordinates coord, World worldObj) {
 			//Poner una puerta en la base
-			worldObj.setBlock(coord.posX+3, coord.posY, coord.posZ, Block.doorWood.blockID, 1, 2);
-			worldObj.setBlock(coord.posX+3, coord.posY+1, coord.posZ, Block.doorWood.blockID, 8, 2);		
+			ArrayList<BlockRepresentation> array = new ArrayList<BlockRepresentation>();
+			
+			array.add(new BlockRepresentation(coord.posX+3, coord.posY,
+					coord.posZ, Block.doorWood.blockID, 1, 2));
+			array.add(new BlockRepresentation(coord.posX+3, coord.posY+1,
+					coord.posZ, Block.doorWood.blockID, 8, 2));
+			
+			return array;
 		
 	}
 

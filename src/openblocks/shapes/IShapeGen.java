@@ -1,11 +1,13 @@
 package openblocks.shapes;
 
+import java.util.ArrayList;
+
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import openmods.shapes.IShapeGenerator;
 import openmods.shapes.IShapeable;
 
-public interface IShapebleGen extends IShapeGenerator{
+public interface IShapeGen extends IShapeGenerator{
 
 	/**
 	 * Generates a shape and applies it to the shapeable object
@@ -22,6 +24,6 @@ public interface IShapebleGen extends IShapeGenerator{
 	 */
 	public void generateShape(int xSize, int ySize, int zSize, IShapeable shapeable);
 	
-	public void fill(ChunkCoordinates chunkCoordinates,  World worldObj);
+	public ArrayList<BlockRepresentation> fill(ChunkCoordinates chunkCoordinates, World worldObj);
 
 }

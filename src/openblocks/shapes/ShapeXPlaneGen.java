@@ -1,5 +1,7 @@
 package openblocks.shapes;
 
+import java.util.ArrayList;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemBlockWithMetadata;
@@ -10,7 +12,7 @@ import openmods.shapes.IShapeable;
 import openmods.utils.BlockNotifyFlags;
 import openmods.utils.MathUtils;
 
-public class ShapeXPlaneGen implements IShapebleGen {
+public class ShapeXPlaneGen implements IShapeGen {
 
 	@Override
 	public void generateShape(int x, int height, int z, IShapeable shapeable) {
@@ -28,8 +30,9 @@ public class ShapeXPlaneGen implements IShapebleGen {
 
 
 	@Override
-	public void fill(ChunkCoordinates coord, World worldObj) {
+	public ArrayList<BlockRepresentation> fill(ChunkCoordinates coord, World worldObj) {
 		//Nada necesario
+		return null;
 	}
 
 }

@@ -1,5 +1,7 @@
 package openblocks.shapes;
 
+import java.util.ArrayList;
+
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -12,14 +14,14 @@ import openmods.shapes.*;
  */
 public enum MyGuideShape {
 	Tower(false, new TowerGen(), "tower 1"),
-	RoofCylinder(false, new ShapeRoofCylinderGen(), "roof cylinder");
+	RoofCylinder(false, new ShapeCylinderGen(), "roof cylinder");
 
 
 	public final String unlocalizedName;
 	public final boolean fixedRatio;
-	public final IShapebleGen generator;
+	public final IShapeGen generator;
 
-	private MyGuideShape(boolean fixedRatio, IShapebleGen generator, String name) {
+	private MyGuideShape(boolean fixedRatio, IShapeGen generator, String name) {
 		this.unlocalizedName = "openblocks.misc.shape." + name;
 		this.fixedRatio = fixedRatio;
 		this.generator = generator;
@@ -29,7 +31,7 @@ public enum MyGuideShape {
 		return StatCollector.translateToLocal(unlocalizedName);
 	}
 	
-	public void fill(ChunkCoordinates chunkCoordinates, World worldObj){
-		generator.fill(chunkCoordinates, worldObj);
+	public ArrayList<BlockRepresentation> fill(ChunkCoordinates chunkCoordinates, World worldObj){
+		return generator.fill(chunkCoordinates, worldObj);
 	}
 }
