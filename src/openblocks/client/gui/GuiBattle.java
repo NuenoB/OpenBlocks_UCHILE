@@ -3,6 +3,7 @@ package openblocks.client.gui;
 import java.util.Map;
 import java.util.TreeMap;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -51,7 +52,7 @@ public class GuiBattle extends GuiScreen {
 	 */
 	@Override
 	public void initGui() {
-		Config.proxy.setGui(this);
+		OpenBlocks.proxy.setGui(this);
 		info[0] = "";
 		info[1] = "";
 		getMenu(-2);
