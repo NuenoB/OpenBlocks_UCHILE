@@ -35,4 +35,12 @@ public class ShapeXPlaneGen implements IShapeGen {
 		return null;
 	}
 
+
+	@Override
+	public ArrayList<BlockRepresentation> fillConditions(
+			ChunkCoordinates entityPos) {
+		//sin restricciones de construccion
+		return new ArrayList<BlockRepresentation>();
+	}
+
 }

@@ -14,11 +14,17 @@ import openmods.shapes.ShapeEquilateral2dGenerator;
 import openmods.utils.BlockNotifyFlags;
 import openmods.utils.MathUtils;
 
+/**
+ * Generador para una, usa diferentes ShapesGenerators para definir la Torre
+ * @author Agustin Antoine
+ *
+ */
 public class TowerGen implements IShapeGen {
 
 	private final int height = 8;
 	private final int width = 3;
 	private final int depth = 3;
+	
 	
 	@Override
 	public void generateShape(int x, int y, int z, IShapeable shapeable) {
@@ -66,6 +72,18 @@ public class TowerGen implements IShapeGen {
 		
 		return array;
 		
+	}
+
+
+	@Override
+	public ArrayList<BlockRepresentation> fillConditions(
+			ChunkCoordinates entityPos) {
+		
+		ArrayList<BlockRepresentation> array = new ArrayList<BlockRepresentation>();
+		
+		array.add(new BlockRepresentation(entityPos.posX, entityPos.posY+1, entityPos.posZ,
+				Block.blockEmerald.blockID));
+		return array;
 	}
 
 }

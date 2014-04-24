@@ -9,12 +9,11 @@ import openmods.shapes.*;
 
 /**
  * Enumeracion de los distintos tipos de bloque fantasma
- * @author OpenBlocks
+ * @author Agustín Antoine
  *
  */
 public enum MyGuideShape {
-	Tower(false, new TowerGen(), "tower 1"),
-	RoofCylinder(false, new ShapeCylinderGen(), "roof cylinder");
+	Tower(false, new TowerGen(), "Tower");
 
 
 	public final String unlocalizedName;
@@ -33,5 +32,9 @@ public enum MyGuideShape {
 	
 	public ArrayList<BlockRepresentation> fill(ChunkCoordinates chunkCoordinates, World worldObj){
 		return generator.fill(chunkCoordinates, worldObj);
+	}
+	
+	public ArrayList<BlockRepresentation> fillConditions(ChunkCoordinates chunkCoordinates){
+		return generator.fillConditions(chunkCoordinates);
 	}
 }

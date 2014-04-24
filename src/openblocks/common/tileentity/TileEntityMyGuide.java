@@ -45,9 +45,9 @@ public class TileEntityMyGuide extends SyncedTileEntity implements IShapeable, I
 
 	@Override
 	protected void createSyncedFields() {
-		width = new SyncableInt(8);
-		height = new SyncableInt(15);
-		depth = new SyncableInt(8);
+		width = new SyncableInt(3);
+		height = new SyncableInt(12);
+		depth = new SyncableInt(3);
 		mode = new SyncableInt(0);
 	}
 
@@ -252,11 +252,20 @@ public class TileEntityMyGuide extends SyncedTileEntity implements IShapeable, I
 		final Item heldItem = held.getItem();
 		if (!(heldItem instanceof ItemBlock)) return;
 		final ItemBlock itemBlock = (ItemBlock)heldItem;
+		
+		//Evitar construir bloques de esmeralda o de bloques que construyen bloques
+		if(itemBlock.getBlockID()==Block.blockEmerald.blockID || 
+				itemBlock.getBlockID()==openblocks.OpenBlocks.Blocks.guide.blockID ||
+				itemBlock.getBlockID()==openblocks.OpenBlocks.Blocks.myguide.blockID){
+			return;
+		}
 
+		//The base structure
 		for (ChunkCoordinates coord : getShapeCoordinates()){
 			worldObj.setBlock(coord.posX, coord.posY, coord.posZ, itemBlock.getBlockID(), itemBlock.getMetadata(held.getItemDamage()), BlockNotifyFlags.ALL);
 		}
 		
+		//The details
 		for(BlockRepresentation b :getCurrentMode().fill(new ChunkCoordinates(xCoord, yCoord, zCoord), worldObj)){
 			worldObj.setBlock(b.getCoord().posX, b.getCoord().posY, b.getCoord().posZ,
 					b.getBlockId(), b.getMetaData(), b.getFlags());
@@ -270,9 +279,21 @@ public class TileEntityMyGuide extends SyncedTileEntity implements IShapeable, I
 
 		if (player.isSneaking()) switchMode(player);
 		else if (player.capabilities.isCreativeMode && isInFillMode()) fill(player);
-		else changeDimensions(player, ForgeDirection.getOrientation(side));
+		//else changeDimensions(player, ForgeDirection.getOrientation(side));
+		else clearStructure();
 
 		return true;
+	}
+
+	private void clearStructure() {
+		for (ChunkCoordinates coord : getShapeCoordinates()){
+			worldObj.destroyBlock(coord.posX, coord.posY, coord.posZ,false);
+		}
+		
+		for(BlockRepresentation b :getCurrentMode().fill(new ChunkCoordinates(xCoord, yCoord, zCoord), worldObj)){
+			worldObj.destroyBlock(b.getCoord().posX, b.getCoord().posY, b.getCoord().posZ, false);
+		}
+		
 	}
 
 	/**
@@ -280,6 +301,12 @@ public class TileEntityMyGuide extends SyncedTileEntity implements IShapeable, I
 	 * @return True si se cumplen las condiciones
 	 */
 	private boolean isInFillMode() {
-		return worldObj.getBlockId(xCoord, yCoord + 1, zCoord) == Block.blockEmerald.blockID;
+		for(BlockRepresentation b :getCurrentMode().generator.fillConditions(new ChunkCoordinates(xCoord, yCoord, zCoord))){
+			if(worldObj.getBlockId(b.getCoord().posX, b.getCoord().posY, b.getCoord().posZ)!= b.getBlockId()){
+				return false;
+			}
+		}
+		
+		return true;
 	}
 }

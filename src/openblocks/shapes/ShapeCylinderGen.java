@@ -3,13 +3,9 @@ package openblocks.shapes;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
-import openmods.shapes.IShapeGenerator;
 import openmods.shapes.IShapeable;
-import openmods.utils.BlockNotifyFlags;
 import openmods.utils.MathUtils;
 
 public class ShapeCylinderGen implements IShapeGen {
@@ -74,5 +70,14 @@ public class ShapeCylinderGen implements IShapeGen {
 			return array;
 		
 	}
+
+
+	@Override
+	public ArrayList<BlockRepresentation> fillConditions(
+			ChunkCoordinates entityPos) {
+		//sin restricciones de construccion
+		return new ArrayList<BlockRepresentation>();
+	}
+
 
 }

@@ -10,20 +10,28 @@ import openmods.shapes.IShapeable;
 public interface IShapeGen extends IShapeGenerator{
 
 	/**
-	 * Generates a shape and applies it to the shapeable object
+	 * Genera una figura y se la aplica al shapeable
 	 * 
 	 * @param xSize
-	 *            Size along the x plane (Width)
+	 *            Tamaño en el plano x (Width)
 	 * @param ySize
-	 *            Size along the y plane (Height)
+	 *            Tamaño en el plano y (Height)
 	 * @param zSize
-	 *            Size along the z plane (Depth)
+	 *            Tamaño en el plano z (Depth)
 	 * @param shapable
-	 *            Object that needs to be shaped
-	 * @return the amount of blocks that were set
+	 *            Objeto sobre el cual se genera la figura
 	 */
 	public void generateShape(int xSize, int ySize, int zSize, IShapeable shapeable);
 	
-	public ArrayList<BlockRepresentation> fill(ChunkCoordinates chunkCoordinates, World worldObj);
+	/**
+	 * Define ciertos detalles a la figura generada
+	 * @param entityPos Las coordenadas de la entidad
+	 * @param worldObj El worldObject
+	 * @return El arreglo con los BlockRepresetation de los detalles a agregar
+	 */
+	public ArrayList<BlockRepresentation> fill(ChunkCoordinates entityPos, World worldObj);
+	
+	public ArrayList<BlockRepresentation> fillConditions(ChunkCoordinates entityPos); 
+
 
 }
