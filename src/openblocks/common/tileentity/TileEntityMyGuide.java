@@ -45,7 +45,7 @@ public class TileEntityMyGuide extends SyncedTileEntity implements IShapeable, I
 	@Override
 	protected void createSyncedFields() {
 		width = new SyncableInt(8);
-		height = new SyncableInt(8);
+		height = new SyncableInt(15);
 		depth = new SyncableInt(8);
 		mode = new SyncableInt(0);
 	}
@@ -255,6 +255,8 @@ public class TileEntityMyGuide extends SyncedTileEntity implements IShapeable, I
 		for (ChunkCoordinates coord : getShapeCoordinates()){
 			worldObj.setBlock(coord.posX, coord.posY, coord.posZ, itemBlock.getBlockID(), itemBlock.getMetadata(held.getItemDamage()), BlockNotifyFlags.ALL);
 		}
+		
+		getCurrentMode().fill(new ChunkCoordinates(xCoord, yCoord, zCoord), worldObj);
 		
 	}
 
