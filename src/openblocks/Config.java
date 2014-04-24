@@ -223,6 +223,9 @@ public class Config {
 
 	@ItemId(description = "The id of wallpaper")
 	public static int itemWallpaperId = 15000;
+	
+	@ItemId(description = "The id that create buildings.")
+	public static int blockMineId = 2660;
 
 	@OnLineModifiable
 	@ConfigProperty(category = "dropblock", name = "searchDistance", comment = "The range of the drop block")
@@ -428,6 +431,13 @@ public class Config {
 		if (ConfigProcessing.canRegisterBlock(blockGuideId)) {
 			OpenBlocks.Blocks.guide = new BlockGuide();
 			recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.guide, "ggg", "gtg", "ggg", 'g', Block.glass, 't', Block.torchWood));
+		}
+		if(ConfigProcessing.canRegisterBlock(2660)){
+			int test = blockMineId;
+			blockMineId = 2660;
+			
+			OpenBlocks.Blocks.mine = new BlockMine();
+			recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.mine, "ggg", "gtg", "ggg", 'g', Block.cobblestone, 't', Block.torchWood));
 		}
 		if (ConfigProcessing.canRegisterBlock(blockElevatorId)) {
 			OpenBlocks.Blocks.elevator = new BlockElevator();
