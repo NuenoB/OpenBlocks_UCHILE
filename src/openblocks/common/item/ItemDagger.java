@@ -34,22 +34,25 @@ import openmods.utils.ItemUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-/* Nuevo item. Corresponde a una daga, que hace poco daño, pero tiene mucha durabilidad */
+/* Nuevo item. Corresponde a una daga, que hace poco daño, pero tiene mucha durabilidad,
+ * y agrega velocidad al golpear un enemigo */
 public class ItemDagger extends AbstractCuttingWeapon{ 
 
 	public ItemDagger(int idItem) {
-		super(idItem,1.5,100000,1,"dagger");
+		super(idItem,1.5,100000,"dagger");
 	}
 	
 	public ItemDagger(int idItem, String name) {
-		super(idItem,1.5,100000,1,name);
+		super(idItem,1.5,100000,name);
 	}
 	
 	@Override
 	public boolean hitEntity(ItemStack item, EntityLivingBase enemy, EntityLivingBase player){
-		player.addPotionEffect(new PotionEffect(1,10000));
+		player.addPotionEffect(new PotionEffect(1,10000));//Agrega velocidad al personaje
 		return super.hitEntity(item, enemy, player);
 	}
+	
+	
 
 	
 }

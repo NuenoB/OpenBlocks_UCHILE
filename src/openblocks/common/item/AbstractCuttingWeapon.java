@@ -17,16 +17,22 @@ public abstract class AbstractCuttingWeapon extends Item{
 
 	protected double damage;
 	protected int durability;
-	protected int maxQuantity; 
+	protected int maxQuantity=1; //Todos los items van a estar a lo mas una vez en el inventario 
 	protected String name;
 	
-	public AbstractCuttingWeapon(int id, double damage, int durability, int maxQuan,String name){
+	/**
+	 * Class Constructor
+	 * @param id  weapon id
+	 * @param damage  damage caused by the weapon
+	 * @param durability  max number of uses
+	 * @param name  weapon's name
+	 */
+	public AbstractCuttingWeapon(int id, double damage, int durability,String name){
 		super(id);
 		this.damage=damage;
 		this.durability=durability;
-		this.maxQuantity=maxQuan;
 		this.name=name;
-		setCreativeTab(OpenBlocks.tabOpenBlocks);
+		setCreativeTab(OpenBlocks.ourWeaponTab);
 		setMaxDamage(durability); //indica maxima cantidad de veces que se puede ocupar un item
 		setMaxStackSize(maxQuantity);
 	}
