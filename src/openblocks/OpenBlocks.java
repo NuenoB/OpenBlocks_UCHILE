@@ -29,6 +29,7 @@ import openblocks.rubbish.BrickManager;
 import openblocks.rubbish.CommandFlimFlam;
 import openblocks.rubbish.CommandLuck;
 import openblocks.utils.ChangelogBuilder;
+import openblocks.Battle.*;
 import openmods.Log;
 import openmods.Mods;
 import openmods.OpenMods;
@@ -53,6 +54,7 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION, dependencies = ModInfo.DEPENDENCIES)
 @NetworkMod(serverSideRequired = true, clientSideRequired = true)
@@ -386,7 +388,9 @@ public class OpenBlocks {
 		if (!Config.soSerious) {
 			MinecraftForge.EVENT_BUS.register(new BrickManager());
 		}
-
+		
+		MinecraftForge.EVENT_BUS.register(new BattleEventListener());
+		
 		if (Config.blockElevatorId > 0) {
 			MinecraftForge.EVENT_BUS.register(ElevatorBlockRules.instance);
 		}
