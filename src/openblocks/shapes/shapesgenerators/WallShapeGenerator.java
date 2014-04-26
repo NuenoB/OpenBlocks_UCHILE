@@ -23,11 +23,24 @@ public class WallShapeGenerator implements IShapeGenerator {
 		
 		mWallThigness = ySize;
 		
-		tower(mTowerRX, mTowerH, mTowerRZ, shapeable);
+		tower(mTowerRX, mTowerH, mTowerRZ,shapeable );
+		bla(shapeable);
 		
 
 	}
 	
+	private void bla(IShapeable shapeable){
+		shapeable.setBlock(0,0,0);
+		shapeable.setBlock(8,8,8);
+		shapeable.setBlock(-8,-8,-8);
+		shapeable.setBlock(-8,8,8);
+		shapeable.setBlock(8,-8,8);
+		shapeable.setBlock(8,8,-8);
+		shapeable.setBlock(-8,-8,8);
+		shapeable.setBlock(-8,8,-8);
+		shapeable.setBlock(8,-8,-8);
+		
+	}
 	private void tower(int radiusX, int height, int radiusZ, IShapeable shapeable) {
 		if (height == 0) { return; }
 
