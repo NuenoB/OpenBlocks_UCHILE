@@ -71,4 +71,8 @@ public abstract class AbstractCuttingWeapon extends Item{
 		list.add("Max uses: "+ durability);
 	}
 
+	/** Entrega el bonus de ataque que entrega un arma **/
+	public double getBonusDamage(){
+		return damage;
+	}
 }
