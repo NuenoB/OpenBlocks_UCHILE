@@ -145,6 +145,11 @@ public class Config {
 
 	@BlockId(description = "The id of the xp shower")
 	public static int blockXPShowerId = 2579;
+	
+	@BlockId(description = "The id of the myGuide block")
+	public static int blockMyGuideId = 2679;
+	
+	//------------------------------------------------------------------------------
 
 	@ItemId(description = "The id of the hang glider")
 	public static int itemHangGliderId = 14975;
@@ -434,10 +439,14 @@ public class Config {
 		}
 		if(ConfigProcessing.canRegisterBlock(2660)){
 			int test = blockMineId;
-			blockMineId = 2660;
+			blockMineId = 2660; 
 			
 			OpenBlocks.Blocks.mine = new BlockMine();
 			recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.mine, "ggg", "gtg", "ggg", 'g', Block.cobblestone, 't', Block.torchWood));
+		}
+		if (ConfigProcessing.canRegisterBlock(blockMyGuideId)) {
+			OpenBlocks.Blocks.myguide = new BlockMyGuide();
+			recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.guide, "ggg", "gtg", "ggg", 'g', Block.glass, 't', Block.torchWood));
 		}
 		if (ConfigProcessing.canRegisterBlock(blockElevatorId)) {
 			OpenBlocks.Blocks.elevator = new BlockElevator();

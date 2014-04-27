@@ -88,6 +88,7 @@ public class ClientProxy implements IOpenBlocksProxy {
 		RenderingRegistry.registerBlockHandler(new BlockRenderingHandler());
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMine.class, new TileEntityMineRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMyGuide.class, new TileEntityMyGuideRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGuide.class, new TileEntityGuideRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTarget.class, new TileEntityTargetRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGrave.class, new TileEntityGraveRenderer());
