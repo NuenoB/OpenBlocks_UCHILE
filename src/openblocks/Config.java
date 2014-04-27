@@ -223,6 +223,9 @@ public class Config {
 
 	@ItemId(description = "The id of wallpaper")
 	public static int itemWallpaperId = 15000;
+	
+	@ItemId(description= "The id of MP bottle")
+	public static int itemMPBottle = 15101;
 
 	@OnLineModifiable
 	@ConfigProperty(category = "dropblock", name = "searchDistance", comment = "The range of the drop block")
@@ -683,6 +686,9 @@ public class Config {
 		if (itemSleepingBagId > 0 && EntityPlayerVisitor.IsInBedHookSuccess) {
 			OpenBlocks.Items.sleepingBag = new ItemSleepingBag();
 			recipeList.add(new ShapedOreRecipe(OpenBlocks.Items.sleepingBag, "cc ", "www", "ccw", 'c', Block.carpet, 'w', Block.cloth));
+		}
+		if (itemMPBottle > 0) {
+			OpenBlocks.Items.mpBottle = new ItemMPBottle(itemMPBottle);
 		}
 
 		if (itemPaintBrushId > 0) {
