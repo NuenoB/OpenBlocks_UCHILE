@@ -1,6 +1,7 @@
 package openblocks.shapes;
 
 import net.minecraft.util.StatCollector;
+import openblocks.shapes.shapesgenerators.IShapeGenenratorMove;
 import openblocks.shapes.shapesgenerators.WallShapeGenerator;
 import openmods.shapes.IShapeGenerator;
 
@@ -11,9 +12,9 @@ public enum BuildingShapes{
 	
 	public final String unlocalizedName;
 	public final boolean fixedRatio;
-	public final IShapeGenerator generator;
+	public final IShapeGenenratorMove generator;
 	
-	private BuildingShapes(boolean fixedRatio, IShapeGenerator generator, String name) {
+	private BuildingShapes(boolean fixedRatio, IShapeGenenratorMove generator, String name) {
 		this.unlocalizedName = "openblocks.misc.shape." + name;
 		this.fixedRatio = fixedRatio;
 		this.generator = generator;

@@ -175,12 +175,13 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 			mnMoveH.modify(-1);
 		}
 		
-		if(Math.abs(mnMoveD.getValue()) >= depth.getValue())
-			depth.setValue(Math.abs(mnMoveD.getValue())+1);
+		// se if the wall fits in the current cube, if not make it bigger
+		if(Math.abs(mnMoveD.getValue()) + getCurrentMode().generator.getSpaceToLimit() >= depth.getValue())
+			depth.setValue(Math.abs(mnMoveD.getValue())+ getCurrentMode().generator.getSpaceToLimit());
 		if(Math.abs(mnMoveH.getValue()) >= height.getValue())
 			height.setValue(Math.abs(mnMoveH.getValue())+1);
-		if(Math.abs(mnMoveW.getValue()) >= width.getValue())
-			width.setValue(Math.abs(mnMoveW.getValue())+1);
+		if(Math.abs(mnMoveW.getValue()) + getCurrentMode().generator.getSpaceToLimit()>= width.getValue())
+			width.setValue(Math.abs(mnMoveW.getValue())+ getCurrentMode().generator.getSpaceToLimit());
 		
 		if (getCurrentMode().fixedRatio) {
 			int h = getHeight();
