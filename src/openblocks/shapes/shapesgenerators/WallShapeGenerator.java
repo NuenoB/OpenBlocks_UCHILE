@@ -54,16 +54,16 @@ public class WallShapeGenerator implements IShapeGenenratorMove {
 		else if(Math.abs(mAngleBetweenTower - Math.PI/2) <= Math.PI/4){
 			initZ = 3;
 			finZ -= 2;
-			mWall = new SimpleWallGeneratorNS();
-			mFancyWall = new SimpleWallGeneratorNSFancy();
+			mWall = new SimpleWallGeneratorOE();
+			mFancyWall = new SimpleWallGeneratorOEFancy();
 		}
 		else if(Math.abs(mAngleBetweenTower + Math.PI/2) <= Math.PI/4){
 			initZ = -2;
 			finZ += 3;
-			mWall = new SimpleWallGeneratorNS();
-			mFancyWall = new SimpleWallGeneratorNSFancy();
+			mWall = new SimpleWallGeneratorOE();
+			mFancyWall = new SimpleWallGeneratorOEFancy();
 		}
-		
+
 		wallParts(ySize, initX, initZ, finX, finZ, mWall, mFancyWall, shapeable);
 		
 	}
@@ -107,6 +107,8 @@ public class WallShapeGenerator implements IShapeGenenratorMove {
 		int dy = -Math.abs(z1 - z0), sy = z0 < z1? 1 : -1;
 		int err = dx + dy, e2;
 		IShapeGenenratorMove drawMe = wall;
+		
+		int cambio = 1;
 
 		for (;;) {
 			drawMe.generateShape(x0, y, z0, shapeable);
@@ -120,6 +122,11 @@ public class WallShapeGenerator implements IShapeGenenratorMove {
 				err += dx;
 				z0 += sy;
 			} /* e_xy+e_y < 0 */
+			cambio*=-1;
+			if(cambio > 0)
+				drawMe = wall;
+			else
+				drawMe = fancyWall;
 		}
 	}
 
