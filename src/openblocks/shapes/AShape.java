@@ -9,6 +9,10 @@ import openmods.shapes.IShapeable;
 public abstract class AShape implements IShapeGen {
 
 	private ICondStrategy strategy;
+	
+	public AShape(ICondStrategy strategy){
+		setStrategy(strategy);
+	}
 
 	@Override
 	public ArrayList<BlockRepresentation> fillConditions(
@@ -20,7 +24,7 @@ public abstract class AShape implements IShapeGen {
 		return strategy;
 	}
 
-	protected void setStrategy(ICondStrategy strategy) {
+	private void setStrategy(ICondStrategy strategy) {
 		this.strategy = strategy;
 	}
 
