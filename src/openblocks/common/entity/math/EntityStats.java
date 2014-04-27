@@ -4,24 +4,16 @@ import net.minecraft.entity.EntityLivingBase;
 
 public abstract class EntityStats {
 	
-	protected EntityLivingBase myself;
-	protected float maxHitPoints;
-	protected int maxMagicPoints;
 	protected float hitPoints;
 	protected int magicPoints;
-	protected float attack;
-	protected float defense;
-	protected float magic;
-	protected float resistance;
-	protected int speed;
 	
-	public float getMaxHP() {
-		return maxHitPoints;
-	}
-	
-	public float getMaxMP() {
-		return maxMagicPoints;
-	}
+	public abstract float getMaxHP();
+	public abstract int getMaxMP();
+	public abstract float getATK();
+	public abstract float getDEF();
+	public abstract float getMAG();
+	public abstract float getRES();
+	public abstract int getSPD();
 	
 	public float getHP() {
 		return hitPoints;
@@ -31,30 +23,15 @@ public abstract class EntityStats {
 		return magicPoints;
 	}
 	
-	public float getATK() {
-		return attack;
-	}
-	
-	public float getDEF() {
-		return defense;
-	}
-	
-	public float getMAG() {
-		return magic;
-	}
-	
-	public float getRES() {
-		return resistance;
-	}
-	
-	public int getSPD() {
-		return speed;
-	}
-	
 	public abstract float attackTo(EntityStats enemy);
 	
-	public void beingDamaged(DamageType type, float damageBase) {
-		
+	public abstract void beingDamaged(DamageType type, float baseDMG);
+	
+	public void healHP (float amount) {
+		hitPoints = Math.max(hitPoints+amount, this.getMaxHP());
 	}
 	
+	public void healMP (int amount) {
+		magicPoints = Math.max(magicPoints+amount, this.getMaxMP());
+	}
 }
