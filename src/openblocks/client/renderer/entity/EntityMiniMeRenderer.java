@@ -9,8 +9,7 @@ import openblocks.common.entity.EntityMiniMe;
 
 public class EntityMiniMeRenderer extends RendererLivingEntity {
 
-	private static final ResourceLocation steveTextures = new ResourceLocation(
-			"textures/entity/steve.png");
+	private static final ResourceLocation steveTextures = new ResourceLocation("textures/entity/steve.png");
 
 	public EntityMiniMeRenderer() {
 		super(new ModelMiniMe(0.0F), 0.5F);

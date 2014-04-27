@@ -10,11 +10,11 @@ import openblocks.shapes.BlockRepresentation;
 import openblocks.shapes.IShapeGen;
 import openmods.shapes.IShapeable;
 
-public class TurretGenerator implements IShapeGenenratorMove {
+public class TurretGenerator extends AbstractShapeGeneratorMove {
 
 	//the dimensions of the tower
-	int height = 6;
-	int wide = 4;// this is from the center to the side
+	final int height = 6;
+	final int wide = 4;// this is from the center to the side
 	@Override
 	public void generateShape(int xSize, int ySize, int zSize,IShapeable shapeable) {
 		for(int y = 0; y <= height; y++){
@@ -30,13 +30,6 @@ public class TurretGenerator implements IShapeGenenratorMove {
 		shapeable.setBlock(xSize + wide-1-2, ySize + height+1, zSize       -1);
 		shapeable.setBlock(xSize + wide-1-2, ySize + height+1, zSize + wide-2);
 
-	}
-
-	@Override
-	public ArrayList<BlockRepresentation> fill(ChunkCoordinates entityPos,
-			World worldObj) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

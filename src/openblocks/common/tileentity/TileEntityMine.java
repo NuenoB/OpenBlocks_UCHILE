@@ -46,7 +46,7 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 	@Override
 	protected void createSyncedFields() {
 		width = new SyncableInt(8);
-		height = new SyncableInt(8);
+		height = new SyncableInt(13);
 		depth = new SyncableInt(8);
 		mode = new SyncableInt(0);
 		mnMoveW = new SyncableInt(0);
@@ -113,7 +113,9 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 			}, "Index  setting block at %d,%d,%d", getHeight() + y, getWidth() + x ,getDepth() + z);*/
 			shape[getHeight() + y][getWidth() + x][getDepth() + z] = true;
 		} catch (IndexOutOfBoundsException iobe) {
-			Log.warn(iobe, "Index out of bounds setting block at %d,%d,%d", x, y, z);
+			Log.warn(iobe, "Cube dimensions %d,%d,%d", getWidth() , getHeight(), getDepth() );
+			Log.warn(iobe, "Cube dimensions real %d,%d,%d", shape[0].length , shape.length, shape[0][0].length );
+			Log.warn(iobe, "Index out of bounds setting block at %d,%d,%d", getWidth() + x, getHeight() + y, getDepth() + z);
 		}
 	}
 
@@ -238,6 +240,12 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 
 		for (ChunkCoordinates coord : getShapeCoordinates())
 			worldObj.setBlock(coord.posX, coord.posY, coord.posZ, itemBlock.blockID, 0, BlockNotifyFlags.ALL);
+		
+		for(BlockRepresentation iteratorBlock:getCurrentMode().generator.fill( new ChunkCoordinates(xCoord,yCoord,zCoord) , worldObj))
+			worldObj.setBlock(iteratorBlock.getCoord().posX, iteratorBlock.getCoord().posY, iteratorBlock.getCoord().posZ, 
+					          iteratorBlock.getBlockId(), 
+					          iteratorBlock.getMetaData(), 
+					          iteratorBlock.getFlags());
 	}
 
 	@Override
