@@ -68,6 +68,7 @@ openblocks.misc.selected_cannon=Selected cannon for targeting
 openblocks.misc.pointed_cannon=Pointed cannon at %s, %s, %s
 openblocks.misc.change_mode=Changing to %s mode
 openblocks.misc.change_size=Changing size to %sx%sx%s
+openblocks.misc.change_pose=Changing position to %sx%sx%s
 openblocks.misc.get_witched=Get witched!
 
 openblocks.misc.shape.sphere=Sphere
@@ -115,6 +116,7 @@ tile.openblocks.heal.name=Healer
 tile.openblocks.heal.description=The healing block is a creative-mode only block that gives off a slight healing effect over time.
 
 tile.openblocks.guide.name=Building Guide
+tile.openblocks.mine.name=Building Mine
 tile.openblocks.guide.description=The building guide will give you an outline of ghost blocks in different shapes and sizes that'll help you plan out rooms.\nYou can shift-click the guide to change the shape, or you can whack the different sides to increase or decrease the size.\nWhen in creative mode you can place an obsdian block above, then hit the building guide with any block you like to automatically create the shape.
 tile.openblocks.guide.video=http://www.youtube.com/watch?v=XAKxfQhdLRA
 

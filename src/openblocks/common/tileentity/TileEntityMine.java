@@ -152,7 +152,7 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 
 	private void changeDimensions(EntityPlayer player, ForgeDirection orientation) {
 		changeDimensions(orientation);
-		player.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions("openblocks.misc.change_size", width.getValue(), height.getValue(), depth.getValue()));
+		player.sendChatToPlayer(ChatMessageComponent.createFromTranslationWithSubstitutions("openblocks.misc.change_pose", mnMoveW.getValue(), mnMoveH.getValue(), mnMoveD.getValue()));
 	}
 
 	private void changeDimensions(ForgeDirection orientation) {
