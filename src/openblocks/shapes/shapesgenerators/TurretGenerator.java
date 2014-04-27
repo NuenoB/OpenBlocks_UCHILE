@@ -2,6 +2,8 @@ package openblocks.shapes.shapesgenerators;
 
 import java.util.ArrayList;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import openblocks.shapes.BlockRepresentation;
@@ -47,6 +49,11 @@ public class TurretGenerator implements IShapeGenenratorMove {
 	@Override
 	public int getSpaceToLimit() {
 		return wide/2;
+	}
+
+	@Override
+	public Block getBlockToConstruct() {
+		return Block.stoneBrick;
 	}
 
 }

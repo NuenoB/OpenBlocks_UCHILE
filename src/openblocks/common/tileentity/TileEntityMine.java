@@ -232,15 +232,11 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 	}
 
 	private void fill(EntityPlayer player, int side) {
-		ItemStack held = player.getHeldItem();
-		if (held == null) return;
 
-		final Item heldItem = held.getItem();
-		if (!(heldItem instanceof ItemBlock)) return;
-		final ItemBlock itemBlock = (ItemBlock)heldItem;
+		final Block itemBlock = getCurrentMode().generator.getBlockToConstruct();
 
 		for (ChunkCoordinates coord : getShapeCoordinates())
-			worldObj.setBlock(coord.posX, coord.posY, coord.posZ, itemBlock.getBlockID(), itemBlock.getMetadata(held.getItemDamage()), BlockNotifyFlags.ALL);
+			worldObj.setBlock(coord.posX, coord.posY, coord.posZ, itemBlock.blockID, 0, BlockNotifyFlags.ALL);
 	}
 
 	@Override
@@ -255,6 +251,6 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 	}
 
 	private boolean isInFillMode() {
-		return worldObj.getBlockId(xCoord, yCoord + 1, zCoord) == Block.obsidian.blockID;
+		return worldObj.getBlockId(xCoord, yCoord + 1, zCoord) == Block.blockGold.blockID;
 	}
 }
