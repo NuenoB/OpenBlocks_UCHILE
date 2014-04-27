@@ -20,6 +20,23 @@ public abstract class ATowerShape extends AShape {
 	protected abstract void generateBodyShape(int xSize, int ySize, int zSize,
 			IShapeable shapeable);
 	
+	protected void generateTopShape(int xSize, int ySize, int zSize,
+			IShapeable shapeable){
+		
+		new ShapeXPlaneGen().generateShape(dx+depth, dy+height, dz+width, shapeable);
+		new ShapeEquilateralSquareGen().generateShape(dx+depth, dy+height+1, dz+width, shapeable);
+		
+		shapeable.setBlock(dx, dy+height+2, dz+width);
+		shapeable.setBlock(dx, dy+height+2, dz-width);
+		shapeable.setBlock(dx+depth, dy+height+2, dz);
+		shapeable.setBlock(dx-depth, dy+height+2, dz);
+		
+		shapeable.setBlock(dx-depth, dy+height+2, dz+width);
+		shapeable.setBlock(dx+depth, dy+height+2, dz+width);
+		shapeable.setBlock(dx+depth, dy+height+2, dz-width);
+		shapeable.setBlock(dx-depth, dy+height+2, dz-width);
+	}
+	
 	protected abstract ArrayList<BlockRepresentation> specificFill(ChunkCoordinates entityPos,
 			World worldObj);
 	
@@ -47,33 +64,25 @@ public abstract class ATowerShape extends AShape {
 			IShapeable shapeable) {
 		
 		generateBodyShape(dx+width, dy+height, dz+depth, shapeable);
-		
-		new ShapeXPlaneGen().generateShape(dx+depth, dy+height, dz+width, shapeable);
-		new ShapeEquilateralSquareGen().generateShape(dx+depth, dy+height+1, dz+width, shapeable);
-		
-		shapeable.setBlock(dx, dy+height+2, dz+width);
-		shapeable.setBlock(dx, dy+height+2, dz-width);
-		shapeable.setBlock(dx+depth, dy+height+2, dz);
-		shapeable.setBlock(dx-depth, dy+height+2, dz);
-		
-		shapeable.setBlock(dx-depth, dy+height+2, dz+width);
-		shapeable.setBlock(dx+depth, dy+height+2, dz+width);
-		shapeable.setBlock(dx+depth, dy+height+2, dz-width);
-		shapeable.setBlock(dx-depth, dy+height+2, dz-width);
+		generateTopShape(dx+width, dy+height, dz+depth, shapeable);
 
+	}
+	
+	protected ChunkCoordinates stairsPos(ChunkCoordinates entityPos){
+		return new ChunkCoordinates(entityPos.posX, entityPos.posY+height, entityPos.posZ);
 	}
 
 	@Override
 	public ArrayList<BlockRepresentation> fill(ChunkCoordinates entityPos,
 			World worldObj) {
 		
-		entityPos = new ChunkCoordinates(dx+entityPos.posX, dy+entityPos.posY, dz+entityPos.posZ);
+		entityPos = stairsPos(entityPos);
 
 		ArrayList<BlockRepresentation> array = new ArrayList<BlockRepresentation>();
 		
-		worldObj.setBlockToAir(entityPos.posX, entityPos.posY+height, entityPos.posZ);
+		worldObj.setBlockToAir(entityPos.posX, entityPos.posY, entityPos.posZ);
 		
-		int y=entityPos.posY+height+1;
+		int y=entityPos.posY+1;
 		while(y-->0){
 			if(!worldObj.isAirBlock(entityPos.posX, y, entityPos.posZ)){
 				break;
