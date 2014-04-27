@@ -272,6 +272,9 @@ public class OpenBlocks {
 
 		@RegisterItem(name = "wallpaper")
 		public static ItemWallpaper wallpaper;
+		
+		@RegisterItem(name = "MP Bottle")
+		public static ItemMPBottle mpBottle;
 
 	}
 
