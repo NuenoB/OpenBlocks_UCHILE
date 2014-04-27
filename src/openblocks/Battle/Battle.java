@@ -25,25 +25,43 @@ public class Battle {
 	public void sortTurn(){
 		Collections.sort(battlers, determinePriority());
 	}
-	
+
 	public Comparator<EntityStats> determinePriority(){
 		return (EntityStats.getSPD() > EntityStats.getSPD()); 
 	}
-	
+
 	public void blockMovement(){
 		for (EntityStats entity : battlers){
 			entity.setJumping(false);
-	        entity.moveStrafing = 0.0F;
-	        entity.moveForward = 0.0F;
-		}
-	}
-	
-	public synchronized void update(){
-			this.blockMovement();
-			for (EntityStats entity : battlers){
-				entity.getAction();
-			}
+			entity.moveStrafing = 0.0F;
+			entity.moveForward = 0.0F;
 		}
 	}
 
+	public synchronized void update(){
+		this.blockMovement();
+		for (EntityStats entity : battlers){
+			entity.getAction();
+		}
+	}
+	public void getAction(){
+		switch (this.action){
+		case 0:
+			this.attackTo(this.target);
+			return;
+		case 1:
+			this.attackTo(this.target);
+			return;
+		case 2:
+			this.attackTo(this.target);
+			return;
+		case 3:
+			battleEnd= true;
+		}
+		if (this.target.hitPoints <= 0){
+			battlers.remove(this.target);
+		}
+	}
 }
+
+
