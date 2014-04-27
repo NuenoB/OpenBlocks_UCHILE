@@ -9,7 +9,6 @@ import openblocks.common.entity.EntityMiniMe;
 
 public class EntityMiniMeRenderer extends RendererLivingEntity {
 
-	@SuppressWarnings("unused")
 	private static final ResourceLocation steveTextures = new ResourceLocation(
 			"textures/entity/steve.png");
 
