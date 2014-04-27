@@ -17,12 +17,10 @@ public class BattleThread implements Runnable {
 	 */
 	
 	@Override
-	public synchronized void  run() {
-		// TODO Auto-generated method stub
+	public synchronized void run() {
+		Battle battle= new Battle(null, null);
 		while (Minecraft.getMinecraft().running){
-		
-		//... llamada al controlador
-		
+			battle.update();
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {}

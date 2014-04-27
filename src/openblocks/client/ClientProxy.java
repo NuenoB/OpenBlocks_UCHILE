@@ -18,6 +18,7 @@ import openblocks.IOpenBlocksProxy;
 import openblocks.OpenBlocks;
 import openblocks.client.bindings.BrickBindings;
 import openblocks.client.fx.FXLiquidSpray;
+import openblocks.client.gui.GuiBattle;
 import openblocks.client.model.ModelCraneBackpack;
 import openblocks.client.radio.RadioManager;
 import openblocks.client.renderer.BlockRenderingHandler;
@@ -167,6 +168,9 @@ public class ClientProxy implements IOpenBlocksProxy {
 		if (OpenBlocks.Blocks.elevator != null) {
 			MinecraftForge.EVENT_BUS.register(new ElevatorMovementHandler());
 		}
+		if (OpenBlocks.Items.mpBottle != null){
+			
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -186,5 +190,10 @@ public class ClientProxy implements IOpenBlocksProxy {
 	public void spawnLiquidSpray(World worldObj, FluidStack water, double x, double y, double z, float scale, float gravity, Vec3 vec) {
 		FXLiquidSpray spray = new FXLiquidSpray(worldObj, water, x, y, z, scale, gravity, vec);
 		Minecraft.getMinecraft().effectRenderer.addEffect(spray);
+	}
+
+	@Override
+	public void setGui(GuiBattle guiBattle) {
+		guiBattle.initGui();	
 	}
 }
