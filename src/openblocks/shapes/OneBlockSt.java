@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.util.ChunkCoordinates;
 
-public class OneBlockSt extends ACondSt implements ICondStrategy {
+public class OneBlockSt extends ACondSt{
 
 	@Override
 	public ArrayList<BlockRepresentation> fillConditions(
