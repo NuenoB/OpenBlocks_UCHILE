@@ -13,6 +13,7 @@ import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraftforge.common.ForgeDirection;
 import openblocks.api.IShapeProvider;
+import openblocks.shapes.BlockRepresentation;
 import openblocks.shapes.BuildingShapes;
 import openblocks.shapes.GuideShape;
 import openmods.Log;
@@ -104,12 +105,12 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 	@Override
 	public void setBlock(int x, int y, int z) {
 		try {
-			Log.warn(new Throwable(){
+			/*Log.warn(new Throwable(){
 				@Override
 				public synchronized Throwable fillInStackTrace() {
 					return null;
 				}
-			}, "Index  setting block at %d,%d,%d", getHeight() + y, getWidth() + x ,getDepth() + z);
+			}, "Index  setting block at %d,%d,%d", getHeight() + y, getWidth() + x ,getDepth() + z);*/
 			shape[getHeight() + y][getWidth() + x][getDepth() + z] = true;
 		} catch (IndexOutOfBoundsException iobe) {
 			Log.warn(iobe, "Index out of bounds setting block at %d,%d,%d", x, y, z);
@@ -251,6 +252,12 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 	}
 
 	private boolean isInFillMode() {
-		return worldObj.getBlockId(xCoord, yCoord + 1, zCoord) == Block.blockGold.blockID;
+		int cont = 1;
+		for(BlockRepresentation aBlock :getCurrentMode().generator.fillConditions(new ChunkCoordinates(xCoord,yCoord,zCoord))){
+			if(worldObj.getBlockId(xCoord, yCoord + cont, zCoord) != Block.blockGold.blockID)
+				return false;
+			cont++;
+		}
+		return true;
 	}
 }

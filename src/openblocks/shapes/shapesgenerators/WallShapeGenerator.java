@@ -23,6 +23,8 @@ public class WallShapeGenerator implements IShapeGenenratorMove {
 	protected int initX, initY, initZ;
 	protected int finX, finY, finZ;
 	
+	protected Block mMaterialToBuild;
+	
 	@Override
 	public void generateShape(int xSize, int ySize, int zSize, IShapeable shapeable) {
 				
@@ -78,17 +80,16 @@ public class WallShapeGenerator implements IShapeGenenratorMove {
 	}
 
 	@Override
-	public ArrayList<BlockRepresentation> fill(ChunkCoordinates entityPos,
-			World worldObj) {
-		// TODO Auto-generated method stub
+	public ArrayList<BlockRepresentation> fill(ChunkCoordinates entityPos,World worldObj) {
 		return null;
 	}
 
 	@Override
-	public ArrayList<BlockRepresentation> fillConditions(
-			ChunkCoordinates entityPos) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<BlockRepresentation> fillConditions(ChunkCoordinates entityPos) {
+		ArrayList<BlockRepresentation> objectList = new ArrayList<BlockRepresentation>();
+		for(int cont = 1; cont <= 2; cont++)
+			objectList.add(new BlockRepresentation(entityPos.posX, entityPos.posY + cont, entityPos.posZ, Block.blockGold.blockID));
+		return objectList;
 	}
 
 	@Override

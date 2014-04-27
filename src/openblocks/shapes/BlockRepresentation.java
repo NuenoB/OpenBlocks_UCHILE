@@ -16,10 +16,7 @@ public class BlockRepresentation {
 	}
 	
 	public BlockRepresentation(int x, int y, int z, int id){
-		this.blockId=id;
-		this.coord = new ChunkCoordinates(x,y,z);
-		this.metaData=0;
-		this.flags=3;
+		this(x,y,z,id,0,3);
 	}
 
 	public ChunkCoordinates getCoord() {
