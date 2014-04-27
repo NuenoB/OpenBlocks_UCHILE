@@ -1,4 +1,4 @@
-package openblocks.shapes.shapesgenerators;
+package openblocks.shapes.shapesgenerators.simpleWallFactory;
 
 import openmods.shapes.IShapeable;
 

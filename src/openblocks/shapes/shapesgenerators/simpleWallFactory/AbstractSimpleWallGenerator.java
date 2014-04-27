@@ -1,4 +1,4 @@
-package openblocks.shapes.shapesgenerators;
+package openblocks.shapes.shapesgenerators.simpleWallFactory;
 
 import java.util.ArrayList;
 
@@ -6,18 +6,24 @@ import net.minecraft.block.Block;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import openblocks.shapes.BlockRepresentation;
+import openblocks.shapes.shapesgenerators.AbstractShapeGeneratorMove;
 import openmods.shapes.IShapeable;
 
-public abstract class AbstractSimpleWallGenerator implements IShapeGenenratorMove {
+public abstract class AbstractSimpleWallGenerator extends AbstractShapeGeneratorMove {
 
 	protected final int wallHeight = 3;
 	protected final int wallDepth = 4;
+	
+
 	@Override
 	public void generateShape(int xSize, int ySize, int zSize, IShapeable shapeable) {
+		moriginX = xSize;
+		moriginY = ySize;
+		moriginZ = zSize;
 		for(int y = 0; y < wallHeight; y++){
 			for(int z = 0; z < wallDepth; z++){
 				if(y < wallHeight-1 || ((z == 0|| z == wallDepth-1) && (y == wallHeight-1)))
-					setBlockAux(xSize,ySize, zSize,y,z, shapeable);
+					setBlockAux(moriginX,moriginY, moriginZ,y,z, shapeable);
 			}
 		}
 
@@ -26,13 +32,13 @@ public abstract class AbstractSimpleWallGenerator implements IShapeGenenratorMov
 	abstract public void setBlockAux(int xSize, int ySize, int zSize, int y, int z, IShapeable shapeable);
 	@Override
 	public ArrayList<BlockRepresentation> fill(ChunkCoordinates entityPos,World worldObj) {
-		return null;
+		return new ArrayList<BlockRepresentation>();
 	}
-
+	
 	@Override
 	public ArrayList<BlockRepresentation> fillConditions(
 			ChunkCoordinates entityPos) {
-		return null;
+		return new ArrayList<BlockRepresentation>();
 	}
 
 	@Override
@@ -44,5 +50,7 @@ public abstract class AbstractSimpleWallGenerator implements IShapeGenenratorMov
 	public Block getBlockToConstruct() {
 		return null;
 	}
+	
+
 
 }

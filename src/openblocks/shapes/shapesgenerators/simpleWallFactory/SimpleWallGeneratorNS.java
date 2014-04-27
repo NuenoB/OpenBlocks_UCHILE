@@ -1,4 +1,4 @@
-package openblocks.shapes.shapesgenerators;
+package openblocks.shapes.shapesgenerators.simpleWallFactory;
 
 import java.util.ArrayList;
 
@@ -15,5 +15,7 @@ public class SimpleWallGeneratorNS extends AbstractSimpleWallGenerator {
 		shapeable.setBlock(xSize, ySize + y, zSize + z - 1);
 		
 	}
+
+
 
 }
