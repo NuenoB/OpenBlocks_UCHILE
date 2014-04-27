@@ -14,7 +14,7 @@ public class WallShapeGenerator implements IShapeGenerator {
 	int mTowerH = 5;
 	
 	int mWallThigness;
-	
+	int SIZE = 4;
 	@Override
 	public void generateShape(int xSize, int ySize, int zSize, IShapeable shapeable) {
 		
@@ -23,22 +23,23 @@ public class WallShapeGenerator implements IShapeGenerator {
 		
 		mWallThigness = ySize;
 		
-		tower(mTowerRX, mTowerH, mTowerRZ,shapeable );
-		bla(shapeable);
+		//tower(mTowerRX, mTowerH, mTowerRZ,shapeable );
+		bla(xSize,ySize,zSize,shapeable);
 		
 
 	}
 	
-	private void bla(IShapeable shapeable){
-		shapeable.setBlock(0,0,0);
-		shapeable.setBlock(8,8,8);
-		shapeable.setBlock(-8,-8,-8);
-		shapeable.setBlock(-8,8,8);
-		shapeable.setBlock(8,-8,8);
-		shapeable.setBlock(8,8,-8);
-		shapeable.setBlock(-8,-8,8);
-		shapeable.setBlock(-8,8,-8);
-		shapeable.setBlock(8,-8,-8);
+	private void bla(int xSize, int ySize, int zSize,IShapeable shapeable){
+		shapeable.setBlock(1,1,1);
+		shapeable.setBlock(SIZE,SIZE,SIZE);
+		shapeable.setBlock(-SIZE,-SIZE,-SIZE);
+		shapeable.setBlock(-SIZE,SIZE,SIZE);
+		shapeable.setBlock(SIZE,-SIZE,SIZE);
+		shapeable.setBlock(SIZE,SIZE,-SIZE);
+		shapeable.setBlock(-SIZE,-SIZE,SIZE);
+		shapeable.setBlock(-SIZE,SIZE,-SIZE);
+		shapeable.setBlock(SIZE,-SIZE,-SIZE);
+		shapeable.setBlock(xSize,ySize,zSize);
 		
 	}
 	private void tower(int radiusX, int height, int radiusZ, IShapeable shapeable) {

@@ -36,18 +36,21 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 	protected SyncableInt depth;
 	protected SyncableInt mode;
 	
-	private int mMaxW = 8;
-	private int mMaxH = 8;
-	private int mMaxD = 8;
+	protected SyncableInt mnMoveW;
+	protected SyncableInt mnMoveH;
+	protected SyncableInt mnMoveD;
 
 	public TileEntityMine() {}
 
 	@Override
 	protected void createSyncedFields() {
-		width = new SyncableInt(0);
-		height = new SyncableInt(0);
-		depth = new SyncableInt(0);
+		width = new SyncableInt(8);
+		height = new SyncableInt(8);
+		depth = new SyncableInt(8);
 		mode = new SyncableInt(0);
+		mnMoveW = new SyncableInt(0);
+		mnMoveH = new SyncableInt(0); 
+		mnMoveD = new SyncableInt(0);
 	}
 
 	public int getWidth() {
@@ -63,22 +66,19 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 	}
 
 	public void setWidth(int w) {
-
 		width.setValue(w);
 	}
 
 	public void setDepth(int d) {
-
 		depth.setValue(d);
 	}
 
 	public void setHeight(int h) {
-		mMaxH = h > mMaxH? h: mMaxH;
 		height.setValue(h);
 	}
 
 	public BuildingShapes getCurrentMode() {
-		return BuildingShapes.values()[0];
+		return BuildingShapes.values()[mode.getValue()];
 	}
 
 	@Override
@@ -96,18 +96,23 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 
 	private void recreateShape() {
 		previousShape = shape;
-		shape = new boolean[mMaxH * 2 + 1][mMaxW * 2 + 1][mMaxD * 2 + 1];
-
-		getCurrentMode().generator.generateShape(getWidth(), getHeight(), getDepth(), this);
+		shape = new boolean[getHeight() * 2 + 1][getWidth() * 2 + 1][getDepth() * 2 + 1];
+		getCurrentMode().generator.generateShape(mnMoveW.getValue(), mnMoveH.getValue(), mnMoveD.getValue(), this);
 		timeSinceChange = 0;
 	}
 
 	@Override
 	public void setBlock(int x, int y, int z) {
 		try {
-			shape[mMaxH + y][mMaxW + x][mMaxD + z] = true;
+			Log.warn(new Throwable(){
+				@Override
+				public synchronized Throwable fillInStackTrace() {
+					return null;
+				}
+			}, "Index  setting block at %d,%d,%d", getHeight() + y, getWidth() + x ,getDepth() + z);
+			shape[getHeight() + y][getWidth() + x][getDepth() + z] = true;
 		} catch (IndexOutOfBoundsException iobe) {
-			Log.warn(iobe, "Index out of bounds setting block at %d,%d,%d %d,%d,%d", x, y, z, shape.length, shape[0].length,shape[0][0].length);
+			Log.warn(iobe, "Index out of bounds setting block at %d,%d,%d", x, y, z);
 		}
 	}
 
@@ -151,19 +156,32 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 	}
 
 	private void changeDimensions(ForgeDirection orientation) {
-		if (width.getValue() + 13> 0 && orientation == ForgeDirection.EAST) {
-			width.modify(-1);
-		} else if (orientation == ForgeDirection.WEST) {
-			width.modify(1);
-		} else if (orientation == ForgeDirection.NORTH) {
-			depth.modify(1);
-		} else if (depth.getValue() + 13 > 0 && orientation == ForgeDirection.SOUTH) {
-			depth.modify(-1);
-		} else if (orientation == ForgeDirection.UP) {
-			height.modify(1);
-		} else if (height.getValue() + 13> 0 && orientation == ForgeDirection.DOWN) {
-			height.modify(-1);
+		if (orientation == ForgeDirection.EAST) {
+			mnMoveW.modify(1);
+		} 
+		else if (orientation == ForgeDirection.WEST) {
+			mnMoveW.modify(-1);
+		} 
+		else if (orientation == ForgeDirection.NORTH) {
+			mnMoveD.modify(-1);
+		} 
+		else if (orientation == ForgeDirection.SOUTH) {
+			mnMoveD.modify(1);
+		} 
+		else if (orientation == ForgeDirection.UP) {
+			mnMoveH.modify(1);
+		} 
+		else if (orientation == ForgeDirection.DOWN) {
+			mnMoveH.modify(-1);
 		}
+		
+		if(Math.abs(mnMoveD.getValue()) >= depth.getValue())
+			depth.setValue(Math.abs(mnMoveD.getValue())+1);
+		if(Math.abs(mnMoveH.getValue()) >= height.getValue())
+			height.setValue(Math.abs(mnMoveH.getValue())+1);
+		if(Math.abs(mnMoveW.getValue()) >= width.getValue())
+			width.setValue(Math.abs(mnMoveW.getValue())+1);
+		
 		if (getCurrentMode().fixedRatio) {
 			int h = getHeight();
 			int w = getWidth();
@@ -179,8 +197,6 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 				height.setValue(d);
 			}
 		}
-		mMaxD = Math.abs(depth.getValue()) + 5 < mMaxD? mMaxD: Math.abs(depth.getValue()) + 6;
-		mMaxW = Math.abs(width.getValue()) + 5 < mMaxW? mMaxW: Math.abs(width.getValue()) + 6;
 		recreateShape();
 		if (!worldObj.isRemote) {
 			sync();
