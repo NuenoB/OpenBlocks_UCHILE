@@ -12,7 +12,7 @@ import openmods.shapes.IShapeable;
 public abstract class AbstractSimpleWallGenerator extends AbstractShapeGeneratorMove {
 
 	protected final int wallHeight = 3;
-	protected final int wallDepth = 4;
+	protected final int wallDepth = 4; 
 	
 
 	@Override
