@@ -13,7 +13,8 @@ import openmods.shapes.*;
  *
  */
 public enum MyGuideShape {
-	Tower(false, new TowerGen(), "Tower");
+	Tower(false, new BigTowerGen(0,0,0), "Tower"),
+	Stairs(false, new StairsGen(3,0), "Stairs");
 
 
 	public final String unlocalizedName;
