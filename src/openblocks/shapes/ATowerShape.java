@@ -73,10 +73,10 @@ public abstract class ATowerShape extends AShape {
 	}
 
 	@Override
-	public ArrayList<BlockRepresentation> fill(ChunkCoordinates entityPos,
+	public ArrayList<BlockRepresentation> fill(ChunkCoordinates worldEntityPos,
 			World worldObj) {
 		
-		entityPos = stairsPos(entityPos);
+		ChunkCoordinates entityPos = stairsPos(worldEntityPos);
 
 		ArrayList<BlockRepresentation> array = new ArrayList<BlockRepresentation>();
 		
@@ -92,7 +92,7 @@ public abstract class ATowerShape extends AShape {
 			
 		}
 		
-		array.addAll(specificFill(entityPos, worldObj));
+		array.addAll(specificFill(worldEntityPos, worldObj));
 		
 		return array;
 	}
