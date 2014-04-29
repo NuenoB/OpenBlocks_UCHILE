@@ -253,8 +253,8 @@ public class TileEntityMyGuide extends SyncedTileEntity implements IShapeable, I
 		if (!(heldItem instanceof ItemBlock)) return;
 		final ItemBlock itemBlock = (ItemBlock)heldItem;
 
-		//Evitar construir bloques de esmeralda o de bloques que construyen bloques
-		if(itemBlock.getBlockID()==Block.blockEmerald.blockID || 
+		//Evitar construir bloques de oro o de bloques que construyen bloques
+		if(itemBlock.getBlockID()==Block.blockGold.blockID || 
 				itemBlock.getBlockID()==openblocks.OpenBlocks.Blocks.guide.blockID ||
 				itemBlock.getBlockID()==openblocks.OpenBlocks.Blocks.myguide.blockID){
 			return;

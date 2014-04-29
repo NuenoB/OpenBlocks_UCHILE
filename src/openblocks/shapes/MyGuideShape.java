@@ -14,6 +14,7 @@ import openmods.shapes.*;
  */
 public enum MyGuideShape {
 	Tower(false, new BigTowerGen(0,0,0), "Tower"),
+	CastleTower(false, new CastleTowerGen(0,0,0), "Castle Tower"),
 	Stairs(false, new StairsGen(3,0), "Stairs");
 
 
