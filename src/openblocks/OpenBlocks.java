@@ -197,6 +197,7 @@ public class OpenBlocks {
 		public static BlockGoldenEgg goldenEgg;
 	}
 
+	/** Clase que contiene una instancia de todos los items **/
 	public static class Items {
 
 		@RegisterItem(name = "hangglider")
@@ -276,7 +277,26 @@ public class OpenBlocks {
 
 		@RegisterItem(name = "wallpaper")
 		public static ItemWallpaper wallpaper;
+		
+		//Our Items --------------------------------------------------------------------------------
+		
+		//Daga
+		@RegisterItem(name = "Dagger", unlocalizedName= "dagger")
+		public static ItemDagger dagger;
+		
+		//Daga de Fuego
+		@RegisterItem(name = "FireDagger", unlocalizedName= "fire_dagger")
+		public static ItemDagger fireDagger;
 
+		//Heavy Sword
+		@RegisterItem(name = "HeavySword", unlocalizedName= "heavy_sword")
+		public static ItemHeavySword heavySword;
+
+		//Normal Sword
+		@RegisterItem(name = "NomalSword", unlocalizedName= "normal_sword")
+		public static ItemNormalSword normalSword;
+
+		// -----------------------------------------------------------------------------------------
 	}
 
 	public static class ClassReferences {
@@ -296,6 +316,14 @@ public class OpenBlocks {
 
 	public static FluidStack XP_FLUID = null;
 
+	//Our Weapon Tab
+	public static CreativeTabs ourWeaponTab = new CreativeTabs("tabOurWeapon") {
+		@Override
+		public ItemStack getIconItemStack() {
+			return new ItemStack(OpenBlocks.Items.dagger,1,0);
+		}
+	};
+	
 	public static CreativeTabs tabOpenBlocks = new CreativeTabs("tabOpenBlocks") {
 		@Override
 		public ItemStack getIconItemStack() {
