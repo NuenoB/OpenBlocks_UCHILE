@@ -59,7 +59,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class OpenBlocks {
 
 	private static final int ENTITY_HANGGLIDER_ID = 701;
-	private static final int ENTITY_LUGGAGE_ID = 702;
+	private static final int ENTITY_LUGGAGE_ID = 702;  
 	private static final int ENTITY_MAGNET_ID = 703;
 	private static final int ENTITY_BLOCK_ID = 704;
 	private static final int ENTITY_CARTOGRAPHER_ID = 705;

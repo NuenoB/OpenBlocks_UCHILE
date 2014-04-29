@@ -30,7 +30,7 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 
 	private boolean shape[][][];
 	private boolean previousShape[][][];
-	private float timeSinceChange = 0;
+	private float timeSinceChange = 0; 
 
 	protected SyncableInt width;
 	protected SyncableInt height;

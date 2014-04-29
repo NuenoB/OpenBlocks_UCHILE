@@ -1,7 +1,7 @@
 package openblocks.shapes.shapesgenerators.simpleWallFactory;
 
 import openblocks.shapes.shapesgenerators.IShapeGenenratorMove;
-
+ 
 public class FactorySimpleWallGeneratorNSFancy implements
 		IFactorySimpleWallGeneratorXX {
 

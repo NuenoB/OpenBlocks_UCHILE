@@ -4,7 +4,7 @@ import net.minecraft.util.StatCollector;
 import openblocks.shapes.shapesgenerators.IShapeGenenratorMove;
 import openblocks.shapes.shapesgenerators.WallShapeGenerator;
 import openmods.shapes.IShapeGenerator;
-
+ 
 	
 public enum BuildingShapes{
 	Wall(false, new WallShapeGenerator(), "wall");

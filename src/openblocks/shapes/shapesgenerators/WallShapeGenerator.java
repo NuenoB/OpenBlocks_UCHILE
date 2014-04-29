@@ -19,7 +19,7 @@ import openblocks.shapes.shapesgenerators.simpleWallFactory.SimpleWallGeneratorO
 import openmods.shapes.IShapeGenerator;
 import openmods.shapes.IShapeable;
 import openmods.utils.MathUtils;
-
+ 
 public class WallShapeGenerator extends AbstractShapeGeneratorMove {
 
 	protected IShapeGenenratorMove mFinealTower;

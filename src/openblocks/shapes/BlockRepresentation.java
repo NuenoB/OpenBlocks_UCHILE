@@ -16,7 +16,7 @@ public class BlockRepresentation {
 	}
 	
 	public BlockRepresentation(int x, int y, int z, int id){
-		this(x,y,z,id,0,3);
+		this(x,y,z,id,0,3); 
 	}
 
 	public ChunkCoordinates getCoord() {

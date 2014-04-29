@@ -7,7 +7,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import openblocks.shapes.BlockRepresentation;
 import openmods.shapes.IShapeable;
-
+ 
 public class SimpleWallGeneratorNS extends AbstractSimpleWallGenerator {
 
 	@Override

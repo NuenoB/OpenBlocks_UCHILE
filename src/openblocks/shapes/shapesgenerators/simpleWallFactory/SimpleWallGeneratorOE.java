@@ -1,6 +1,6 @@
 package openblocks.shapes.shapesgenerators.simpleWallFactory;
 
-import openmods.shapes.IShapeable;
+import openmods.shapes.IShapeable; 
 
 public class SimpleWallGeneratorOE extends AbstractSimpleWallGenerator {
 

@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 import openblocks.shapes.BlockRepresentation;
 import openblocks.shapes.IShapeGen;
 import openmods.shapes.IShapeable;
-
+ 
 public class TurretGenerator extends AbstractShapeGeneratorMove {
 
 	//the dimensions of the tower

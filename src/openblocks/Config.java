@@ -149,16 +149,18 @@ public class Config {
 	@BlockId(description = "The id of the myGuide block")
 	public static int blockMyGuideId = 2679;
 	
+	
+	
 	//------------------------------------------------------------------------------
 
 	@ItemId(description = "The id of the hang glider")
 	public static int itemHangGliderId = 14975;
 
 	@ItemId(description = "The id of the generic item")
-	public static int itemGenericId = 14976;
+	public static int itemGenericId = 14976;  
 
 	@ItemId(description = "The id of the luggage item")
-	public static int itemLuggageId = 14977;
+	public static int itemLuggageId = 14977;  
 
 	@ItemId(description = "The id of the sonic glasses item")
 	public static int itemSonicGlassesId = 14978;

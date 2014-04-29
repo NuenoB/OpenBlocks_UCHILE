@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import openblocks.shapes.BlockRepresentation;
 import openblocks.shapes.shapesgenerators.AbstractShapeGeneratorMove;
 import openmods.shapes.IShapeable;
-
+ 
 public abstract class AbstractSimpleWallGenerator extends AbstractShapeGeneratorMove {
 
 	protected final int wallHeight = 3;
