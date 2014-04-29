@@ -59,6 +59,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION, dependencies = ModInfo.DEPENDENCIES)
 @NetworkMod(serverSideRequired = true, clientSideRequired = true)
 public class OpenBlocks {
+	//public static BattleSystemServer bss = new BattleSystemServer();
 
 	private static final int ENTITY_HANGGLIDER_ID = 701;
 	private static final int ENTITY_LUGGAGE_ID = 702;
