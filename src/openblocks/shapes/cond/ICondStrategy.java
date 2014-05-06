@@ -1,6 +1,8 @@
-package openblocks.shapes;
+package openblocks.shapes.cond;
 
 import java.util.ArrayList;
+
+import openblocks.shapes.BlockRepresentation;
 
 import net.minecraft.util.ChunkCoordinates;
 

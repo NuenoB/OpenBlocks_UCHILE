@@ -1,4 +1,4 @@
-package openblocks.shapes;
+package openblocks.shapes.newshapes;
 
 import java.util.ArrayList;
 
@@ -8,6 +8,10 @@ import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import openblocks.common.tileentity.TileEntityRopeLadder;
+import openblocks.shapes.ATowerShape;
+import openblocks.shapes.BlockRepresentation;
+import openblocks.shapes.IShapeGen;
+import openblocks.shapes.simpleshapes.ShapeCylinderGen;
 import openmods.shapes.IShapeGenerator;
 import openmods.shapes.IShapeable;
 import openmods.shapes.ShapeEquilateral2dGenerator;

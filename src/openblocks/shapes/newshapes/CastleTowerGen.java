@@ -1,13 +1,17 @@
-package openblocks.shapes;
+package openblocks.shapes.newshapes;
 
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
+import openblocks.shapes.ATowerShape;
+import openblocks.shapes.BlockRepresentation;
+import openblocks.shapes.simpleshapes.ShapeEquilateralSquareGen;
+import openblocks.shapes.simpleshapes.ShapeXPlaneGen;
 import openmods.shapes.IShapeable;
 
-class CastleTowerGen extends ATowerShape {
+public class CastleTowerGen extends ATowerShape {
 
 	public CastleTowerGen(int x, int y, int z) {
 		super(x, y, z, 8, 1, 1);

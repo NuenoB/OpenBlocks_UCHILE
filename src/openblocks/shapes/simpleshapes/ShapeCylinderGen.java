@@ -1,10 +1,12 @@
-package openblocks.shapes;
+package openblocks.shapes.simpleshapes;
 
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
+import openblocks.shapes.BlockRepresentation;
+import openblocks.shapes.IShapeGen;
 import openmods.shapes.IShapeable;
 import openmods.utils.MathUtils;
 

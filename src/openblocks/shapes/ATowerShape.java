@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
+import openblocks.shapes.cond.OneBlockSt;
+import openblocks.shapes.simpleshapes.ShapeEquilateralSquareGen;
+import openblocks.shapes.simpleshapes.ShapeXPlaneGen;
 import openmods.shapes.IShapeable;
 
 public abstract class ATowerShape extends AShape {
@@ -60,8 +63,7 @@ public abstract class ATowerShape extends AShape {
 	}
 
 	@Override
-	public void generateShape(int xSize, int ySize, int zSize,
-			IShapeable shapeable) {
+	public void generateShape(int x, int y, int z, IShapeable shapeable) {
 		
 		generateBodyShape(dx+width, dy+height, dz+depth, shapeable);
 		generateTopShape(dx+width, dy+height, dz+depth, shapeable);

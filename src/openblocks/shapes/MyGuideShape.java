@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import openmods.shapes.*;
+import openblocks.shapes.newshapes.*;
+import openblocks.shapes.simpleshapes.FloorShape;
+import openblocks.shapes.simpleshapes.ShapeXPlaneGen;
 
 /**
  * Enumeracion de los distintos tipos de bloque fantasma
@@ -15,7 +17,8 @@ import openmods.shapes.*;
 public enum MyGuideShape {
 	Tower(false, new BigTowerGen(0,0,0), "Tower"),
 	CastleTower(false, new CastleTowerGen(0,0,0), "Castle Tower"),
-	Stairs(false, new StairsGen(3,0), "Stairs");
+	Stairs(false, new StairsGen(3,0), "Stairs"),
+	Floor(false, new FloorShape(-1,-1,3,5), "Floor");
 
 
 	public final String unlocalizedName;
