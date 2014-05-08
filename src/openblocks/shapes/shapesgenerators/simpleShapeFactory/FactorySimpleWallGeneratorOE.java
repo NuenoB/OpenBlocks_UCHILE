@@ -1,9 +1,9 @@
-package openblocks.shapes.shapesgenerators.simpleWallFactory;
+package openblocks.shapes.shapesgenerators.simpleShapeFactory;
 
 import openblocks.shapes.shapesgenerators.IShapeGenenratorMove;
 
 public class FactorySimpleWallGeneratorOE implements
-		IFactorySimpleWallGeneratorXX {
+		IFactorySimpleShapeGeneratorXX {
 
 	@Override
 	public IShapeGenenratorMove generateAWall() {

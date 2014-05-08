@@ -48,7 +48,7 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 		width = new SyncableInt(8);
 		height = new SyncableInt(13);
 		depth = new SyncableInt(8);
-		mode = new SyncableInt(0);
+		mode = new SyncableInt(1);
 		mnMoveW = new SyncableInt(0);
 		mnMoveH = new SyncableInt(0); 
 		mnMoveD = new SyncableInt(0);

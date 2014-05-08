@@ -55,5 +55,17 @@ public class TurretGenerator extends AbstractShapeGeneratorMove {
 		return Block.stoneBrick;
 	}
 
+	@Override
+	public int getSpaceToTop() 
+	{
+		return height + 1;
+	}
+
+	@Override
+	public void setBlockAux(int xSize, int ySize, int zSize, int y, int z, IShapeable shapeable) 
+	{
+		
+	}
+
 	
 }

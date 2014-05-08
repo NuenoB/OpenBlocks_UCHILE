@@ -1,4 +1,4 @@
-package openblocks.shapes.shapesgenerators.simpleWallFactory;
+package openblocks.shapes.shapesgenerators.simpleShapeFactory;
 
 import java.util.ArrayList;
 
@@ -9,19 +9,23 @@ import openblocks.shapes.BlockRepresentation;
 import openblocks.shapes.shapesgenerators.AbstractShapeGeneratorMove;
 import openmods.shapes.IShapeable;
 
-public abstract class AbstractSimpleWallGenerator extends AbstractShapeGeneratorMove {
+public abstract class AbstractSimpleWallGenerator extends AbstractShapeGeneratorMove 
+{
 
 	protected final int wallHeight = 3;
 	protected final int wallDepth = 6;
 	
 
 	@Override
-	public void generateShape(int xSize, int ySize, int zSize, IShapeable shapeable) {
+	public void generateShape(int xSize, int ySize, int zSize, IShapeable shapeable) 
+	{
 		moriginX = xSize;
 		moriginY = ySize;
 		moriginZ = zSize;
-		for(int y = 0; y < wallHeight; y++){
-			for(int z = 0; z < wallDepth; z++){
+		for(int y = 0; y < wallHeight; y++)
+		{
+			for(int z = 0; z < wallDepth; z++)
+			{
 				if(y < wallHeight-1 || ((z == 0|| z == wallDepth-1) && (y == wallHeight-1)))
 					setBlockAux(moriginX,moriginY, moriginZ,y,z, shapeable);
 			}
@@ -29,9 +33,9 @@ public abstract class AbstractSimpleWallGenerator extends AbstractShapeGenerator
 
 	}
 
-	abstract public void setBlockAux(int xSize, int ySize, int zSize, int y, int z, IShapeable shapeable);
 	@Override
-	public ArrayList<BlockRepresentation> fill(ChunkCoordinates entityPos,World worldObj) {
+	public ArrayList<BlockRepresentation> fill(ChunkCoordinates entityPos,World worldObj) 
+	{
 		return new ArrayList<BlockRepresentation>();
 	}
 	
@@ -46,12 +50,20 @@ public abstract class AbstractSimpleWallGenerator extends AbstractShapeGenerator
 	}
 
 	@Override
-	public int getSpaceToLimit() {
+	public int getSpaceToLimit() 
+	{
 		return 0;
+	}
+	
+	@Override
+	public int getSpaceToTop() 
+	{
+		return wallHeight + 1;
 	}
 
 	@Override
-	public Block getBlockToConstruct() {
+	public Block getBlockToConstruct() 
+	{
 		return null;
 	}
 	
