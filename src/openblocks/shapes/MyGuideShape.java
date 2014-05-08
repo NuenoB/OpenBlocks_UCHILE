@@ -17,7 +17,7 @@ import openblocks.shapes.simpleshapes.SimpleWallShape;
  *
  */
 public enum MyGuideShape {
-	CastleTower(false, new CastleTowerGen(3,0,2), "Castle Tower"),
+	CastleTower(false, new CastleTowerGen(3,0,5), "Castle Tower"),
 	Castle(false, new CastleGen(), "Castle"),
 	Tower(false, new BigTowerGen(3,0,4), "Tower");
 

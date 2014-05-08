@@ -7,6 +7,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import openblocks.shapes.ATowerShape;
 import openblocks.shapes.BlockRepresentation;
+import openblocks.shapes.simpleshapes.FourWallGen;
 import openblocks.shapes.simpleshapes.ShapeEquilateralSquareGen;
 import openblocks.shapes.simpleshapes.ShapeXPlaneGen;
 import openmods.shapes.IShapeable;
@@ -20,27 +21,26 @@ public class CastleTowerGen extends ATowerShape {
 	@Override
 	protected void generateTopShape(int xSize, int ySize, int zSize,
 			IShapeable shapeable){
-		new ShapeXPlaneGen().generateShape(xSize, ySize-1, zSize, shapeable);
-		new ShapeEquilateralSquareGen().generateShape(xSize+1, ySize, zSize+1, shapeable);
 		
-		shapeable.setBlock(xSize-depth, ySize+1, zSize+1);
-		shapeable.setBlock(xSize-depth, ySize+1, zSize-2*width-1);
-		shapeable.setBlock(xSize+1, ySize+1, zSize-width);
-		shapeable.setBlock(xSize-2*depth-1, ySize+1, zSize-width);
+		new FourWallGen(-depth+dx-1, -width+dz-1, depth+dx+1, width+dz+1, 1).generateShape(xSize, dy+height, zSize, shapeable);
 		
-		shapeable.setBlock(xSize-2*depth-1, ySize+1, zSize+1);
-		shapeable.setBlock(xSize+1, ySize+1, zSize+1);
-		shapeable.setBlock(xSize+1, ySize+1, zSize-2*width-1);
-		shapeable.setBlock(xSize-2*depth-1, ySize+1, zSize-2*width-1);
+		shapeable.setBlock(dx, dy+height+1, dz+width+1);
+		shapeable.setBlock(dx, dy+height+1, dz-width-1);
+		shapeable.setBlock(dx+depth+1, dy+height+1, dz);
+		shapeable.setBlock(dx-depth-1, dy+height+1, dz);
+		
+		shapeable.setBlock(dx-depth-1, dy+height+1, dz+width+1);
+		shapeable.setBlock(dx+depth+1, dy+height+1, dz+width+1);
+		shapeable.setBlock(dx+depth+1, dy+height+1, dz-width-1);
+		shapeable.setBlock(dx-depth-1, dy+height+1, dz-width-1);
 		
 	}
 
 	@Override
 	protected void generateBodyShape(int xSize, int ySize, int zSize,
 			IShapeable shapeable) {
-		for(int i=0; i<ySize; i++){
-			new ShapeEquilateralSquareGen().generateShape(xSize, i, zSize, shapeable);
-		}
+		
+		new FourWallGen(-depth+dx, -width+dz, depth+dx, width+dz, height).generateShape(xSize, dy, zSize, shapeable);
 
 	}
 
