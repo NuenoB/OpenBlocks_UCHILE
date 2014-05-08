@@ -26,7 +26,7 @@ public class CastleTowerGen extends ATowerShape {
 		shapeable.setBlock(xSize-depth, ySize+1, zSize+1);
 		shapeable.setBlock(xSize-depth, ySize+1, zSize-2*width-1);
 		shapeable.setBlock(xSize+1, ySize+1, zSize-width);
-		shapeable.setBlock(xSize-2*depth-1, ySize+1, zSize-width-1);
+		shapeable.setBlock(xSize-2*depth-1, ySize+1, zSize-width);
 		
 		shapeable.setBlock(xSize-2*depth-1, ySize+1, zSize+1);
 		shapeable.setBlock(xSize+1, ySize+1, zSize+1);

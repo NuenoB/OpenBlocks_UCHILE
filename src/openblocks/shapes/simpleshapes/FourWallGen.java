@@ -8,26 +8,26 @@ import openblocks.shapes.BlockRepresentation;
 import openblocks.shapes.IShapeGen;
 import openmods.shapes.IShapeable;
 
-public class FloorShape implements IShapeGen {
+public class FourWallGen implements IShapeGen {
 	
-	private int x0, x1, z0, z1;
+	private int x0, x1, z0, z1, height;
 	
-	public FloorShape(int x0, int z0, int x1, int z1){
+	public FourWallGen(int x0, int z0, int x1, int z1, int height){
 		this.x0=x0;
 		this.x1=x1;
 		this.z0=z0;
 		this.z1=z1;
+		this.height=height;
 	}
 
 	@Override
 	public void generateShape(int xSize, int ySize, int zSize,
 			IShapeable shapeable) {
-			
-		for(int i=x0; i<=x1; i++){
-			for(int j=z0; j<=z1; j++){
-				shapeable.setBlock(i, ySize, j);
-			}	
-		}
+		
+		new SimpleWallShape(x0, z0, x0, z1, height).generateShape(xSize, ySize, zSize, shapeable);
+		new SimpleWallShape(x0, z1, x1, z1, height).generateShape(xSize, ySize, zSize, shapeable);
+		new SimpleWallShape(x1, z1, x1, z0, height).generateShape(xSize, ySize, zSize, shapeable);
+		new SimpleWallShape(x1, z0, x0, z0, height).generateShape(xSize, ySize, zSize, shapeable);
 
 	}
 

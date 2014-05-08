@@ -7,7 +7,9 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import openblocks.shapes.newshapes.*;
 import openblocks.shapes.simpleshapes.FloorShape;
+import openblocks.shapes.simpleshapes.FourWallGen;
 import openblocks.shapes.simpleshapes.ShapeXPlaneGen;
+import openblocks.shapes.simpleshapes.SimpleWallShape;
 
 /**
  * Enumeracion de los distintos tipos de bloque fantasma
@@ -18,7 +20,7 @@ public enum MyGuideShape {
 	Tower(false, new BigTowerGen(0,0,0), "Tower"),
 	CastleTower(false, new CastleTowerGen(0,0,0), "Castle Tower"),
 	Stairs(false, new StairsGen(3,0), "Stairs"),
-	Floor(false, new FloorShape(-1,-1,3,5), "Floor");
+	House(false, new LittleHouseGen(0,0,0), "House");
 
 
 	public final String unlocalizedName;
