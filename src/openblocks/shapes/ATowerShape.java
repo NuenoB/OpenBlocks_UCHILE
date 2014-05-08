@@ -6,6 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import openblocks.shapes.cond.OneBlockSt;
+import openblocks.shapes.simpleshapes.FloorShape;
+import openblocks.shapes.simpleshapes.FourWallGen;
 import openblocks.shapes.simpleshapes.ShapeEquilateralSquareGen;
 import openblocks.shapes.simpleshapes.ShapeXPlaneGen;
 import openmods.shapes.IShapeable;
@@ -16,9 +18,9 @@ public abstract class ATowerShape extends AShape {
 	protected int width;
 	protected int depth;
 	
-	private int dx;
-	private int dy;
-	private int dz;
+	protected int dx;
+	protected int dy;
+	protected int dz;
 	
 	protected abstract void generateBodyShape(int xSize, int ySize, int zSize,
 			IShapeable shapeable);
@@ -26,8 +28,8 @@ public abstract class ATowerShape extends AShape {
 	protected void generateTopShape(int xSize, int ySize, int zSize,
 			IShapeable shapeable){
 		
-		new ShapeXPlaneGen().generateShape(dx+depth, dy+height, dz+width, shapeable);
-		new ShapeEquilateralSquareGen().generateShape(dx+depth, dy+height+1, dz+width, shapeable);
+		new FloorShape(-depth+dx, -width+dz, depth+dx, width+dz).generateShape(xSize, dy+height, zSize, shapeable);
+		new FourWallGen(-depth+dx, -width+dz, depth+dx, width+dz, 1).generateShape(xSize, dy+height+1, zSize, shapeable);
 		
 		shapeable.setBlock(dx, dy+height+2, dz+width);
 		shapeable.setBlock(dx, dy+height+2, dz-width);
@@ -65,8 +67,8 @@ public abstract class ATowerShape extends AShape {
 	@Override
 	public void generateShape(int x, int y, int z, IShapeable shapeable) {
 		
-		generateBodyShape(dx+width, dy+height, dz+depth, shapeable);
-		generateTopShape(dx+width, dy+height, dz+depth, shapeable);
+		generateBodyShape(width, height, depth, shapeable);
+		generateTopShape(width, height, depth, shapeable);
 
 	}
 	
@@ -82,14 +84,14 @@ public abstract class ATowerShape extends AShape {
 
 		ArrayList<BlockRepresentation> array = new ArrayList<BlockRepresentation>();
 		
-		worldObj.setBlockToAir(entityPos.posX, entityPos.posY, entityPos.posZ);
+		worldObj.setBlockToAir(entityPos.posX+dx, entityPos.posY+dy, entityPos.posZ+dz);
 		
-		int y=entityPos.posY+1;
+		int y=entityPos.posY+1+dy;
 		while(y-->0){
-			if(!worldObj.isAirBlock(entityPos.posX, y, entityPos.posZ)){
+			if(!worldObj.isAirBlock(entityPos.posX+dx, y, entityPos.posZ+dz)){
 				break;
 			}
-			array.add(new BlockRepresentation(entityPos.posX, y, entityPos.posZ,
+			array.add(new BlockRepresentation(entityPos.posX+dx, y, entityPos.posZ+dz,
 					openblocks.OpenBlocks.Blocks.ropeLadder.blockID,5,3));
 			
 		}
