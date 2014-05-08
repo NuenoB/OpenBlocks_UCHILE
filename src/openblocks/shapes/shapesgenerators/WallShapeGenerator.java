@@ -57,36 +57,37 @@ public class WallShapeGenerator extends AbstractShapeGeneratorMove {
 		
 		// the orientation of the wall
 		if(Math.abs(mAngleBetweenTower) <= Math.PI/4 ){
-			initX = 2;
-			finX -= 3;
+			initX+= 4;
+			finX +=-3;
 			mWall = new FactorySimpleWallGeneratorNS();
 			mFancyWall = new FactorySimpleWallGeneratorNSFancy();
 		}
 		else if(Math.abs(mAngleBetweenTower) >= 3*Math.PI/4){
-			initX = -3;
-			finX += 2;
+			initX+= -3;
+			finX += 4;
 			mWall = new FactorySimpleWallGeneratorNS();
 			mFancyWall = new FactorySimpleWallGeneratorNSFancy();
 		}
 		else if(Math.abs(mAngleBetweenTower - Math.PI/2) <= Math.PI/4){
-			initZ = 3;
-			finZ -= 2;
+			initZ+= 5;
+			finZ +=-2;
 			mWall = new FactorySimpleWallGeneratorOE();
 			mFancyWall = new FactorySimpleWallGeneratorOEFancy();
 		}
 		else if(Math.abs(mAngleBetweenTower + Math.PI/2) <= Math.PI/4){
-			initZ = -2;
-			finZ += 3;
+			initZ+=-2;
+			finZ += 5;
 			mWall = new FactorySimpleWallGeneratorOE();
 			mFancyWall = new FactorySimpleWallGeneratorOEFancy();
 		}
 
-		//build the wall
-		wallParts(ySize, initX, initZ, finX, finZ, mWall, mFancyWall, shapeable);
+		if( Math.abs(zSize) >= mFinealTower.getSpaceToLimit() || Math.abs(xSize) > mFinealTower.getSpaceToLimit())
+			wallParts(ySize, initX, initZ, finX, finZ, mWall, mFancyWall, shapeable);
 		
 	}
 		
-	static public double angleBetweenm180p180(double angle){
+	static public double angleBetweenm180p180(double angle)
+	{
 		if(Math.abs(angle) <= Math.PI)
 			return angle;
 		else if(angle > Math.PI)
@@ -96,7 +97,8 @@ public class WallShapeGenerator extends AbstractShapeGeneratorMove {
 	}
 
 	@Override
-	public ArrayList<BlockRepresentation> fill(ChunkCoordinates entityPos,World worldObj) {
+	public ArrayList<BlockRepresentation> fill(ChunkCoordinates entityPos,World worldObj) 
+	{
 		ArrayList<BlockRepresentation> blockList = new ArrayList<BlockRepresentation>();
 		for(IShapeGenenratorMove shape : mListOfConstructions)
 			blockList.addAll(shape.fill(entityPos, worldObj));
@@ -104,15 +106,18 @@ public class WallShapeGenerator extends AbstractShapeGeneratorMove {
 	}
 
 	@Override
-	public ArrayList<BlockRepresentation> fillConditions(ChunkCoordinates entityPos) {
+	public ArrayList<BlockRepresentation> fillConditions(ChunkCoordinates entityPos) 
+	{
 		ArrayList<BlockRepresentation> objectList = new ArrayList<BlockRepresentation>();
-		for(int cont = 1; cont <= 2; cont++)
-			objectList.add(new BlockRepresentation(entityPos.posX, entityPos.posY + cont, entityPos.posZ, Block.blockGold.blockID));
+		for(IShapeGenenratorMove construction : mListOfConstructions)
+			objectList.addAll(construction.fillConditions(entityPos));
+		
 		return objectList;
 	}
 
 	@Override
-	public int getSpaceToLimit() {
+	public int getSpaceToLimit() 
+	{
 		return mFinealTower.getSpaceToLimit();
 	}
 

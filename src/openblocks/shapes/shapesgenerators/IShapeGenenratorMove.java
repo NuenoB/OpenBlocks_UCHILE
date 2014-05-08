@@ -10,6 +10,5 @@ public interface IShapeGenenratorMove extends IShapeGen {
 	
 	public Block getBlockToConstruct();
 	
-	public void setConstrictionPosition(int x, int y, int z);
 
 }

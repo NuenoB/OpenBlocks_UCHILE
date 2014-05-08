@@ -15,14 +15,6 @@ public abstract class AbstractShapeGeneratorMove implements IShapeGenenratorMove
 	protected int moriginX = 0;
 	protected int moriginY = 0;
 	protected int moriginZ = 0;
-
-	@Override
-	public void setConstrictionPosition(int x, int y, int z) {
-		moriginX = x;
-		moriginY = y;
-		moriginZ = z;
-		
-	}
 	
 	@Override
 	public ArrayList<BlockRepresentation> fill(ChunkCoordinates entityPos,

@@ -12,7 +12,7 @@ import openmods.shapes.IShapeable;
 public abstract class AbstractSimpleWallGenerator extends AbstractShapeGeneratorMove {
 
 	protected final int wallHeight = 3;
-	protected final int wallDepth = 4;
+	protected final int wallDepth = 6;
 	
 
 	@Override
@@ -36,9 +36,13 @@ public abstract class AbstractSimpleWallGenerator extends AbstractShapeGenerator
 	}
 	
 	@Override
-	public ArrayList<BlockRepresentation> fillConditions(
-			ChunkCoordinates entityPos) {
-		return new ArrayList<BlockRepresentation>();
+	public ArrayList<BlockRepresentation> fillConditions(ChunkCoordinates entityPos) 
+	{
+		ArrayList<BlockRepresentation> objectList = new ArrayList<BlockRepresentation>();
+		
+		objectList.add(new BlockRepresentation(entityPos.posX, entityPos.posY, entityPos.posZ, Block.blockGold.blockID));
+		
+		return objectList;
 	}
 
 	@Override

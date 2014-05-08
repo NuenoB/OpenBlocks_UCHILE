@@ -15,25 +15,25 @@ public class SimpleWallGeneratorOEFancy extends SimpleWallGeneratorOE {
 	
 		super.generateShape(xSize, ySize, zSize, shapeable);
 		
-		shapeable.setBlock(xSize  - wallDepth + 2, ySize + wallHeight, zSize);
-		shapeable.setBlock(xSize + 1 , ySize + wallHeight, zSize);
+		shapeable.setBlock(xSize + wallDepth - 3  , ySize + wallHeight, zSize);
+		shapeable.setBlock(xSize - 2 , ySize + wallHeight, zSize);
 		
 	}
 	
 	@Override
 	public ArrayList<BlockRepresentation> fill(ChunkCoordinates entityPos,World worldObj) {
 		ArrayList<BlockRepresentation> oList = new ArrayList<BlockRepresentation>();
-		oList.add(new BlockRepresentation(entityPos.posX + moriginX - wallDepth + 3,
+		oList.add(new BlockRepresentation(entityPos.posX + moriginX + wallDepth - 4,
 										  entityPos.posY + moriginY + wallHeight , 
 										  entityPos.posZ + moriginZ , 
 										  Block.torchWood.blockID, 
-										  0x1,
+										  0x2,
 										  0));
-		oList.add(new BlockRepresentation(entityPos.posX + moriginX ,
+		oList.add(new BlockRepresentation(entityPos.posX + moriginX - 1,
 										  entityPos.posY + moriginY + wallHeight, 
 										  entityPos.posZ + moriginZ , 
 										  Block.torchWood.blockID, 
-										  0x0,
+										  0x1,
 										  0));
 		return oList;
 	}
