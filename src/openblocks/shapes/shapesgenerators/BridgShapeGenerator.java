@@ -30,39 +30,59 @@ public class BridgShapeGenerator extends AbstractShape
 
 
 	@Override
-	protected void nsLeft() 
+	protected void nsLeft(IShapeable shapeable) 
 	{
 		initX-= mFinealTower.getSpaceToLimit();
 		finX += mFinealTower.getSpaceToLimit();
 		mWall = new FactorySimpleBridgeGeneratorNS();
 		mFancyWall = new FactorySimpleBridgeGeneratorNS();
+		for(int cont = -1; cont <= 1; cont++)
+		{
+			shapeable.setBlock( initX + 1, initY + 1, initZ + cont);
+			shapeable.setBlock( finX - 1, finY + 1, finZ + cont);
+		}
 	}
 
 	@Override
-	protected void oeLeft() 
+	protected void oeLeft(IShapeable shapeable) 
 	{
 		initZ-= mFinealTower.getSpaceToLimit();
 		finZ += mFinealTower.getSpaceToLimit();
 		mWall = new FactorySimpleBridgeGeneratorOE();
 		mFancyWall = new FactorySimpleBridgeGeneratorOE();
+		for(int cont = -1; cont <= 1; cont++)
+		{
+			shapeable.setBlock( initX + cont, initY + 1, initZ + 1);
+			shapeable.setBlock( finX + cont, finY + 1, finZ - 1);
+		}
 	}
 
 	@Override
-	protected void nsRight() 
+	protected void nsRight(IShapeable shapeable) 
 	{
 		initX+= mFinealTower.getSpaceToLimit();
 		finX -= mFinealTower.getSpaceToLimit();
 		mWall = new FactorySimpleBridgeGeneratorNS();
 		mFancyWall = new FactorySimpleBridgeGeneratorNS();
+		for(int cont = -1; cont <= 1; cont++)
+		{
+			shapeable.setBlock( initX - 1, initY + 1, initZ + cont);
+			shapeable.setBlock( finX + 1, finY + 1, finZ + cont);
+		}
 	}
 
 	@Override
-	protected void oeRight() 
+	protected void oeRight(IShapeable shapeable) 
 	{
 		initZ+= mFinealTower.getSpaceToLimit();
 		finZ -= mFinealTower.getSpaceToLimit();
 		mWall = new FactorySimpleBridgeGeneratorOE();
 		mFancyWall = new FactorySimpleBridgeGeneratorOE();
+		for(int cont = -1; cont <= 1; cont++)
+		{
+			shapeable.setBlock( initX + cont, initY + 1, initZ - 1);
+			shapeable.setBlock( finX + cont, finY + 1, finZ + 1);
+		}
 	}
 
 	@Override

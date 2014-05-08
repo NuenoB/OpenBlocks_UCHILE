@@ -51,19 +51,19 @@ public abstract class AbstractShape extends AbstractShapeGeneratorMove
 		// the orientation of the wall
 		if(Math.abs(mAngleBetweenTower) <= Math.PI/4 )
 		{
-			nsRight();
+			nsRight(shapeable);
 		}
 		else if(Math.abs(mAngleBetweenTower) >= 3*Math.PI/4)
 		{
-			nsLeft();
+			nsLeft(shapeable);
 		}
 		else if(Math.abs(mAngleBetweenTower - Math.PI/2) <= Math.PI/4)
 		{
-			oeRight();
+			oeRight(shapeable);
 		}
 		else if(Math.abs(mAngleBetweenTower + Math.PI/2) <= Math.PI/4)
 		{
-			oeLeft();
+			oeLeft(shapeable);
 		}
 
 		if( Math.abs(zSize) >= mFinealTower.getSpaceToLimit() || Math.abs(xSize) > mFinealTower.getSpaceToLimit())
@@ -71,10 +71,10 @@ public abstract class AbstractShape extends AbstractShapeGeneratorMove
 		
 	}
 	
-	abstract protected void nsLeft();
-	abstract protected void oeLeft();
-	abstract protected void nsRight();
-	abstract protected void oeRight();
+	abstract protected void nsLeft(IShapeable shapeable);
+	abstract protected void oeLeft(IShapeable shapeable);
+	abstract protected void nsRight(IShapeable shapeable);
+	abstract protected void oeRight(IShapeable shapeable);
 	abstract protected void turents();
 		
 	static public double angleBetweenm180p180(double angle)

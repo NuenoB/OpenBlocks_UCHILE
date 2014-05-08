@@ -25,7 +25,7 @@ public class WallShapeGenerator extends AbstractShape
 
 		
 	@Override
-	protected void nsLeft() 
+	protected void nsLeft(IShapeable shapeable) 
 	{
 		initX+= -3;
 		finX += 4;
@@ -34,7 +34,7 @@ public class WallShapeGenerator extends AbstractShape
 	}
 
 	@Override
-	protected void oeLeft() 
+	protected void oeLeft(IShapeable shapeable) 
 	{
 		initZ+=-2;
 		finZ += 5;
@@ -43,7 +43,7 @@ public class WallShapeGenerator extends AbstractShape
 	}
 
 	@Override
-	protected void nsRight() 
+	protected void nsRight(IShapeable shapeable) 
 	{
 		initX+= 4;
 		finX +=-3;
@@ -52,7 +52,7 @@ public class WallShapeGenerator extends AbstractShape
 	}
 
 	@Override
-	protected void oeRight() 
+	protected void oeRight(IShapeable shapeable) 
 	{
 		initZ+= 5;
 		finZ +=-2;
