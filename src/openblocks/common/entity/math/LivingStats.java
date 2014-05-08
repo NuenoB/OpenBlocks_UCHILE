@@ -1,9 +1,11 @@
 package openblocks.common.entity.math;
 
 
+import openblocks.common.item.ItemDamage;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
@@ -11,42 +13,43 @@ public class LivingStats extends Stats{
 	
 
 	protected EntityLiving entityLiving;
-	protected ItemStack heldItem;
-	protected float attack;
- 	protected float defense;
- 	protected float magic;
- 	protected float resistance;
+	protected Item heldItem; // Se obtiene el item a partir del itemStack
+	protected double attack; // Cambios de float a double
+ 	protected double defense;
+ 	protected double magic;
+ 	protected double resistance;
  	protected int speed;
  	
  	
  	public LivingStats(Entity entity){
  		this.entityLiving=(EntityLiving) entity;
- 		this.heldItem=entityLiving.getHeldItem();
+ 		ItemStack hi=entityLiving.getHeldItem();
+ 		this.heldItem= hi.getItem();
  	}
  	
  	
 	@Override
 	void statsAllocte() {
-		attack=heldItem.getBonusDamage(); //método agregado por el grupo de items.
+		attack=new ItemDamage(heldItem).getBonusDamage(); //método agregado por el grupo de items.
 		defense=this.getTotalDefenseValue();
 		magic=this.getTotalMagicValue();
 		resistance=this.getTotalResistanceValue();
 		speed=this.getTotalSpeedValue();
 	}
 
-	public float getAttack(){
+	public double getAttack(){
 		return attack;
 	}
-	public float getDefense(){
+	public double getDefense(){
 		return defense;
 	}
-	public float getMagic(){
+	public double getMagic(){
 		return magic;
 	}
-	public float getResistance(){
+	public double getResistance(){
 		return resistance;
 	}
-	public float getSpeed(){
+	public double getSpeed(){
 		return speed;
 	}
 
@@ -67,7 +70,7 @@ public class LivingStats extends Stats{
         return i;
     }
     
-    public int getTotalMagicValue()
+	public int getTotalMagicValue()
     {
         int i = 0;
 

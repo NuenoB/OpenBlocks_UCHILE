@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public abstract class AbstractCuttingWeapon extends Item{
+public abstract class AbstractCuttingWeapon extends Item implements CuttingWeapon{
 
 	protected double damage;
 	protected int durability;

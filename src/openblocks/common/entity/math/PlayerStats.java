@@ -1,7 +1,9 @@
 package openblocks.common.entity.math;
 
+import openblocks.common.item.ItemDamage;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
@@ -9,10 +11,10 @@ public class PlayerStats extends Stats{
 
 	protected EntityPlayer player;
 	protected ItemStack[] itemStack;
-	protected float attack;
- 	protected float defense;
- 	protected float magic;
- 	protected float resistance;
+	protected double attack; // Cambios de float a double
+ 	protected double defense;
+ 	protected double magic;
+ 	protected double resistance;
  	protected int speed;
 
  	public PlayerStats(Entity entity){
@@ -20,9 +22,16 @@ public class PlayerStats extends Stats{
 		itemStack=player.inventory.armorInventory;
  	}
  	
+ 	/**
+ 	 * Se obtiene el item que tiene el personaje en la mano, y a partir de eso
+ 	 * se calcula el ataque
+ 	 */
 	@Override
 	void statsAllocte() {
-		attack=player.getHeldItem().getBonusDamage(); //método agregado por el grupo de items.
+		ItemStack player_itemStack=player.getHeldItem();
+		Item heldItem = player_itemStack.getItem(); 
+		
+		attack=new ItemDamage(heldItem).getBonusDamage(); //método agregado por el grupo de items.
 		defense=this.getTotalDefenseValue();
 		magic=this.getTotalMagicValue();
 		resistance=this.getTotalResistanceValue();
@@ -30,19 +39,19 @@ public class PlayerStats extends Stats{
 	}
 	
 	
-	public float getAttack(){
+	public double getAttack(){
 		return attack;
 	}
-	public float getDefense(){
+	public double getDefense(){
 		return defense;
 	}
-	public float getMagic(){
+	public double getMagic(){
 		return magic;
 	}
-	public float getResistance(){
+	public double getResistance(){
 		return resistance;
 	}
-	public float getSpeed(){
+	public double getSpeed(){
 		return speed;
 	}
 

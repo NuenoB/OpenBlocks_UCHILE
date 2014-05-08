@@ -289,6 +289,7 @@ item.openblocks.dagger.name=Dagger
 item.openblocks.fire_dagger.name=Fire Dagger
 item.openblocks.heavy_sword.name=Heavy Sword
 item.openblocks.normal_sword.name=Normal Sword
+item.openblocks.fire_iron_helmet.name=Fire Iron Helmet
 
 itemGroup.tabOpenBlocks=OpenBlocks
 itemGroup.tabOurWeapon=Our Weapons

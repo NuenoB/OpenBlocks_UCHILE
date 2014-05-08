@@ -292,6 +292,9 @@ public class OpenBlocks {
 		//Normal Sword
 		@RegisterItem(name = "NomalSword", unlocalizedName= "normal_sword")
 		public static ItemNormalSword normalSword;
+		
+		@RegisterItem(name = "fireIronHelmet", unlocalizedName= "fire_iron_helmet")
+		public static FireHelmet fireIronHelmet;
 
 		// -----------------------------------------------------------------------------------------
 	}
