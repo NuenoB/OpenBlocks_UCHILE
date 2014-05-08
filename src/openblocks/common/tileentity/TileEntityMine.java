@@ -48,7 +48,7 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 		width = new SyncableInt(8);
 		height = new SyncableInt(13);
 		depth = new SyncableInt(8);
-		mode = new SyncableInt(0);
+		mode = new SyncableInt(1);
 		mnMoveW = new SyncableInt(0);
 		mnMoveH = new SyncableInt(0); 
 		mnMoveD = new SyncableInt(0);
@@ -237,6 +237,15 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 	private void fill(EntityPlayer player, int side) {
 
 		final Block itemBlock = getCurrentMode().generator.getBlockToConstruct();
+		
+		int cont = 1;
+		ArrayList<BlockRepresentation> conditions = getCurrentMode().generator.fillConditions(new ChunkCoordinates(xCoord,yCoord,zCoord)); 
+		
+		for(BlockRepresentation block: conditions)
+		{
+			worldObj.destroyBlock(xCoord, yCoord + cont, zCoord, false);
+			cont++;
+		}
 
 		for (ChunkCoordinates coord : getShapeCoordinates())
 			worldObj.setBlock(coord.posX, coord.posY, coord.posZ, itemBlock.blockID, 0, BlockNotifyFlags.ALL);
@@ -259,13 +268,29 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 		return true;
 	}
 
-	private boolean isInFillMode() {
+	private boolean isInFillMode() 
+	{
 		int cont = 1;
-		for(BlockRepresentation aBlock :getCurrentMode().generator.fillConditions(new ChunkCoordinates(xCoord,yCoord,zCoord))){
-			if(worldObj.getBlockId(xCoord, yCoord + cont, zCoord) != Block.blockGold.blockID)
-				return false;
+		ArrayList<BlockRepresentation> conditions = getCurrentMode().generator.fillConditions(new ChunkCoordinates(xCoord,yCoord,zCoord));
+		
+		for(;;)
+		{
+			int block = worldObj.getBlockId(xCoord, yCoord + cont, zCoord);
+			if( worldObj.isAirBlock(xCoord, yCoord + cont, zCoord))
+				break;
+			for(BlockRepresentation oneBlock:conditions)
+			{
+				if(oneBlock.getBlockId() == block)
+				{
+					conditions.remove(oneBlock);
+					break;
+				}					
+			}
+			
+			if(conditions.isEmpty())
+				break;
 			cont++;
 		}
-		return true;
+		return conditions.isEmpty();
 	}
 }
