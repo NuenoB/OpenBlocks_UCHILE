@@ -6,10 +6,13 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import openblocks.shapes.AShape;
 import openblocks.shapes.BlockRepresentation;
+import openblocks.shapes.IShapeGen;
 import openblocks.shapes.cond.ICondStrategy;
 import openblocks.shapes.cond.TwoBlockSt;
+import openblocks.shapes.simpleshapes.FloorShape;
 import openblocks.shapes.simpleshapes.FourWallGen;
 import openmods.shapes.IShapeable;
+import openmods.words.IGenerator;
 
 public class CastleGen extends AShape {
 	
@@ -18,6 +21,23 @@ public class CastleGen extends AShape {
 	private int x1 = 7;
 	private int z1 = 7;
 	private int floor = 2;
+	
+	private IShapeGen stairs = new StairsGen(3, 0);
+	private IShapeGen tower1 = new CastleTowerGen(-x1, 0, z0);
+	private IShapeGen tower2 = new CastleTowerGen(x1+1, 0, z0);
+	private IShapeGen tower3 = new CastleTowerGen(x1+1, 0, z1);
+	private IShapeGen tower4 = new CastleTowerGen(-x1, 0, z1);
+	private IShapeGen roofRoom = new LittleHouseGen(0, 8, 0);
+	
+	private final int[] xArr = {x0,x0,
+								x0,x0,
+								x1,x1,
+								x1,x1};
+	
+	private final int[] zArr = {z0,z0+1,
+								z1,z1-1,
+								z1,z1-1,
+								z0,z0+1};
 
 	public CastleGen() {
 		super(new TwoBlockSt());		
@@ -27,6 +47,20 @@ public class CastleGen extends AShape {
 	public ArrayList<BlockRepresentation> fill(ChunkCoordinates entityPos,
 			World worldObj) {
 		ArrayList<BlockRepresentation> array = new ArrayList<BlockRepresentation>();
+		
+		array.addAll(stairs.fill(entityPos, worldObj));
+		array.addAll(tower1.fill(entityPos, worldObj));
+		array.addAll(tower2.fill(entityPos, worldObj));
+		array.addAll(tower3.fill(entityPos, worldObj));
+		array.addAll(tower4.fill(entityPos, worldObj));
+		array.addAll(roofRoom.fill(entityPos, worldObj));	
+		
+		for(int i = 0; i<4; i++){
+			worldObj.setBlockToAir(xArr[i*2]+entityPos.posX, entityPos.posY, zArr[i*2]+entityPos.posZ);
+			worldObj.setBlockToAir(xArr[i*2+1]+entityPos.posX, entityPos.posY, zArr[i*2+1]+entityPos.posZ);
+			worldObj.setBlockToAir(xArr[i*2]+entityPos.posX, 1+entityPos.posY, zArr[i*2]+entityPos.posZ);
+			worldObj.setBlockToAir(xArr[i*2+1]+entityPos.posX, 1+entityPos.posY, zArr[i*2+1]+entityPos.posZ);
+		}
 		return array;
 	}
 
@@ -34,8 +68,28 @@ public class CastleGen extends AShape {
 	public void generateShape(int xSize, int ySize, int zSize,
 			IShapeable shapeable) {
 		
+		//escalera
+		stairs.generateShape(xSize, ySize, zSize, shapeable);
+		
+		//pared
 		new FourWallGen(x0, z0, x1, z1, 8).generateShape(xSize, 0, zSize, shapeable);
-		//new CastleTowerGen(-7, 0, -6).generateShape(xSize, ySize, zSize, shapeable);
+		
+		//torreones
+		tower1.generateShape(xSize, ySize, zSize, shapeable);
+		tower2.generateShape(xSize, ySize, zSize, shapeable);
+		tower3.generateShape(xSize, ySize, zSize, shapeable);
+		tower4.generateShape(xSize, ySize, zSize, shapeable);
+		
+		//habitacion techo
+		roofRoom.generateShape(xSize, ySize, zSize, shapeable);
+		
+		//pisos
+		for(int i=0; i<2; i++){
+			new FloorShape(x0+4, z0, x1-5, z0+3).generateShape(xSize, (i*4)+3, zSize, shapeable);
+			new FloorShape(x0+4, z1-4, x1-5, z1).generateShape(xSize, (i*4)+3, zSize, shapeable);
+			new FloorShape(x1-4, z0, x1, z1).generateShape(xSize, (i*4)+3, zSize, shapeable);
+			new FloorShape(x0, z0, x0+3, z1).generateShape(xSize, (i*4)+3, zSize, shapeable);
+		}
 
 	}
 

@@ -45,9 +45,9 @@ public class TileEntityMyGuide extends SyncedTileEntity implements IShapeable, I
 
 	@Override
 	protected void createSyncedFields() {
-		width = new SyncableInt(12);
-		height = new SyncableInt(12);
-		depth = new SyncableInt(12);
+		width = new SyncableInt(20);
+		height = new SyncableInt(20);
+		depth = new SyncableInt(20);
 		mode = new SyncableInt(0);
 	}
 
