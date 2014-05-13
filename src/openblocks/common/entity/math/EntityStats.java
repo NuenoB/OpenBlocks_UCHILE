@@ -26,9 +26,11 @@ public abstract class EntityStats{
 		return magicPoints;
 	}
 	
-	public abstract float attackTo(EntityStats enemy);
+	public abstract void attackTo(EntityStats enemy);
 	
 	public abstract void beingDamaged(DamageType type, float baseDMG);
+	
+	public abstract EntityLivingBase getEntity();
 	
 	public void healHP (float amount) {
 		hitPoints = Math.max(hitPoints+amount, this.getMaxHP());
@@ -37,4 +39,5 @@ public abstract class EntityStats{
 	public void healMP (int amount) {
 		magicPoints = Math.max(magicPoints+amount, this.getMaxMP());
 	}
+	
 }
