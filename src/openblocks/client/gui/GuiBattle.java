@@ -244,15 +244,15 @@ public class GuiBattle extends GuiScreen {
 			break;
 		case 0: //Main menu
 			info[0] = "What will you do?";
-			buttonList.add(new GuiButton(1, width*2/6 - 40, height - 72, 80, 20, "Fight"));
-			buttonList.add(new GuiButton(2, width*4/6 - 40, height - 72, 80, 20, "Flee"));
+			buttonList.add(new GuiBattleButton(1,"Fight"));
+			buttonList.add(new GuiBattleButton(2,"Flee"));
 			break;
 		case 1: //Fight menu
 			info[0] = "What will you do?";
-			buttonList.add(new GuiButton(3, width/6 - 40, height - 72, 80, 20, "Attack"));
-			//controlList.add(new GuiButton(5, width*2/5 - 40, height - 72, 80, 20, "Use Item"));
-			buttonList.add(new GuiButton(4, width*3/5 - 40, height - 72, 80, 20, "Skills"));
-			buttonList.add(new GuiButton(0, width*5/6 - 40, height - 72, 80, 20, "Cancel"));
+			buttonList.add(new GuiBattleButton(3,"Attack"));
+			//controlList.add(new  GuiBattleButton(5, width*2/5 - 40, height - 72, 80, 20, "Use Item"));
+			buttonList.add(new  GuiBattleButton(4,"Skills"));
+			buttonList.add(new  GuiBattleButton(0,"Cancel"));
 			break;
 		case 2: //Flee status
 			info[0] = "You attempt to flee!";
@@ -266,10 +266,10 @@ public class GuiBattle extends GuiScreen {
 			int i=0;
 			while(player.Skills.hasNext()) //Changed weapons to skills.
 			{
-				buttonList.add(new GuiButton(6, width/2 - 88 + i * 20, height - 19, ""));
+				buttonList.add(new  GuiBattleButton(6, i * 20, 0, ""));
 				i++;
 			}
-			buttonList.add(new GuiButton(0, width/2 - 40, height - 40, 80, 20, "Cancel"));
+			buttonList.add(new  GuiBattleButton(0, width/2 - 40, height - 40, 80, 20, "Cancel"));
 			break;
 		case 5: //Attack Phase (Handled by actionPerformed method)
 			info[0] = "You attack!";
