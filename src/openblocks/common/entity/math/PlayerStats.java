@@ -1,5 +1,6 @@
 package openblocks.common.entity.math;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class PlayerStats extends EntityStats {
@@ -8,6 +9,8 @@ public class PlayerStats extends EntityStats {
 	
 	public PlayerStats(EntityPlayer player) {
 		this.player = player;
+		hitPoints = this.getMaxHP();
+		magicPoints = this.getMaxMP();
 	}
 
 	@Override
@@ -49,22 +52,17 @@ public class PlayerStats extends EntityStats {
 	}
 	
 	@Override
-	public float attackTo(EntityStats enemy) {
-		return 0;
+	public void attackTo(EntityStats enemy) {
+		
+	}
+	
+	public EntityLivingBase getEntity() {
+		return player;
 	}
 	
 	@Override
 	public void beingDamaged(DamageType type, float baseDMG) {
-		float totalDMG = baseDMG;
-		if (type == type.PHYSICAL) {
-			totalDMG /= this.getDEF();
-		}
-		else {
-			totalDMG /= this.getRES();
-		}
-		totalDMG *= (player.getRNG().nextGaussian()/10.0F) + 0.9F;
-		totalDMG -= player.getTotalArmorValue();
-		player.inventory.damageArmor(4.0F);
+		
 	}
 	
 }
