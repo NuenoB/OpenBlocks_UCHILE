@@ -2,10 +2,12 @@ package openblocks.common.entity.math;
 
 import net.minecraft.entity.EntityLivingBase;
 
-public abstract class EntityStats {
+public abstract class EntityStats{
 	
 	protected float hitPoints;
 	protected int magicPoints;
+	protected int speed;
+	public EntityLivingBase entity;
 	
 	public abstract float getMaxHP();
 	public abstract int getMaxMP();
@@ -14,6 +16,7 @@ public abstract class EntityStats {
 	public abstract float getMAG();
 	public abstract float getRES();
 	public abstract int getSPD();
+	public abstract EntityLivingBase getEntity();
 	
 	public float getHP() {
 		return hitPoints;

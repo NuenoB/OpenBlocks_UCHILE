@@ -1,5 +1,6 @@
 package openblocks.common.entity.math;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class PlayerStats extends EntityStats {
@@ -65,6 +66,11 @@ public class PlayerStats extends EntityStats {
 		totalDMG *= (player.getRNG().nextGaussian()/10.0F) + 0.9F;
 		totalDMG -= player.getTotalArmorValue();
 		player.inventory.damageArmor(4.0F);
+	}
+
+	@Override
+	public EntityLivingBase getEntity() {
+		return this.entity;
 	}
 	
 }

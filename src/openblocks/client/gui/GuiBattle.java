@@ -10,47 +10,43 @@ import net.minecraft.client.gui.GuiScreen;
 import openblocks.Config;
 import openblocks.OpenBlocks;
 import openblocks.common.container.ContainerAutoEnchantmentTable;
-import openblocks.common.entity.player.EntityPlayerExt.EntityStats;
-import openblocks.common.entity.player.EntityPlayerExt.EntityStats.Action;
-import openblocks.common.entity.EntityStats;
-import openblocks.common.skills.ISkill;
+import openblocks.common.entity.player.EntityPlayerExt.CombatantInfo;
 import openmods.gui.BaseGuiContainer;
 
 public class GuiBattle extends GuiScreen {
-
+	
 	private int battleID;
-	private EntityStats player;
-
-	private Map<Integer,EntityStats> combatants;
+	private CombatantInfo player;
+	
+	private Map<Integer,CombatantInfo> combatants;
 	private int serverBattleSize;
 	private boolean updatingCombatants;
-
+	
 	private int bgColor = 0x000000;
 	private String info[] = new String[2];
-
+	
 	private boolean combatantButton = false;
 	private boolean combatantButtonPopulated = false;
-
+	
 	private boolean turnChoiceSent;
-
+	
 	private int currentMenu;
-
+	
 	private int updateTick;
 	private final int updateWaitTime = 400;
-
+	
 	private final int nameHeightInterval = 14;
-	private boolean useSkill= false;
-
-	public void BattleGui(int battleID, EntityStats player)
+	
+	public void BattleGui(int battleID, CombatantInfo player)
 	{
 		this.battleID = battleID;
 		this.player = player;
 		player.ready = true;
-
-		combatants = new TreeMap<Integer,EntityStats>();
+		
+		combatants = new TreeMap<Integer,CombatantInfo>();
 		updateTick = updateWaitTime;
 	}
-
+	
 	/**
 	 * Called automatically when the client brings up this GUIScreen.
 	 */
@@ -63,7 +59,7 @@ public class GuiBattle extends GuiScreen {
 		updatingCombatants = false;
 		turnChoiceSent = false;
 	}
-
+	
 	public void checkBattleInfo(boolean forceUpdate, int battleSize, boolean playerPhase, boolean turnChoiceReceived)
 	{
 		serverBattleSize = battleSize;
@@ -74,23 +70,23 @@ public class GuiBattle extends GuiScreen {
 		}
 		update(playerPhase, turnChoiceReceived);
 	}
-
+	
 	public void receiveCombatantHealthInfo(int entityID, float health)
 	{
 		if(!updatingCombatants)
 		{
-			EntityStats combatant = combatants.get(entityID);
+			CombatantInfo combatant = combatants.get(entityID);
 			if(combatant != null)
 				combatant.updateHealth(health);
 		}
 	}
-
-	//	public void updateTurnEnd(boolean serverTurnEnded)
-	//	{
-	//		if(serverTurnEnded)
-	//			turnChoiceSent = false;
-	//	}
-
+	
+//	public void updateTurnEnd(boolean serverTurnEnded)
+//	{
+//		if(serverTurnEnded)
+//			turnChoiceSent = false;
+//	}
+	
 	public void update(boolean playerPhase, boolean turnChoiceReceived)
 	{
 		System.out.println("Update called, turnSentBool is" + turnChoiceSent);
@@ -113,7 +109,7 @@ public class GuiBattle extends GuiScreen {
 		else
 			getMenu(-2);
 	}
-
+	
 	/**
 	 * Method that draws the elements of the GUI.
 	 */
@@ -121,16 +117,16 @@ public class GuiBattle extends GuiScreen {
 	public void drawScreen(int par1, int par2, float par3) {
 		drawRect(0, 0, width, height*5/6, 0xa0000000 | bgColor);
 		//drawRect(0, height*6/10, width, height*5/6, 0x70000000 | bgColor);
-
+		
 		drawCombatants();
 
 		super.drawScreen(par1, par2, par3);
-
+		
 		if(info[0] != "")
 			Minecraft.getMinecraft().fontRenderer.drawString(info[0], width/2 - Minecraft.getMinecraft().fontRenderer.getStringWidth(info[0])/2, height - 90, 0xffffffff);
 		if(info[1] != "")
 			Minecraft.getMinecraft().fontRenderer.drawString(info[1], width/2 - Minecraft.getMinecraft().fontRenderer.getStringWidth(info[1])/2, height - 80, 0xffffffff);
-
+		
 		updateTick--;
 		if(updateTick==0)
 		{
@@ -138,16 +134,16 @@ public class GuiBattle extends GuiScreen {
 			updateTick = updateWaitTime;
 		}
 	}
-
+	
 	/**
 	 * Draws the combatant information on the GUIScreen.
 	 */
 	public void drawCombatants()
 	{
 		int x, y1 = height/5, y2 = height/5;
-		for(EntityStats combatant : combatants.values())
+		for(CombatantInfo combatant : combatants.values())
 		{
-			if(combatant.isPlayer)
+			if(combatant.isSideOne)
 			{
 				y1 += nameHeightInterval;
 				x = width/8;
@@ -160,11 +156,11 @@ public class GuiBattle extends GuiScreen {
 				drawCombatant(combatant,x,y2,0xFFFFFFFF);
 			}
 		}
-
+		
 		if(!combatantButtonPopulated)
 			combatantButtonPopulated = true;
 	}
-
+	
 	/**
 	 * Draws a combatant on the GUIScreen based on the given parameters.
 	 * @param id entityID of the combatant.
@@ -173,26 +169,21 @@ public class GuiBattle extends GuiScreen {
 	 * @param y Y coordinate of the drawn information.
 	 * @param color The color of the drawn information (when applicable).
 	 */
-	private void drawCombatant(EntityStats combatant, int x, int y, int color)
+	private void drawCombatant(CombatantInfo combatant, int x, int y, int color)
 	{
-		int nameLength = Minecraft.getMinecraft().fontRenderer.getStringWidth(combatant.name());
+		int nameLength = Minecraft.getMinecraft().fontRenderer.getStringWidth(combatant.name);
 		if(combatantButton)
 		{
 			if(!combatantButtonPopulated)
 			{
-				if (useSkill){
-					buttonList.add(new EntitySelectionButton(6, combatant.getId(), x - nameLength/2, y, nameLength + 2, 8, combatant.name()));
-				}
-				else{
-					buttonList.add(new EntitySelectionButton(5, combatant.getId(), x - nameLength/2, y, nameLength + 2, 8, combatant.name()));
-				}
+				buttonList.add(new IDSelectionButton(5, combatant.id, x - nameLength/2, y, nameLength + 2, 8, combatant.name));
 			}
 		}
 		else
 		{
-			Minecraft.getMinecraft().fontRenderer.drawString(combatant.name(), x - nameLength/2, y, color);
+			Minecraft.getMinecraft().fontRenderer.drawString(combatant.name, x - nameLength/2, y, color);
 		}
-
+		
 		//Draw Health
 		if(combatant.HP > 100)
 		{
@@ -251,7 +242,7 @@ public class GuiBattle extends GuiScreen {
 			info[0] = "What will you do?";
 			buttonList.add(new GuiButton(3, width/6 - 40, height - 72, 80, 20, "Attack"));
 			//controlList.add(new GuiButton(5, width*2/5 - 40, height - 72, 80, 20, "Use Item"));
-			buttonList.add(new GuiButton(4, width*3/5 - 40, height - 72, 80, 20, "Skills"));
+			buttonList.add(new GuiButton(4, width*3/5 - 40, height - 72, 80, 20, "Change Weapon"));
 			buttonList.add(new GuiButton(0, width*5/6 - 40, height - 72, 80, 20, "Cancel"));
 			break;
 		case 2: //Flee status
@@ -261,13 +252,11 @@ public class GuiBattle extends GuiScreen {
 		case 3: //Attack Selection (Handled by actionPerformed method)
 			info[0] = "Pick a target!";
 			break;
-		case 4: //Skill menu
-			info[0] = "Pick a skill!";
-			int i=0;
-			while(player.Skills.hasNext()) //Changed weapons to skills.
+		case 4: //Change weapon menu
+			info[0] = "Pick your weapon!";
+			for(int i=0; i < 9; i++)
 			{
-				buttonList.add(new GuiButton(6, width/2 - 88 + i * 20, height - 19, ""));
-				i++;
+				buttonList.add(new ItemSelectionButton(6, width/2 - 88 + i * 20, height - 19, 16, 16, "", i));
 			}
 			buttonList.add(new GuiButton(0, width/2 - 40, height - 40, 80, 20, "Cancel"));
 			break;
@@ -276,14 +265,14 @@ public class GuiBattle extends GuiScreen {
 			info[1] = "Waiting for server...";
 			break;
 		case 6: //Weapon Changed
-			info[0] = "You used a skill!";
+			info[0] = "You switched weapons!";
 			info[1] = "Waiting for server...";
 			break;
 		default:
 			break;
 		}
 	}
-
+	
 	/**
 	 * This method is called automatically when a button is pressed.
 	 * Calls getMenu() with the button ID.
@@ -292,56 +281,49 @@ public class GuiBattle extends GuiScreen {
 	protected void actionPerformed(GuiButton button) {
 		if(button.id == 2) //Flee
 		{
-			player.action = Action.FLEE;
-			player.target = player.getId();
+			player.type = Type.FLEE;
+			player.target = player.id;
 			PacketDispatcher.sendPacketToServer(new BattleCommandPacket(battleID, player).makePacket());
 			turnChoiceSent = true;
 		}
-
+		
 		if(button.id == 3) //Show attack menu
 		{
 			combatantButton = true;
-			useSkill= false;
-			combatantButtonPopulated = false;
-		}
-		else if(button.id == 4) //Show skills menu
-		{
-			combatantButton= true;
-			useSkill= true;
 			combatantButtonPopulated = false;
 		}
 		else
 			combatantButton = false;
-
+		
 		if(button.id == 5) //Attack phase
 		{
-			player.target = ((EntitySelectionButton)button).entityID;
-			player.action = Action.ATTACK;
+			player.target = ((IDSelectionButton)button).entityID;
+			player.type = Type.ATTACK;
 			PacketDispatcher.sendPacketToServer(new BattleCommandPacket(battleID, player).makePacket());
 			turnChoiceSent = true;
 		}
-
+		
 		if(button.id == 6)
 		{
-			int itemStackID = ((SkillSelectionButton)button).getSkillID();
-
-			player.action = Action.USE_SKILL;
-			player.target = player.getId();
+			int itemStackID = ((ItemSelectionButton)button).getItemStackID();
+			Minecraft.getMinecraft().thePlayer.inventory.currentItem = itemStackID;
+			
+			player.type = Type.CHANGE_ITEM;
+			player.target = player.id;
 			PacketDispatcher.sendPacketToServer(new BattleCommandPacket(battleID, player).makePacket());
 			turnChoiceSent = true;
 		}
-
+		
 		getMenu(button.id);
 	}
-
+	
 	@Override
 	public boolean doesGuiPauseGame() {
-		return true;
+		return false;
 	}
 
 	@Override
 	protected void keyTyped(char par1, int par2) {
-
 	}
 }
 

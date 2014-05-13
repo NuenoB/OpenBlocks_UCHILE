@@ -14,12 +14,13 @@ public class Battle {
 	private ArrayList<EntityLivingBase> battlers;
 	public Battle(Iterator<EntityLivingBase> ent, World world){
 		while (ent.hasNext()){
+			ent.next().
 			battlers.add(ent.next());
 		}
 	}
 	public void calculate(){
 		for (EntityLivingBase battler : battlers){
-			battler.onUpdate();
+			battler.updateStatus();
 		}
 	}
 	public void sortTurn(){
@@ -42,7 +43,7 @@ public class Battle {
 		while (!battleEnd){
 			this.blockMovement();
 			for (EntityLivingBase entity : battlers){
-				entity.getAction();
+				
 			}
 		}
 	}

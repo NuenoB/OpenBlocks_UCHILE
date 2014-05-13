@@ -1,12 +1,7 @@
 package openblocks.common.entity.player;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Map;
 
-import openblocks.common.skills.ISkill;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.ChunkCoordinates;
@@ -14,25 +9,20 @@ import net.minecraft.world.World;
 
 public class EntityPlayerExt extends EntityPlayer{
 	
+	private int MagicPoints = 500;
+	private int MaxMagicPoints = 500;
+	private ArrayList<String> Skills;
+	private boolean inBattle;
+	
 	public enum CombatantInfo{
-		Player;
-		public Iterator<ISkill> Skills;
+		MaxMagicPoints, MagicPoints, Skills;
 		public boolean ready;
-		public float HP;
-		public Action action;
-		public CombatantInfo target;
-		private int MagicPoints = 500;
-		private int MaxMagicPoints = 500;
-		private boolean inBattle;
-		private int id= 6;
-		public boolean isPlayer = true;
+		public float HP = 65535;
 
 		public void updateHealth(float health) {
 			// TODO Auto-generated method stub
+
 		}	
-		public enum Action{
-			USE_SKILL, ATTACK, MAGIC, FLEE;
-		}
 	}
 
 	public EntityPlayerExt(World par1World, String par2Str) {

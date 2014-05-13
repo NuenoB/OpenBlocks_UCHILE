@@ -6,35 +6,35 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityStats;
+import openblocks.common.entity.math.*;
 import net.minecraft.world.World;
 
 public class Battle {
 	private boolean battleEnd;
 	private ArrayList<EntityStats> battlers;
-	public Battle(Iterator<EntityStats> ent, World world){
-		while (ent.hasNext()){
-			battlers.add(ent.next());
-		}
-	}
-	public void calculate(){
-		for (EntityStats battler : battlers){
-			battler.onUpdate();
+	public Battle(ArrayList<EntityStats> ent, World world){
+		for (EntityStats entity : ent){
+			battlers.add(entity);
 		}
 	}
 	public void sortTurn(){
-		Collections.sort(battlers, determinePriority());
+		Collections.sort(battlers, new determinePriority());
 	}
 
-	public Comparator<EntityStats> determinePriority(){
-		return (EntityStats.getSPD() > EntityStats.getSPD()); 
+	public class determinePriority implements Comparator<EntityStats>{
+
+		@Override
+		public int compare(EntityStats o1, EntityStats o2) {
+			if (o1.getSPD() >= o2.getSPD()) return 1;
+			else return 0;
+		}
 	}
 
 	public void blockMovement(){
 		for (EntityStats entity : battlers){
-			entity.setJumping(false);
-			entity.moveStrafing = 0.0F;
-			entity.moveForward = 0.0F;
+			entity.getEntity().setJumping(false);
+			entity.getEntity().moveStrafing = 0.0F;
+			entity.getEntity().moveForward = 0.0F;
 		}
 	}
 
@@ -42,6 +42,7 @@ public class Battle {
 		this.blockMovement();
 		for (EntityStats entity : battlers){
 			entity.getAction();
+			entity.getEntity();
 		}
 	}
 	public void getAction(){
