@@ -45,24 +45,6 @@ public class Battle {
 			entity.getEntity();
 		}
 	}
-	public void getAction(){
-		switch (this.action){
-		case 0:
-			this.attackTo(this.target);
-			return;
-		case 1:
-			this.attackTo(this.target);
-			return;
-		case 2:
-			this.attackTo(this.target);
-			return;
-		case 3:
-			battleEnd= true;
-		}
-		if (this.target.hitPoints <= 0){
-			battlers.remove(this.target);
-		}
-	}
 }
 
 

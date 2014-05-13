@@ -5,8 +5,7 @@ import java.util.TreeMap;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.*;
 import openblocks.Config;
 import openblocks.OpenBlocks;
 import openblocks.common.container.ContainerAutoEnchantmentTable;
@@ -192,36 +191,12 @@ public class GuiBattle extends GuiScreen {
 		}
 
 		//Draw Health
-		if(combatant.getHP() > 100)
-		{
-			drawRect(x - nameLength/2 + 12, y + 10, x - nameLength/2 + 15, y + 11, 0xFF00FFFF);
-			drawRect(x - nameLength/2 + 8, y + 10, x - nameLength/2 + 11, y + 11, 0xFF00FF00);
-			drawRect(x - nameLength/2 + 4, y + 10, x - nameLength/2 + 7, y + 11, 0xFFFFFF00);
-			drawRect(x - nameLength/2, y + 10, x - nameLength/2 + 3, y + 11, 0xFFFF0000);
-			drawRect(x - nameLength/2, y + 9, x - nameLength/2 + (int)((combatant.getHP() - 100.0f) / 200.0f * (float)nameLength), y + 10, 0xFFFFFFFF);
-		}
-		else if (combatant.getHP() > 50)
-		{
-			drawRect(x - nameLength/2 + 8, y + 10, x - nameLength/2 + 11, y + 11, 0xFF00FF00);
-			drawRect(x - nameLength/2 + 4, y + 10, x - nameLength/2 + 7, y + 11, 0xFFFFFF00);
-			drawRect(x - nameLength/2, y + 10, x - nameLength/2 + 3, y + 11, 0xFFFF0000);
-			drawRect(x - nameLength/2, y + 9, x - nameLength/2 + (int)((combatant.getHP() - 50.0f) / 50.0f * (float)nameLength), y + 10, 0xFF00FFFF);
-		}
-		else if (combatant.getHP() > 20)
-		{
-			drawRect(x - nameLength/2 + 4, y + 10, x - nameLength/2 + 7, y + 11, 0xFFFFFF00);
-			drawRect(x - nameLength/2, y + 10, x - nameLength/2 + 3, y + 11, 0xFFFF0000);
-			drawRect(x - nameLength/2, y + 9, x - nameLength/2 + (int)((combatant.getHP() - 20.0f) / 30.0f * (float)nameLength), y + 10, 0xFF00FF00);
-		}
-		else if (combatant.getHP() > 10)
-		{
-			drawRect(x - nameLength/2, y + 10, x - nameLength/2 + 3, y + 11, 0xFFFF0000);
-			drawRect(x - nameLength/2, y + 9, x - nameLength/2 + (int)((combatant.getHP() - 10.0f) / 10.0f * (float)nameLength), y + 10, 0xFFFFFF00);
-		}
-		else
-		{
-			drawRect(x - nameLength/2, y + 9, x - nameLength/2 + (int)(combatant.getHP() / 10.0f * (float)nameLength), y + 10, 0xFFFF0000);
-		}
+		DrawHealth(combatant,x,y);
+	}
+
+	private void DrawHealth(EntityStats entity, int x, int y) {
+		DrawBattle draw= new DrawBattle();
+		draw.DrawHealth(entity, x, y);
 	}
 
 	/**
