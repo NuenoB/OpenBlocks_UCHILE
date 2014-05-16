@@ -1,5 +1,6 @@
 package openblocks.common.item;
 
-public class ModelFireIronHelmet extends ModelFireHelmet {
+import net.minecraft.entity.player.EntityPlayer;
 
+public class ModelFireIronHelmet extends ModelFireHelmet {
 }

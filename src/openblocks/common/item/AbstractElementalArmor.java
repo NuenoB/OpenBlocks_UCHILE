@@ -22,7 +22,7 @@ public abstract class AbstractElementalArmor extends ItemArmor implements IEleme
 	public AbstractElementalArmor(int armorId,EnumArmorMaterial material, 
 			int renderMaterial ,int armorType) {
 		super(armorId, material,renderMaterial,armorType);
-		setCreativeTab(OpenBlocks.tabOpenBlocks);
+		setCreativeTab(OpenBlocks.ourArmorTab);
 		this.armorId=armorId;
 		this.ARMOR_TYPE=armorType;
 	}

@@ -316,13 +316,21 @@ public class OpenBlocks {
 
 	public static FluidStack XP_FLUID = null;
 
-	//Our Weapon Tab
-	public static CreativeTabs ourBlockTab = new CreativeTabs("tabOurBlock") {
+	//Our Block Tab
+	public static CreativeTabs ourBlockTab = new CreativeTabs("tabOurBlocks") {
 		@Override
 		public ItemStack getIconItemStack() {
 			return new ItemStack(OpenBlocks.Blocks.myguide,1,0);
 			}
 	};
+	
+	//Our Armor Tab
+		public static CreativeTabs ourArmorTab = new CreativeTabs("tabOurArmor") {
+			@Override
+			public ItemStack getIconItemStack() {
+				return new ItemStack(OpenBlocks.Items.fireIronHelmet,1,0);
+				}
+		};
 	
 	//Our Weapon Tab
 	public static CreativeTabs ourWeaponTab = new CreativeTabs("tabOurWeapon") {

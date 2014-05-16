@@ -293,7 +293,8 @@ item.openblocks.fire_iron_helmet.name=Fire Iron Helmet
 
 itemGroup.tabOpenBlocks=OpenBlocks
 itemGroup.tabOurWeapon=Our Weapons
-itemGroup.tabOurBlock=Our Blocks
+itemGroup.tabOurBlocks=Our Blocks
+itemGroup.tabOurArmor= Our Armor
 
 entity.OpenBlocks.Luggage.name=Luggage
 entity.OpenBlocks.Cartographer.name=Cartographer
