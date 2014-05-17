@@ -2,6 +2,7 @@ package openblocks.shapes.newshapes;
 
 import java.util.ArrayList;
 
+import net.minecraft.block.Block;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import openblocks.shapes.AShape;
@@ -55,12 +56,36 @@ public class CastleGen extends AShape {
 		array.addAll(tower4.fill(entityPos, worldObj));
 		array.addAll(roofRoom.fill(entityPos, worldObj));	
 		
+		
+		//entradas para los torreones
 		for(int i = 0; i<4; i++){
 			worldObj.setBlockToAir(xArr[i*2]+entityPos.posX, entityPos.posY, zArr[i*2]+entityPos.posZ);
 			worldObj.setBlockToAir(xArr[i*2+1]+entityPos.posX, entityPos.posY, zArr[i*2+1]+entityPos.posZ);
 			worldObj.setBlockToAir(xArr[i*2]+entityPos.posX, 1+entityPos.posY, zArr[i*2]+entityPos.posZ);
 			worldObj.setBlockToAir(xArr[i*2+1]+entityPos.posX, 1+entityPos.posY, zArr[i*2+1]+entityPos.posZ);
 		}
+		
+		//ventanas
+		for(int i = 0; i<2; i++){
+			int var;
+			int j;
+			for(j=0; j<2; j++){
+				if(j==0) var=x0;
+				else var=x1;
+				
+				array.add(new BlockRepresentation(entityPos.posX+var, entityPos.posY+(i*4)+1, entityPos.posZ+z0+3, Block.glass.blockID));
+				array.add(new BlockRepresentation(entityPos.posX+var, entityPos.posY+(i*4)+1, entityPos.posZ+z0+4, Block.glass.blockID));
+				array.add(new BlockRepresentation(entityPos.posX+var, entityPos.posY+(i*4)+1, entityPos.posZ+z0+6, Block.glass.blockID));
+				array.add(new BlockRepresentation(entityPos.posX+var, entityPos.posY+(i*4)+1, entityPos.posZ+z0+7, Block.glass.blockID));
+				array.add(new BlockRepresentation(entityPos.posX+var, entityPos.posY+(i*4)+1, entityPos.posZ+z0+9, Block.glass.blockID));
+				array.add(new BlockRepresentation(entityPos.posX+var, entityPos.posY+(i*4)+1, entityPos.posZ+z0+10, Block.glass.blockID));
+			}
+			
+			array.add(new BlockRepresentation(entityPos.posX+x0+6, entityPos.posY+(i*4)+1, entityPos.posZ+z1, Block.glass.blockID));
+			array.add(new BlockRepresentation(entityPos.posX+x0+7, entityPos.posY+(i*4)+1, entityPos.posZ+z1, Block.glass.blockID));
+			
+		}
+		
 		return array;
 	}
 

@@ -285,6 +285,9 @@ public class TileEntityMyGuide extends SyncedTileEntity implements IShapeable, I
 		if (player.isSneaking()) switchMode(player);
 		else if (isInFillMode()) fill(player);
 		else if (player.capabilities.isCreativeMode) clearStructure();
+		
+//		System.out.println("Id: "+worldObj.getBlockId(xCoord, yCoord, zCoord+1)+
+//				" meta: "+worldObj.getBlockMetadata(xCoord, yCoord, zCoord+1));
 
 		return true;
 	}
