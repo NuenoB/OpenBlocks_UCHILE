@@ -2,6 +2,8 @@ package openblocks.common.block;
 
 import openblocks.Config;
 import openblocks.common.block.BlockGuide.Icons;
+import openblocks.shapes.BlockRepresentation;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
@@ -10,6 +12,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 public class BlockScreenPrinter extends OpenBlock{
+	
+	private int width = 2;
+	private int depth = 2;
+	private int height = 2;
 	
 	public static class Icons {
 		public static Icon ends;
@@ -59,5 +65,25 @@ public class BlockScreenPrinter extends OpenBlock{
 		setTexture(ForgeDirection.SOUTH, Icons.side);
 		setDefaultTexture(Icons.ends);
 	}
+	
+	@Override
+	public void onBlockAdded(World worldObj, int xCoord, int yCoord ,int zCoord){
+		String res = "";
+		for(int x=-width; x<=width;x++){
+			for(int y=-height; y<=height;y++){
+				for(int z=-depth; z<=depth;z++){
+					if(y>=0 && worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z)==0){
+						//nada
+					}
+					else{
+						res+="array.add(new BlockRepresentation(entityPos.posX+"+x+", entityPos.posY+"+y+", entityPos.posZ+"+z+", "
+								+worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z)+", "+worldObj.getBlockMetadata(xCoord+x, yCoord+y, zCoord+z)+", 3)); \n";
+					}
+				}
+			}
+		}
+		System.out.println(res);
+	}
 
 }
+
