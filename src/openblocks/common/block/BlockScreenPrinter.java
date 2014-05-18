@@ -13,8 +13,8 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class BlockScreenPrinter extends OpenBlock{
 	
-	private int width = 2;
-	private int depth = 2;
+	private int width = 4;
+	private int depth = 4;
 	private int height = 2;
 	
 	public static class Icons {
@@ -72,12 +72,14 @@ public class BlockScreenPrinter extends OpenBlock{
 		for(int x=-width; x<=width;x++){
 			for(int y=-height; y<=height;y++){
 				for(int z=-depth; z<=depth;z++){
-					if(y>=0 && worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z)==0){
+					if((y>=0 && worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z)==0) ||
+							(y==0 && x==0 && z==0) ||
+							worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z)==12){
 						//nada
 					}
 					else{
 						res+="array.add(new BlockRepresentation(entityPos.posX+"+x+", entityPos.posY+"+y+", entityPos.posZ+"+z+", "
-								+worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z)+", "+worldObj.getBlockMetadata(xCoord+x, yCoord+y, zCoord+z)+", 3)); \n";
+								+worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z)+", "+worldObj.getBlockMetadata(xCoord+x, yCoord+y, zCoord+z)+", 3));     ";
 					}
 				}
 			}
