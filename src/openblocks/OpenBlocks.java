@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
@@ -49,6 +50,7 @@ import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -459,9 +461,14 @@ public class OpenBlocks {
 	}
 
 	@EventHandler
+	/*Aqui se registran las entidades*/
 	public void postInit(FMLPostInitializationEvent evt) {
 		proxy.postInit();
-
+		
+		EntityRegistry.registerGlobalEntityID(EntityHolyPig.class, "HolyPig", EntityRegistry.findGlobalUniqueEntityId()
+				, 255<<16, (255<<16)+(200<<8));
+		LanguageRegistry.instance().addStringLocalization("entity.HolyPig.name", "en_US", "Holy Pig");
+		EntityRegistry.addSpawn(EntityHolyPig.class, 10, 3, 10000, EnumCreatureType.creature);
 		if (Config.enableChangelogBooks) changeLog = ChangelogBuilder.createChangeLog();
 
 		if (Loader.isModLoaded(Mods.FLANSMOD)) {

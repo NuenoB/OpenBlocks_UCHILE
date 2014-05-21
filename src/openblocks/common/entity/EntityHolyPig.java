@@ -15,6 +15,7 @@ public class EntityHolyPig extends EntityPig {
 	 public boolean attackEntityFrom(DamageSource par1DamageSource, float par2){
 		if(this.isBurning()){
 			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 6.0F, true);
+			this.setDead();
 			return true;
 			
 		}
