@@ -11,6 +11,8 @@ import openblocks.Config;
 import openblocks.OpenBlocks;
 import openmods.utils.ItemUtils;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -48,9 +50,14 @@ public class ItemDagger extends AbstractCuttingWeapon{
 	
 	@Override
 	public boolean hitEntity(ItemStack item, EntityLivingBase enemy, EntityLivingBase player){
-		player.addPotionEffect(new PotionEffect(1,10000));//Agrega velocidad al personaje
+		//Agrega velocidad al personaje
 		return super.hitEntity(item, enemy, player);
 	}
+	
+	 public void onUsingItemTick(ItemStack stack, EntityPlayer player, int count)
+	 {	player.addPotionEffect(new PotionEffect(1,10));
+		 
+	   }
 	
 	
 

@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 
 public class ItemFireDagger extends ItemDagger {
@@ -21,5 +22,6 @@ public class ItemFireDagger extends ItemDagger {
 		enemy.setFire(10);
 		return super.hitEntity(item, enemy, player);
 	}
+
 
 }

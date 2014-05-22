@@ -26,6 +26,9 @@ import openblocks.common.tileentity.*;
 import openblocks.enchantments.flimflams.*;
 import openblocks.events.EventTypes;
 import openblocks.integration.ModuleOpenPeripheral;
+import openblocks.registry.IEntityRegister;
+import openblocks.registry.OurEntityRegistry;
+import openblocks.registry.USEntityRegister;
 import openblocks.rubbish.BrickManager;
 import openblocks.rubbish.CommandFlimFlam;
 import openblocks.rubbish.CommandLuck;
@@ -297,6 +300,9 @@ public class OpenBlocks {
 		
 		@RegisterItem(name = "fireIronHelmet", unlocalizedName= "fire_iron_helmet")
 		public static FireHelmet fireIronHelmet;
+		
+		@RegisterItem(name = "ourMonsterPlacer", unlocalizedName= "spawn_egg")
+		public static ItemOurMonsterPlacer ourMonsterPlacer;
 
 		// -----------------------------------------------------------------------------------------
 	}
@@ -326,6 +332,13 @@ public class OpenBlocks {
 			}
 	};
 	
+	//Our Item Tab
+		public static CreativeTabs ourItemTab = new CreativeTabs("tabOurItems") {
+			@Override
+			public ItemStack getIconItemStack() {
+				return new ItemStack(OpenBlocks.Blocks.myguide,1,0);
+				}
+		};
 	//Our Armor Tab
 		public static CreativeTabs ourArmorTab = new CreativeTabs("tabOurArmor") {
 			@Override
@@ -455,6 +468,13 @@ public class OpenBlocks {
 
 	@EventHandler
 	public void init(FMLInitializationEvent evt) {
+		//Se registra el cerdo
+		IEntityRegister HolyPigRegister = new USEntityRegister(EntityHolyPig.class, "HolyPig", "Holy Pig");
+		HolyPigRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
+				
+		OurEntityRegistry.registerGlobalEntityID(EntityHolyPig.class, "HolyPig", EntityRegistry.findGlobalUniqueEntityId()
+				, 255<<16, (255<<16)+(200<<8));
+		OurEntityRegistry.addSpawn(EntityHolyPig.class, 10, 2, 100000, EnumCreatureType.creature);
 		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
 		proxy.init();
 		proxy.registerRenderInformation();
@@ -464,11 +484,8 @@ public class OpenBlocks {
 	/*Aqui se registran las entidades*/
 	public void postInit(FMLPostInitializationEvent evt) {
 		proxy.postInit();
+		 
 		
-		EntityRegistry.registerGlobalEntityID(EntityHolyPig.class, "HolyPig", EntityRegistry.findGlobalUniqueEntityId()
-				, 255<<16, (255<<16)+(200<<8));
-		LanguageRegistry.instance().addStringLocalization("entity.HolyPig.name", "en_US", "Holy Pig");
-		EntityRegistry.addSpawn(EntityHolyPig.class, 10, 3, 10000, EnumCreatureType.creature);
 		if (Config.enableChangelogBooks) changeLog = ChangelogBuilder.createChangeLog();
 
 		if (Loader.isModLoaded(Mods.FLANSMOD)) {

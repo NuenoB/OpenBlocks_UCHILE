@@ -295,6 +295,7 @@ itemGroup.tabOpenBlocks=OpenBlocks
 itemGroup.tabOurWeapon=Our Weapons
 itemGroup.tabOurBlocks=Our Blocks
 itemGroup.tabOurArmor= Our Armor
+itemGroup.tabOurItems= Our Items
 
 entity.OpenBlocks.Luggage.name=Luggage
 entity.OpenBlocks.Cartographer.name=Cartographer

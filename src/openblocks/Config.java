@@ -249,6 +249,9 @@ public class Config {
 	
 	@ItemId(description = "the id of a fire resistive iron helmet")
 	private static int fireIronHelmetId=15005;
+	
+	@ItemId(description = "the id of a monster placer")
+	private static int monsterPlacerId=15006;
 	//---------------------------------------------------------------------------------------------
 	@OnLineModifiable
 	@ConfigProperty(category = "dropblock", name = "searchDistance", comment = "The range of the drop block")
@@ -836,6 +839,7 @@ public class Config {
 		OpenBlocks.Items.heavySword = new ItemHeavySword(itemHeavySwordId);
 		OpenBlocks.Items.normalSword = new ItemNormalSword(itemNormalSwordId);
 		OpenBlocks.Items.fireIronHelmet = new FireIronHelmet(fireIronHelmetId);
+		OpenBlocks.Items.ourMonsterPlacer = new ItemOurMonsterPlacer(monsterPlacerId);
 		//----------------------------------------------------------------------------------------
 		final String modId = "openblocks";
 		ConfigProcessing.registerItems(OpenBlocks.Items.class, modId);
