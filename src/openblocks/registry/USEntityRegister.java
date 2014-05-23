@@ -17,11 +17,13 @@ public class USEntityRegister extends AbstractEntityRegister{
 
 	@Override
 	public void register(int weightedProb, int min, int max, EnumCreatureType type, int eggColor, int spotColor){
+		super.register(weightedProb, min, max, type, eggColor, spotColor);
 		LanguageRegistry.instance().addStringLocalization("entity."+entityName+".name", "en_US", shownName);
 	}
 	
 	@Override
 	public void register(int weightedProb, int min, int max, EnumCreatureType type){
+		super.register(weightedProb, min, max, type);
 		LanguageRegistry.instance().addStringLocalization("entity."+entityName+".name", "en_US", shownName);
 	}
 

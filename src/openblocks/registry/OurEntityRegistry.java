@@ -115,7 +115,7 @@ public class OurEntityRegistry {
     {
         availableIndicies = new BitSet(256);
         availableIndicies.set(1,255);
-        for (Object id : EntityList.IDtoClassMapping.keySet())
+        for (Object id : OurEntityList.IDtoClassMapping.keySet())
         {
             availableIndicies.clear((Integer)id);
         }
@@ -146,11 +146,11 @@ public class OurEntityRegistry {
         {
             entityClassRegistrations.put(entityClass, er);
             entityNames.put(entityName, mc);
-            if (!EntityList.classToStringMapping.containsKey(entityClass))
+            if (!OurEntityList.classToStringMapping.containsKey(entityClass))
             {
                 String entityModName = String.format("%s.%s", mc.getModId(), entityName);
-                EntityList.classToStringMapping.put(entityClass, entityModName);
-                EntityList.stringToClassMapping.put(entityModName, entityClass);
+                OurEntityList.classToStringMapping.put(entityClass, entityModName);
+                OurEntityList.stringToClassMapping.put(entityModName, entityClass);
                 FMLLog.finest("Automatically registered mod %s entity %s as %s", mc.getModId(), entityName, entityModName);
             }
             else
@@ -168,7 +168,7 @@ public class OurEntityRegistry {
 
     public static void registerGlobalEntityID(Class <? extends Entity > entityClass, String entityName, int id)
     {
-        if (EntityList.classToStringMapping.containsKey(entityClass))
+        if (OurEntityList.classToStringMapping.containsKey(entityClass))
         {
             ModContainer activeModContainer = Loader.instance().activeModContainer();
             String modId = "unknown";
@@ -220,7 +220,7 @@ public class OurEntityRegistry {
 
     public static void registerGlobalEntityID(Class <? extends Entity > entityClass, String entityName, int id, int backgroundEggColour, int foregroundEggColour)
     {
-        if (EntityList.classToStringMapping.containsKey(entityClass))
+        if (OurEntityList.classToStringMapping.containsKey(entityClass))
         {
             ModContainer activeModContainer = Loader.instance().activeModContainer();
             String modId = "unknown";
@@ -265,7 +265,7 @@ public class OurEntityRegistry {
     @SuppressWarnings("unchecked")
     public static void addSpawn(String entityName, int weightedProb, int min, int max, EnumCreatureType spawnList, BiomeGenBase... biomes)
     {
-        Class <? extends Entity > entityClazz = (Class<? extends Entity>) EntityList.stringToClassMapping.get(entityName);
+        Class <? extends Entity > entityClazz = (Class<? extends Entity>) OurEntityList.stringToClassMapping.get(entityName);
 
         if (EntityLiving.class.isAssignableFrom(entityClazz))
         {
@@ -294,7 +294,7 @@ public class OurEntityRegistry {
     @SuppressWarnings("unchecked")
     public static void removeSpawn(String entityName, EnumCreatureType spawnList, BiomeGenBase... biomes)
     {
-        Class <? extends Entity > entityClazz = (Class<? extends Entity>) EntityList.stringToClassMapping.get(entityName);
+        Class <? extends Entity > entityClazz = (Class<? extends Entity>) OurEntityList.stringToClassMapping.get(entityName);
 
         if (EntityLiving.class.isAssignableFrom(entityClazz))
         {

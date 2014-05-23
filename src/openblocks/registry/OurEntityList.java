@@ -5,6 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.logging.Level;
 
+import openblocks.common.entity.EntityHolyPig;
+
 import cpw.mods.fml.common.FMLLog;
 
 import net.minecraft.entity.Entity;
@@ -69,7 +71,7 @@ import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class OurEntityList extends EntityList{
+public class OurEntityList {
 	 /** Provides a mapping between entity classes and a string */
     public static Map stringToClassMapping = new HashMap();
 
@@ -256,6 +258,8 @@ public class OurEntityList extends EntityList{
         Class oclass = getClassFromID(par0);
         return oclass != null ? (String)classToStringMapping.get(oclass) : null;
     }
+    
+    
 
 	
 

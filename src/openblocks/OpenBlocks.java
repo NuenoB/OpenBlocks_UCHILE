@@ -468,13 +468,7 @@ public class OpenBlocks {
 
 	@EventHandler
 	public void init(FMLInitializationEvent evt) {
-		//Se registra el cerdo
-		IEntityRegister HolyPigRegister = new USEntityRegister(EntityHolyPig.class, "HolyPig", "Holy Pig");
-		HolyPigRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
-				
-		OurEntityRegistry.registerGlobalEntityID(EntityHolyPig.class, "HolyPig", EntityRegistry.findGlobalUniqueEntityId()
-				, 255<<16, (255<<16)+(200<<8));
-		OurEntityRegistry.addSpawn(EntityHolyPig.class, 10, 2, 100000, EnumCreatureType.creature);
+		
 		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
 		proxy.init();
 		proxy.registerRenderInformation();
@@ -485,6 +479,13 @@ public class OpenBlocks {
 	public void postInit(FMLPostInitializationEvent evt) {
 		proxy.postInit();
 		 
+		//Se registra el cerdo
+				//IEntityRegister HolyPigRegister = new USEntityRegister(EntityHolyPig.class, "HolyPig", "Holy Pig");
+				//HolyPigRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
+						
+				//EntityRegistry.registerGlobalEntityID(EntityHolyPig.class, "HolyPig", EntityRegistry.findGlobalUniqueEntityId()
+					//	, 255<<16, (255<<16)+(200<<8));
+				//EntityRegistry.addSpawn(EntityHolyPig.class, 10, 2, 100000, EnumCreatureType.creature);
 		
 		if (Config.enableChangelogBooks) changeLog = ChangelogBuilder.createChangeLog();
 
