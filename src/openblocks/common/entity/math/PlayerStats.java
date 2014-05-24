@@ -1,14 +1,16 @@
 package openblocks.common.entity.math;
  
  import net.minecraft.entity.Entity;
- import net.minecraft.entity.player.EntityPlayer;
- import net.minecraft.item.ItemArmor;
- import net.minecraft.item.ItemStack;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
  
  public class PlayerStats extends Stats{
  
  	protected EntityPlayer player;
  	protected ItemStack[] itemStack;
+ 	protected ItemStack weapon;
  	protected float attack;
   	protected float defense;
   	protected float magic;
@@ -18,15 +20,17 @@ package openblocks.common.entity.math;
   	public PlayerStats(Entity entity){
   		player=(EntityPlayer) entity;
  		itemStack=player.inventory.armorInventory;
+ 		weapon=player.getHeldItem();
   	}
   	
+  //todos los valores son cero por el momento.
  	@Override
  	void statsAllocte() {
- 		attack=player.getHeldItem().getBonusDamage(); //método agregado por el grupo de items.
- 		defense=this.getTotalDefenseValue();
- 		magic=this.getTotalMagicValue();
- 		resistance=this.getTotalResistanceValue();
- 		speed=this.getTotalSpeedValue();
+ 		attack=0; //attack=weapon.getBonusDamage();
+ 		defense=this.getTotalValue(new DefenseStrategy());
+ 		magic=this.getTotalValue(new MagicStrategy());
+ 		resistance=this.getTotalValue(new ResistanceStrategy());
+ 		speed=this.getTotalValue(new SpeedStrategy());
  	}
  	
  	
@@ -45,70 +49,26 @@ package openblocks.common.entity.math;
  	public float getSpeed(){
  		return speed;
  	}
- 
  	
-     public int getTotalDefenseValue()
-     {
-         int i = 0;
- 
-         for (int j = 0; j < itemStack.length; ++j)
-         {
-             if (itemStack[j] != null && itemStack[j].getItem() instanceof ItemArmor)
-             {
-                 int k = ((ItemArmor)itemStack[j].getItem()).damageReduceAmount;
-                 i += k;
-             }
-         }
- 
-         return i;
-     }
-     
-     public int getTotalMagicValue()
-     {
-         int i = 0;
- 
-         for (int j = 0; j < itemStack.length; ++j)
-         {
-             if (itemStack[j] != null && itemStack[j].getItem() instanceof ItemArmor)
-             {
-                 int k = ((ItemArmor)itemStack[j].getItem()).magicAmount; //ajustar accesor definido por desarrollo de items
-                 i += k;
-             }
-         }
- 
-         return i;
-     }
-     
-     public int getTotalResistanceValue()
-     {
-         int i = 0;
- 
-         for (int j = 0; j < itemStack.length; ++j)
-         {
-             if (itemStack[j] != null && itemStack[j].getItem() instanceof ItemArmor)
-             {
-                 int k = ((ItemArmor)itemStack[j].getItem()).resistanceAmount; //ajustar accesor definido por desarrollo de items
-                 i += k;
-             }
-         }
- 
-         return i;
-     }
-     
-     public int getTotalSpeedValue()
-     {
-         int i = 0;
- 
-         for (int j = 0; j < itemStack.length; ++j)
-         {
-             if (itemStack[j] != null && itemStack[j].getItem() instanceof ItemArmor)
-             {
-                 int k = ((ItemArmor)itemStack[j].getItem()).speedAmount; //ajustar accesor definido por desarrollo de items
-                 i += k;
-             }
-         }
- 
-         return i;
-     }
+ 	public Item getItem(int i){
+ 		return itemStack[i].getItem();
+ 	}
+ 	
+ 	public int getTotalValue(Strategy strat){
+        int i = 0;
+        
+        for (int j = 0; j < itemStack.length; ++j)
+        {
+            if (itemStack[j] != null && getItem(j) instanceof ItemArmor)
+            {
+                int k = strat.getPlayerStats(this,j);
+                i += k;
+            }
+        }
+
+        return i;
+ 	}
+ 	
+
  
  }

@@ -2,10 +2,11 @@ package openblocks.common.entity.math;
  
  
  import net.minecraft.entity.Entity;
- import net.minecraft.entity.EntityLiving;
- import net.minecraft.entity.player.EntityPlayer;
- import net.minecraft.item.ItemArmor;
- import net.minecraft.item.ItemStack;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
  
  public class LivingStats extends Stats{
  	
@@ -24,14 +25,14 @@ package openblocks.common.entity.math;
   		this.heldItem=entityLiving.getHeldItem();
   	}
   	
-  	
+  	//todos los valores son cero por el momento.
  	@Override
  	void statsAllocte() {
- 		attack=heldItem.getBonusDamage(); //método agregado por el grupo de items.
- 		defense=this.getTotalDefenseValue();
- 		magic=this.getTotalMagicValue();
- 		resistance=this.getTotalResistanceValue();
- 		speed=this.getTotalSpeedValue();
+ 		attack=0;	//attack=heldItem.getBonusDamage(); 
+		defense=this.getTotalValue(new DefenseStrategy());
+ 		magic=this.getTotalValue(new MagicStrategy());
+ 		resistance=this.getTotalValue(new ResistanceStrategy());
+ 		speed=this.getTotalValue(new SpeedStrategy());
  	}
  
  	public float getAttack(){
@@ -49,70 +50,23 @@ package openblocks.common.entity.math;
  	public float getSpeed(){
  		return speed;
  	}
- 
  	
-     public int getTotalDefenseValue()
-     {
-         int i = 0;
- 
-         for (int j = 0; j < 5; ++j)
-         {
-             if (entityLiving.getCurrentItemOrArmor(j) != null && entityLiving.getCurrentItemOrArmor(j).getItem() instanceof ItemArmor)
-             {
-                 int k = ((ItemArmor)entityLiving.getCurrentItemOrArmor(j).getItem()).damageReduceAmount;
-                 i += k;
-             }
-         }
- 
-         return i;
-     }
-     
-     public int getTotalMagicValue()
-     {
-         int i = 0;
- 
-         for (int j = 0; j < 5; ++j)
-         {
-             if (entityLiving.getCurrentItemOrArmor(j) != null && entityLiving.getCurrentItemOrArmor(j).getItem() instanceof ItemArmor)
-             {
-                 int k = ((ItemArmor)entityLiving.getCurrentItemOrArmor(j).getItem()).magicAmount; //ajustar accesor definido por desarrollo de items
-                 i += k;
-             }
-         }
- 
-         return i;
-     }
-     
-     public int getTotalResistanceValue()
-     {
-         int i = 0;
- 
-         for (int j = 0; j < 5; ++j)
-         {
-             if (entityLiving.getCurrentItemOrArmor(j) != null && entityLiving.getCurrentItemOrArmor(j).getItem() instanceof ItemArmor)
-             {
-                 int k = ((ItemArmor)entityLiving.getCurrentItemOrArmor(j).getItem()).resistanceAmount; //ajustar accesor definido por desarrollo de items
-                 i += k;
-             }
-         }
- 
-         return i;
-     }
-     
-     public int getTotalSpeedValue()
-     {
-         int i = 0;
- 
-         for (int j = 0; j < 5; ++j)
-         {
-             if (entityLiving.getCurrentItemOrArmor(j) != null && entityLiving.getCurrentItemOrArmor(j).getItem() instanceof ItemArmor)
-             {
-                 int k = ((ItemArmor)entityLiving.getCurrentItemOrArmor(j).getItem()).speedAmount; //ajustar accesor definido por desarrollo de items
-                 i += k;
-             }
-         }
- 
-         return i;
-     }
- 
+ 	public Item getItem(int i){
+ 		return entityLiving.getCurrentItemOrArmor(i).getItem();
+ 	}
+ 	
+ 	public int getTotalValue(Strategy strat){
+        int i = 0;
+        
+        for (int j = 0; j < 5; ++j)
+        {
+            if (getItem(j) != null && getItem(j) instanceof ItemArmor)
+            {
+            	int k = strat.getLivingStats(this,j);
+                i += k;
+            }
+        }
+
+        return i;
+	}
  }
