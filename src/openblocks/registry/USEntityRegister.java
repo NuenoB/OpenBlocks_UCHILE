@@ -10,9 +10,16 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
  */
 public class USEntityRegister extends AbstractEntityRegister{
 	
-	public USEntityRegister(Class<? extends Entity> entityClass, String name,
-			String shownName) {
-		super(entityClass, name, shownName);
+	private static IEntityRegister registry;
+	
+	private USEntityRegister(){
+	}
+	
+	public static IEntityRegister getInstance(){
+		if(registry==null){
+			return new USEntityRegister();
+		}
+		return registry;
 	}
 
 	@Override

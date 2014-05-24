@@ -480,12 +480,11 @@ public class OpenBlocks {
 		proxy.postInit();
 		 
 		//Se registra el cerdo
-				//IEntityRegister HolyPigRegister = new USEntityRegister(EntityHolyPig.class, "HolyPig", "Holy Pig");
-				//HolyPigRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
+		IEntityRegister HolyPigRegister = USEntityRegister.getInstance();
+		HolyPigRegister.setInfo(EntityHolyPig.class, "HolyPig", "Holy Pig");
+		HolyPigRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
 						
-				//EntityRegistry.registerGlobalEntityID(EntityHolyPig.class, "HolyPig", EntityRegistry.findGlobalUniqueEntityId()
-					//	, 255<<16, (255<<16)+(200<<8));
-				//EntityRegistry.addSpawn(EntityHolyPig.class, 10, 2, 100000, EnumCreatureType.creature);
+				
 		
 		if (Config.enableChangelogBooks) changeLog = ChangelogBuilder.createChangeLog();
 

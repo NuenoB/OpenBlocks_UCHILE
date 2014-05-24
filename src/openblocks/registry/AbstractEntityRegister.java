@@ -12,11 +12,18 @@ import net.minecraft.entity.EnumCreatureType;
  */
 public abstract class AbstractEntityRegister implements IEntityRegister {
 	
-	private Class entityClass;
+	protected Class entityClass;
 	protected String entityName;
 	protected String shownName;
+
 	
-	public AbstractEntityRegister(Class<? extends Entity> entityClass, String name, String shownName){
+	/** 
+	 * Sets important entity info
+	 * @param entityClass entity class
+	 * @param name entity name
+	 * @param shownName name that will be shown on screen
+	 */
+	public void setInfo(Class<? extends Entity> entityClass, String name, String shownName){
 		this.entityClass=entityClass;
 		this.entityName=name;
 		this.shownName=shownName;
@@ -33,9 +40,9 @@ public abstract class AbstractEntityRegister implements IEntityRegister {
 	 * @param spotColor Egg spot color
 	 */
 	public void register(int weightedProb, int min, int max, EnumCreatureType type, int eggColor, int spotColor){
-		OurEntityRegistry.registerGlobalEntityID(entityClass, entityName, OurEntityRegistry.findGlobalUniqueEntityId()
+		EntityRegistry.registerGlobalEntityID(entityClass, entityName, EntityRegistry.findGlobalUniqueEntityId()
 				, eggColor, spotColor);
-		OurEntityRegistry.addSpawn(entityClass, weightedProb, min, max, type);
+		EntityRegistry.addSpawn(entityClass, weightedProb, min, max, type);
 	}
 	
 	/**
@@ -49,8 +56,8 @@ public abstract class AbstractEntityRegister implements IEntityRegister {
 	 * @param spotColor Egg spot color
 	 */
 	public void register(int weightedProb, int min, int max, EnumCreatureType type){
-		OurEntityRegistry.registerGlobalEntityID(entityClass, entityName, EntityRegistry.findGlobalUniqueEntityId());
-		OurEntityRegistry.addSpawn(entityClass, weightedProb, min, max, type);
+		EntityRegistry.registerGlobalEntityID(entityClass, entityName, EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.addSpawn(entityClass, weightedProb, min, max, type);
 	}
 
 }
