@@ -16,6 +16,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.*;
 import openblocks.api.FlimFlamRegistry;
 import openblocks.client.radio.RadioManager;
+import openblocks.client.renderer.entity.EntityWarriorRenderer;
 import openblocks.common.*;
 import openblocks.common.block.*;
 import openblocks.common.entity.*;
@@ -29,6 +30,7 @@ import openblocks.rubbish.BrickManager;
 import openblocks.rubbish.CommandFlimFlam;
 import openblocks.rubbish.CommandLuck;
 import openblocks.utils.ChangelogBuilder;
+import openblocks.Battle.*;
 import openmods.Log;
 import openmods.Mods;
 import openmods.OpenMods;
@@ -53,6 +55,7 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION, dependencies = ModInfo.DEPENDENCIES)
 @NetworkMod(serverSideRequired = true, clientSideRequired = true)
@@ -81,6 +84,9 @@ public class OpenBlocks {
 
 		@RegisterBlock(name = "guide", tileEntity = TileEntityGuide.class)
 		public static BlockGuide guide;
+		
+		@RegisterBlock(name = "myguide", tileEntity = TileEntityMyGuide.class)
+		public static BlockMyGuide myguide;
 
 		@RegisterBlock(name = "elevator", tileEntity = TileEntityElevator.class)
 		public static BlockElevator elevator;
@@ -191,6 +197,7 @@ public class OpenBlocks {
 		public static BlockGoldenEgg goldenEgg;
 	}
 
+	/** Clase que contiene una instancia de todos los items **/
 	public static class Items {
 
 		@RegisterItem(name = "hangglider")
@@ -270,7 +277,26 @@ public class OpenBlocks {
 
 		@RegisterItem(name = "wallpaper")
 		public static ItemWallpaper wallpaper;
+		
+		//Our Items --------------------------------------------------------------------------------
+		
+		//Daga
+		@RegisterItem(name = "Dagger", unlocalizedName= "dagger")
+		public static ItemDagger dagger;
+		
+		//Daga de Fuego
+		@RegisterItem(name = "FireDagger", unlocalizedName= "fire_dagger")
+		public static ItemDagger fireDagger;
 
+		//Heavy Sword
+		@RegisterItem(name = "HeavySword", unlocalizedName= "heavy_sword")
+		public static ItemHeavySword heavySword;
+
+		//Normal Sword
+		@RegisterItem(name = "NomalSword", unlocalizedName= "normal_sword")
+		public static ItemNormalSword normalSword;
+
+		// -----------------------------------------------------------------------------------------
 	}
 
 	public static class ClassReferences {
@@ -290,6 +316,22 @@ public class OpenBlocks {
 
 	public static FluidStack XP_FLUID = null;
 
+	//Our Weapon Tab
+	public static CreativeTabs ourBlockTab = new CreativeTabs("tabOurBlock") {
+		@Override
+		public ItemStack getIconItemStack() {
+			return new ItemStack(OpenBlocks.Blocks.myguide,1,0);
+			}
+	};
+	
+	//Our Weapon Tab
+	public static CreativeTabs ourWeaponTab = new CreativeTabs("tabOurWeapon") {
+		@Override
+		public ItemStack getIconItemStack() {
+			return new ItemStack(OpenBlocks.Items.dagger,1,0);
+		}
+	};
+	
 	public static CreativeTabs tabOpenBlocks = new CreativeTabs("tabOpenBlocks") {
 		@Override
 		public ItemStack getIconItemStack() {
@@ -363,6 +405,7 @@ public class OpenBlocks {
 
 		if (Config.blockGoldenEggId > 0) {
 			EntityRegistry.registerModEntity(EntityMiniMe.class, "MiniMe", ENTITY_MINIME_ID, OpenBlocks.instance, 64, 1, true);
+			EntityRegistry.registerModEntity(EntityWarriorRenderer.class, "warrior mob", 42000, OpenBlocks.instance, 80, 3, true); 
 		}
 
 		Fluids.openBlocksXPJuice = new Fluid("xpjuice").setLuminosity(10).setDensity(800).setViscosity(1500).setUnlocalizedName("OpenBlocks.xpjuice");
@@ -386,7 +429,9 @@ public class OpenBlocks {
 		if (!Config.soSerious) {
 			MinecraftForge.EVENT_BUS.register(new BrickManager());
 		}
-
+		
+		MinecraftForge.EVENT_BUS.register(new BattleEventListener());
+		
 		if (Config.blockElevatorId > 0) {
 			MinecraftForge.EVENT_BUS.register(ElevatorBlockRules.instance);
 		}
@@ -396,6 +441,11 @@ public class OpenBlocks {
 			VillagerRegistry.instance().registerVillageTradeHandler(Config.radioVillagerId, RadioManager.instance);
 		}
 
+		/*registrar criaturas*/
+		EntityRegistry.registerModEntity(EntityWarriorRenderer.class, "warrior mob", 4, this, 80, 3, true); 
+		/*fin registro criaturas*/
+		
+		
 		FMLInterModComms.sendMessage("NotEnoughCodecs", "listCodecs", "");
 
 		proxy.preInit();
