@@ -86,6 +86,18 @@ public class CastleGen extends AShape {
 			
 		}
 		
+		//puerta
+		array.add(new BlockRepresentation(entityPos.posX, entityPos.posY,
+				entityPos.posZ+z0, Block.doorWood.blockID, 1, 2));
+		array.add(new BlockRepresentation(entityPos.posX,entityPos.posY+1,
+				entityPos.posZ+z0, Block.doorWood.blockID, 8, 2));
+		
+		array.add(new BlockRepresentation(entityPos.posX-1, entityPos.posY,
+				entityPos.posZ+z0, Block.doorWood.blockID, 1, 2));
+		array.add(new BlockRepresentation(entityPos.posX-1,entityPos.posY+1,
+				entityPos.posZ+z0, Block.doorWood.blockID, 9, 2));
+		
+		
 		return array;
 	}
 
@@ -109,7 +121,7 @@ public class CastleGen extends AShape {
 		roofRoom.generateShape(xSize, ySize, zSize, shapeable);
 		
 		//pisos
-		for(int i=0; i<2; i++){
+		for(int i=-1; i<2; i++){
 			new FloorShape(x0+4, z0, x1-5, z0+3).generateShape(xSize, (i*4)+3, zSize, shapeable);
 			new FloorShape(x0+4, z1-4, x1-5, z1).generateShape(xSize, (i*4)+3, zSize, shapeable);
 			new FloorShape(x1-4, z0, x1, z1).generateShape(xSize, (i*4)+3, zSize, shapeable);
