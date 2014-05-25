@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import openblocks.Config;
 
-public class BlockMyGuide extends OpenBlock {
+public class BlockMyGuide extends AbstractOurBlock {
 
 	public static class Icons {
 		public static Icon ends;

@@ -295,6 +295,7 @@ item.openblocks.normal_sword.name=Normal Sword
 
 itemGroup.tabOpenBlocks=OpenBlocks
 itemGroup.tabOurWeapon=Our Weapons
+itemGroup.tabOurBlock=Our Blocks
 
 entity.OpenBlocks.Luggage.name=Luggage
 entity.OpenBlocks.Cartographer.name=Cartographer
