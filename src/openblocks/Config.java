@@ -253,8 +253,6 @@ public class Config {
 	@ItemId(description = "the id of a fire resistive iron helmet")
 	private static int fireIronHelmetId=15005;
 	
-	@ItemId(description = "the id of a monster placer")
-	private static int monsterPlacerId=15006;
 	//---------------------------------------------------------------------------------------------
 	@OnLineModifiable
 	@ConfigProperty(category = "dropblock", name = "searchDistance", comment = "The range of the drop block")
