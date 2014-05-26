@@ -305,7 +305,6 @@ public class OpenBlocks {
 		@RegisterItem(name = "fireIronHelmet", unlocalizedName= "fire_iron_helmet")
 		public static FireHelmet fireIronHelmet;
 
-
 		// -----------------------------------------------------------------------------------------
 	}
 

@@ -847,6 +847,7 @@ public class Config {
 		OpenBlocks.Items.heavySword = new ItemHeavySword(itemHeavySwordId);
 		OpenBlocks.Items.normalSword = new ItemNormalSword(itemNormalSwordId);
 		OpenBlocks.Items.fireIronHelmet = new FireIronHelmet(fireIronHelmetId);
+
 		//----------------------------------------------------------------------------------------
 		final String modId = "openblocks";
 		ConfigProcessing.registerItems(OpenBlocks.Items.class, modId);
