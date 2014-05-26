@@ -1,14 +1,24 @@
-package openblocks.shapes;
+package openblocks.shapes.simpleshapes;
 
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
+import openblocks.shapes.BlockRepresentation;
+import openblocks.shapes.IShapeGen;
 import openmods.shapes.IShapeable;
 import openmods.utils.MathUtils;
 
 public class ShapeCylinderGen implements IShapeGen {
+	
+	private int dx, dy, dz;
+	
+	public ShapeCylinderGen(int dx, int dy, int dz){
+		this.dx=dx;
+		this.dy=dy;
+		this.dz=dz;
+	}
 
 	@Override
 	public void generateShape(int radiusX, int height, int radiusZ, IShapeable shapeable) {
@@ -43,13 +53,13 @@ public class ShapeCylinderGen implements IShapeGen {
 
 				for (int y = 0; y < height; ++y) {
 					if((y==0 || y==1) && x==radiusX && z==0){
-						shapeable.setBlock(-x, y, z);
+						shapeable.setBlock(-x+dx, y+dy, z+dz);
 						continue;
 					}
-					shapeable.setBlock(x, y, z);
-					shapeable.setBlock(-x, y, z);
-					shapeable.setBlock(x, y, -z);
-					shapeable.setBlock(-x, y, -z);
+					shapeable.setBlock(x+dx, y+dy, z+dz);
+					shapeable.setBlock(-x+dx, y+dy, z+dz);
+					shapeable.setBlock(x+dx, y+dy, -z+dz);
+					shapeable.setBlock(-x+dx, y+dy, -z+dz);
 				}
 			}
 		}
@@ -62,10 +72,10 @@ public class ShapeCylinderGen implements IShapeGen {
 			//Poner una puerta en la base
 			ArrayList<BlockRepresentation> array = new ArrayList<BlockRepresentation>();
 			
-			array.add(new BlockRepresentation(coord.posX+3, coord.posY,
-					coord.posZ, Block.doorWood.blockID, 1, 2));
-			array.add(new BlockRepresentation(coord.posX+3, coord.posY+1,
-					coord.posZ, Block.doorWood.blockID, 8, 2));
+			array.add(new BlockRepresentation(coord.posX+3+dx, coord.posY+dy,
+					coord.posZ+dz, Block.doorWood.blockID, 1, 2));
+			array.add(new BlockRepresentation(coord.posX+3+dx, coord.posY+1+dy,
+					coord.posZ+dz, Block.doorWood.blockID, 8, 2));
 			
 			return array;
 		

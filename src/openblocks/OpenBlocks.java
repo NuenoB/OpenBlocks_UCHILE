@@ -78,6 +78,9 @@ public class OpenBlocks {
 	public static IOpenBlocksProxy proxy;
 
 	public static class Blocks {
+		@RegisterBlock(name = "screenprinter")
+		public static BlockScreenPrinter screenprinter;
+		
 		@RegisterBlock(name = "ladder")
 		public static BlockLadder ladder;
 

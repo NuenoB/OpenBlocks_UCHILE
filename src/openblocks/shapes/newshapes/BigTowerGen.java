@@ -1,4 +1,4 @@
-package openblocks.shapes;
+package openblocks.shapes.newshapes;
 
 import java.util.ArrayList;
 
@@ -8,6 +8,10 @@ import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import openblocks.common.tileentity.TileEntityRopeLadder;
+import openblocks.shapes.ATowerShape;
+import openblocks.shapes.BlockRepresentation;
+import openblocks.shapes.IShapeGen;
+import openblocks.shapes.simpleshapes.ShapeCylinderGen;
 import openmods.shapes.IShapeGenerator;
 import openmods.shapes.IShapeable;
 import openmods.shapes.ShapeEquilateral2dGenerator;
@@ -17,7 +21,7 @@ import openmods.utils.MathUtils;
 
 public class BigTowerGen extends ATowerShape{
 
-	private IShapeGen body = new ShapeCylinderGen(); 
+	private IShapeGen body; 
 	
 	/**
 	 * 
@@ -27,6 +31,7 @@ public class BigTowerGen extends ATowerShape{
 	 */
 	public BigTowerGen(int x, int y, int z) {
 		super(x, y, z, 8, 3, 3);
+		body = new ShapeCylinderGen(x,y,z); 
 	}
 
 	
@@ -47,10 +52,10 @@ public class BigTowerGen extends ATowerShape{
 		array.addAll(body.fill(entityPos, worldObj));
 		
 		for (int h = entityPos.posY+3; h < entityPos.posY+height; h=h+2) { //ventanas
-			array.add(new BlockRepresentation(entityPos.posX+depth, h, entityPos.posZ, Block.glass.blockID));
-			array.add(new BlockRepresentation(entityPos.posX-depth, h, entityPos.posZ, Block.glass.blockID));
-			array.add(new BlockRepresentation(entityPos.posX, h, entityPos.posZ+width, Block.glass.blockID));
-			array.add(new BlockRepresentation(entityPos.posX, h, entityPos.posZ-width, Block.glass.blockID));
+			array.add(new BlockRepresentation(entityPos.posX+depth+dx, h+dy, entityPos.posZ+dz, Block.glass.blockID));
+			array.add(new BlockRepresentation(entityPos.posX-depth+dx, h+dy, entityPos.posZ+dz, Block.glass.blockID));
+			array.add(new BlockRepresentation(entityPos.posX+dx, h+dy, entityPos.posZ+width+dz, Block.glass.blockID));
+			array.add(new BlockRepresentation(entityPos.posX+dx, h+dy, entityPos.posZ-width+dz, Block.glass.blockID));
 		}
 		
 		return array;
