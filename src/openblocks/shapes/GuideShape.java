@@ -3,6 +3,11 @@ package openblocks.shapes;
 import net.minecraft.util.StatCollector;
 import openmods.shapes.*;
 
+/**
+ * Enumeracion de los distintos tipos de bloque fantasma
+ * @author OpenBlocks
+ *
+ */
 public enum GuideShape {
 	Sphere(false, new ShapeSphereGenerator(), "sphere"),
 	Cylinder(false, new ShapeCylinderGenerator(), "cylinder"),

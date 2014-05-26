@@ -171,4 +171,10 @@ public class EntityMutant extends EntityTameable implements IEntityAdditionalSpa
 		wings = getEntityClassForId(tag.getString("wings"));
 		tail = getEntityClassForId(tag.getString("tail"));
 	}
+
+	@Override
+	public Entity getOwner() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

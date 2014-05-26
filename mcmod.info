@@ -1,17 +1,24 @@
 [
 {
-  "modid" : "OpenBlocks",
-  "name" : "OpenBlocks",
+  "modid" : "OpenBlocks_UCHILE",
+  "name" : "OpenBlocks_UCHILE",
   "version" : "@VERSION@",
-  "url" : "http://www.openperipheral.info",
+  "url" : "https://github.com/NuenoB/OpenBlocks_UCHILE",
   "credits" : "",
   "authors": [
-    "Mikee",
-    "NeverCast",
-    "boq",
-    "Lyqyd"
+    "aantoine",
+    "CamilaAlvarez",
+    "Samirovich",
+    "Pato285",
+    "amermelao",
+    "Claudin",
+    "NuenoB",
+    "RittoShadow",
+    "danielrc14",
+    "GTartari",
+    "JoshepLeonhart"
   ],
-  "description": "All the things you never thought you will ever need",
+  "description": "an add of OpenBlock that look for a turn based medieval minecraft",
   "logoFile" : "",
   "updateUrl" : "",
   "parent" : "",
