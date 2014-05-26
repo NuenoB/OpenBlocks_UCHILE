@@ -27,12 +27,12 @@ import openblocks.enchantments.flimflams.*;
 import openblocks.events.EventTypes;
 import openblocks.integration.ModuleOpenPeripheral;
 import openblocks.registry.IEntityRegister;
-import openblocks.registry.OurEntityRegistry;
 import openblocks.registry.USEntityRegister;
 import openblocks.rubbish.BrickManager;
 import openblocks.rubbish.CommandFlimFlam;
 import openblocks.rubbish.CommandLuck;
 import openblocks.utils.ChangelogBuilder;
+import openblocks.Battle.*;
 import openmods.Log;
 import openmods.Mods;
 import openmods.OpenMods;
@@ -59,6 +59,7 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION, dependencies = ModInfo.DEPENDENCIES)
 @NetworkMod(serverSideRequired = true, clientSideRequired = true)
 public class OpenBlocks {
@@ -81,6 +82,9 @@ public class OpenBlocks {
 	public static IOpenBlocksProxy proxy;
 
 	public static class Blocks {
+		@RegisterBlock(name = "screenprinter")
+		public static BlockScreenPrinter screenprinter;
+		
 		@RegisterBlock(name = "ladder")
 		public static BlockLadder ladder;
 
@@ -300,9 +304,7 @@ public class OpenBlocks {
 		
 		@RegisterItem(name = "fireIronHelmet", unlocalizedName= "fire_iron_helmet")
 		public static FireHelmet fireIronHelmet;
-		
-		@RegisterItem(name = "ourMonsterPlacer", unlocalizedName= "spawn_egg")
-		public static ItemOurMonsterPlacer ourMonsterPlacer;
+
 
 		// -----------------------------------------------------------------------------------------
 	}
@@ -451,7 +453,9 @@ public class OpenBlocks {
 		if (!Config.soSerious) {
 			MinecraftForge.EVENT_BUS.register(new BrickManager());
 		}
-
+		
+		MinecraftForge.EVENT_BUS.register(new BattleEventListener());
+		
 		if (Config.blockElevatorId > 0) {
 			MinecraftForge.EVENT_BUS.register(ElevatorBlockRules.instance);
 		}

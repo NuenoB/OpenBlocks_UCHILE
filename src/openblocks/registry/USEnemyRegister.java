@@ -1,23 +1,27 @@
 package openblocks.registry;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+
 /**
- * Registers entity in english
- * @author Mi Pc
+ * Para registrar enemigos
+ * @author CamilaAlvarez
  *
  */
-public class USEntityRegister extends AbstractEntityRegister{
+
+public class USEnemyRegister extends AbstractEntityRegister{
 	
 	private static IEntityRegister registry;
+	private double HP;
+	private double attack;
+	private double defense;
 	
-	private USEntityRegister(){
+	private USEnemyRegister(){
 	}
 	
 	public static IEntityRegister getInstance(){
 		if(registry==null){
-			return new USEntityRegister();
+			return new USEnemyRegister();
 		}
 		return registry;
 	}
@@ -33,5 +37,6 @@ public class USEntityRegister extends AbstractEntityRegister{
 		super.register(weightedProb, min, max, type);
 		LanguageRegistry.instance().addStringLocalization("entity."+entityName+".name", "en_US", shownName);
 	}
-
+	
+	
 }

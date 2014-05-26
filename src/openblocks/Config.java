@@ -147,6 +147,9 @@ public class Config {
 	@BlockId(description = "The id of the xp shower")
 	public static int blockXPShowerId = 2579;
 	
+	@BlockId(description = "The id of the Screen Printer block")
+	public static int blockScreenPrinter = 2678;
+	
 	@BlockId(description = "The id of the myGuide block")
 	public static int blockMyGuideId = 2679;
 	
@@ -250,8 +253,6 @@ public class Config {
 	@ItemId(description = "the id of a fire resistive iron helmet")
 	private static int fireIronHelmetId=15005;
 	
-	@ItemId(description = "the id of a monster placer")
-	private static int monsterPlacerId=15006;
 	//---------------------------------------------------------------------------------------------
 	@OnLineModifiable
 	@ConfigProperty(category = "dropblock", name = "searchDistance", comment = "The range of the drop block")
@@ -427,6 +428,7 @@ public class Config {
 	@ConfigProperty(category = "fan", name = "isRedstoneActivated", comment = "Is fan force controlled by redstone current")
 	public static boolean redstoneActivatedFan = true;
 
+
 	/** Registrar un nuevo item**/
 	public static void register() {
 
@@ -461,7 +463,11 @@ public class Config {
 		}
 		if (ConfigProcessing.canRegisterBlock(blockMyGuideId)) {
 			OpenBlocks.Blocks.myguide = new BlockMyGuide();
-			recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.guide, "ggg", "gtg", "ggg", 'g', Block.glass, 't', Block.torchWood));
+			recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.myguide, "ggg", "gtg", "ggg", 'g', Block.glass, 't', Block.torchWood));
+		}
+		if (ConfigProcessing.canRegisterBlock(blockScreenPrinter)) {
+			OpenBlocks.Blocks.screenprinter = new BlockScreenPrinter();
+			recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.screenprinter, "ggg", "gtg", "ggg", 'g', Block.glass, 't', Block.torchWood));
 		}
 		if (ConfigProcessing.canRegisterBlock(blockElevatorId)) {
 			OpenBlocks.Blocks.elevator = new BlockElevator();
@@ -839,7 +845,7 @@ public class Config {
 		OpenBlocks.Items.heavySword = new ItemHeavySword(itemHeavySwordId);
 		OpenBlocks.Items.normalSword = new ItemNormalSword(itemNormalSwordId);
 		OpenBlocks.Items.fireIronHelmet = new FireIronHelmet(fireIronHelmetId);
-		OpenBlocks.Items.ourMonsterPlacer = new ItemOurMonsterPlacer(monsterPlacerId);
+
 		//----------------------------------------------------------------------------------------
 		final String modId = "openblocks";
 		ConfigProcessing.registerItems(OpenBlocks.Items.class, modId);
