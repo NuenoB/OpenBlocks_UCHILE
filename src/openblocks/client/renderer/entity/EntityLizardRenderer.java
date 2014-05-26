@@ -41,6 +41,6 @@ public class EntityLizardRenderer extends RenderLiving
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		return new ResourceLocation("/textures/models/green.png"); 
+		return new ResourceLocation("/textures/models/greenLizTex.png"); 
 	}
 }
