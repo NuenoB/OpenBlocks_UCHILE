@@ -19,6 +19,8 @@ import openblocks.OpenBlocks;
 import openblocks.client.bindings.BrickBindings;
 import openblocks.client.fx.FXLiquidSpray;
 import openblocks.client.model.ModelCraneBackpack;
+import openblocks.client.model.ModelKnight;
+import openblocks.client.model.ModelLizard;
 import openblocks.client.radio.RadioManager;
 import openblocks.client.renderer.BlockRenderingHandler;
 import openblocks.client.renderer.entity.*;
@@ -87,6 +89,11 @@ public class ClientProxy implements IOpenBlocksProxy {
 		OpenBlocks.renderId = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(new BlockRenderingHandler());
 
+		/*registrar nuevos renderer para nuevas criaturas*/
+		RenderingRegistry.registerEntityRenderingHandler(EntityKnight.class, new EntityKnightRenderer(new ModelKnight(), 0.8f));
+		RenderingRegistry.registerEntityRenderingHandler(EntityLizard.class, new EntityLizardRenderer(new ModelLizard(), 0.8f));
+		
+		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMyGuide.class, new TileEntityMyGuideRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGuide.class, new TileEntityGuideRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTarget.class, new TileEntityTargetRenderer());
