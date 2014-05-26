@@ -91,7 +91,7 @@ public class ClientProxy implements IOpenBlocksProxy {
 
 		/*registrar nuevos renderer para nuevas criaturas*/
 		RenderingRegistry.registerEntityRenderingHandler(EntityKnight.class, new EntityKnightRenderer(new ModelKnight(), 0.8f));
-		RenderingRegistry.registerEntityRenderingHandler(EntityLizard.class, new EntityLizardRenderer(new ModelLizard(), 0.8f));
+		RenderingRegistry.registerEntityRenderingHandler(EntityLizard.class, new EntityLizardRenderer(new ModelLizard(), 0.2f));
 		
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMyGuide.class, new TileEntityMyGuideRenderer());
