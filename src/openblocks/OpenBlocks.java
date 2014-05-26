@@ -27,7 +27,6 @@ import openblocks.enchantments.flimflams.*;
 import openblocks.events.EventTypes;
 import openblocks.integration.ModuleOpenPeripheral;
 import openblocks.registry.IEntityRegister;
-import openblocks.registry.OurEntityRegistry;
 import openblocks.registry.USEntityRegister;
 import openblocks.rubbish.BrickManager;
 import openblocks.rubbish.CommandFlimFlam;
@@ -300,9 +299,7 @@ public class OpenBlocks {
 		
 		@RegisterItem(name = "fireIronHelmet", unlocalizedName= "fire_iron_helmet")
 		public static FireHelmet fireIronHelmet;
-		
-		@RegisterItem(name = "ourMonsterPlacer", unlocalizedName= "spawn_egg")
-		public static ItemOurMonsterPlacer ourMonsterPlacer;
+
 
 		// -----------------------------------------------------------------------------------------
 	}

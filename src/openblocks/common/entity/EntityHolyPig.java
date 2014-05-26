@@ -3,11 +3,13 @@ package openblocks.common.entity;
 import java.util.concurrent.CountDownLatch;
 
 import sun.management.counter.Counter;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class EntityHolyPig extends EntityPig {
+public class EntityHolyPig extends EntityPig{
+	
 	
 	private CountDownLatch count;
 
@@ -33,6 +35,13 @@ public class EntityHolyPig extends EntityPig {
 		
 		super.onUpdate();
 		
+	}
+
+
+	@Override
+	public EntityAgeable createChild(EntityAgeable entityageable) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
