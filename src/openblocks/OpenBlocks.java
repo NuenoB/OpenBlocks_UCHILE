@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
@@ -25,6 +26,8 @@ import openblocks.common.tileentity.*;
 import openblocks.enchantments.flimflams.*;
 import openblocks.events.EventTypes;
 import openblocks.integration.ModuleOpenPeripheral;
+import openblocks.registry.IEntityRegister;
+import openblocks.registry.USEntityRegister;
 import openblocks.rubbish.BrickManager;
 import openblocks.rubbish.CommandFlimFlam;
 import openblocks.rubbish.CommandLuck;
@@ -50,6 +53,7 @@ import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -297,6 +301,10 @@ public class OpenBlocks {
 		//Normal Sword
 		@RegisterItem(name = "NomalSword", unlocalizedName= "normal_sword")
 		public static ItemNormalSword normalSword;
+		
+		@RegisterItem(name = "fireIronHelmet", unlocalizedName= "fire_iron_helmet")
+		public static FireHelmet fireIronHelmet;
+
 
 		// -----------------------------------------------------------------------------------------
 	}
@@ -318,13 +326,28 @@ public class OpenBlocks {
 
 	public static FluidStack XP_FLUID = null;
 
-	//Our Weapon Tab
-	public static CreativeTabs ourBlockTab = new CreativeTabs("tabOurBlock") {
+	//Our Block Tab
+	public static CreativeTabs ourBlockTab = new CreativeTabs("tabOurBlocks") {
 		@Override
 		public ItemStack getIconItemStack() {
 			return new ItemStack(OpenBlocks.Blocks.myguide,1,0);
 			}
 	};
+	
+	//Our Item Tab
+		public static CreativeTabs ourItemTab = new CreativeTabs("tabOurItems") {
+			@Override
+			public ItemStack getIconItemStack() {
+				return new ItemStack(OpenBlocks.Blocks.myguide,1,0);
+				}
+		};
+	//Our Armor Tab
+		public static CreativeTabs ourArmorTab = new CreativeTabs("tabOurArmor") {
+			@Override
+			public ItemStack getIconItemStack() {
+				return new ItemStack(OpenBlocks.Items.fireIronHelmet,1,0);
+				}
+		};
 	
 	//Our Weapon Tab
 	public static CreativeTabs ourWeaponTab = new CreativeTabs("tabOurWeapon") {
@@ -449,15 +472,24 @@ public class OpenBlocks {
 
 	@EventHandler
 	public void init(FMLInitializationEvent evt) {
+		
 		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
 		proxy.init();
 		proxy.registerRenderInformation();
 	}
 
 	@EventHandler
+	/*Aqui se registran las entidades*/
 	public void postInit(FMLPostInitializationEvent evt) {
 		proxy.postInit();
-
+		 
+		//Se registra el cerdo
+		IEntityRegister HolyPigRegister = USEntityRegister.getInstance();
+		HolyPigRegister.setInfo(EntityHolyPig.class, "HolyPig", "Holy Pig");
+		HolyPigRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
+						
+				
+		
 		if (Config.enableChangelogBooks) changeLog = ChangelogBuilder.createChangeLog();
 
 		if (Loader.isModLoaded(Mods.FLANSMOD)) {

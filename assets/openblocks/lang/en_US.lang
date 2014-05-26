@@ -288,13 +288,16 @@ item.openblocks.tuned_crystal.name=Tuned Crystal
 item.openblocks.wallpaper.name=Wallpaper
 
 item.openblocks.dagger.name=Dagger
-item.openblocks.fire_dagger.name=Fire Dagger
+item.openblocks.fire_dagger.name=Fire Dagger (a.k.a PigSlayer)
 item.openblocks.heavy_sword.name=Heavy Sword
 item.openblocks.normal_sword.name=Normal Sword
+item.openblocks.fire_iron_helmet.name=Fire Iron Helmet
 
 itemGroup.tabOpenBlocks=OpenBlocks
 itemGroup.tabOurWeapon=Our Weapons
-itemGroup.tabOurBlock=Our Blocks
+itemGroup.tabOurBlocks=Our Blocks
+itemGroup.tabOurArmor= Our Armor
+itemGroup.tabOurItems= Our Items
 
 entity.OpenBlocks.Luggage.name=Luggage
 entity.OpenBlocks.Cartographer.name=Cartographer
