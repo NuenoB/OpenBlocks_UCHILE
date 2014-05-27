@@ -39,6 +39,9 @@ public class Config {
 	@BlockId(description = "The id of the guide")
 	public static int blockGuideId = 2541;
 
+	@BlockId(description = "The id that creates buildings.")
+	public static int blockMineId = 2660;
+	
 	@BlockId(description = "The id of the elevator block")
 	public static int blockElevatorId = 2542;
 
@@ -463,6 +466,10 @@ public class Config {
 		}
 		if (ConfigProcessing.canRegisterBlock(blockMyGuideId)) {
 			OpenBlocks.Blocks.myguide = new BlockMyGuide();
+			recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.myguide, "ggg", "gtg", "ggg", 'g', Block.glass, 't', Block.torchWood));
+		}
+		if (ConfigProcessing.canRegisterBlock(2660)) {
+			OpenBlocks.Blocks.mine = new BlockMine();
 			recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.myguide, "ggg", "gtg", "ggg", 'g', Block.glass, 't', Block.torchWood));
 		}
 		if (ConfigProcessing.canRegisterBlock(blockScreenPrinter)) {

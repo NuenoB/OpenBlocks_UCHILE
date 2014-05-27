@@ -218,7 +218,7 @@ tile.openblocks.xpshower.name=XP Shower
 tile.openblocks.xpshower.description=Attach an XP shower to a tank of XP juice and it'll pour out XP orbs. These orbs can be collected by an XP Drain or an MFR Sewer.
 
 tile.openblocks.myguide.name=My Guide Block
-
+tile.openblocks.mine.name=A Guide Block for moving buildings
 tile.openblocks.screenprinter.name=Screen Printer
 
 item.openblocks.cursor.name=Cursor
