@@ -5,14 +5,11 @@ import java.util.TreeMap;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.*;
 import openblocks.Config;
 import openblocks.OpenBlocks;
 import openblocks.common.container.ContainerAutoEnchantmentTable;
-import openblocks.common.entity.player.EntityPlayerExt.EntityStats;
-import openblocks.common.entity.player.EntityPlayerExt.EntityStats.Action;
-import openblocks.common.entity.EntityStats;
+import openblocks.common.entity.math.*;
 import openblocks.common.skills.ISkill;
 import openmods.gui.BaseGuiContainer;
 
@@ -20,7 +17,7 @@ public class GuiBattle extends GuiScreen {
 
 	private int battleID;
 	private EntityStats player;
-
+	
 	private Map<Integer,EntityStats> combatants;
 	private int serverBattleSize;
 	private boolean updatingCombatants;
@@ -40,7 +37,39 @@ public class GuiBattle extends GuiScreen {
 
 	private final int nameHeightInterval = 14;
 	private boolean useSkill= false;
-
+	
+	protected enum Information {
+		WAITING, EMPTY, ACTION, ATEMP_FLEE, TARGET, SELECT_SKILL, ATTACK, SKILL
+	}
+	
+	private Information inform;
+	
+	protected String anInformation(Information info){
+		switch(info){
+		case WAITING:
+			return "Waiting for server ...";
+		case EMPTY:
+			return "";
+		case ACTION:
+			return "What will you do?";
+		case ATEMP_FLEE:
+			return "You atemp to flee!";
+		case TARGET:
+			return "Select a target!";
+		case SELECT_SKILL:
+			return "Select a skill!";
+		case ATTACK:
+			return "Attack!!";
+		case SKILL:
+			return "You used a skill!";
+		default:
+			return "";
+		}
+		
+		
+	}
+    
+	
 	public void BattleGui(int battleID, EntityStats player)
 	{
 		this.battleID = battleID;
@@ -104,6 +133,7 @@ public class GuiBattle extends GuiScreen {
 			}
 			else if(!turnChoiceReceived && (turnChoiceSent || currentMenu == -2))
 			{
+				
 				turnChoiceSent = false;
 				getMenu(0);
 			}
@@ -194,36 +224,12 @@ public class GuiBattle extends GuiScreen {
 		}
 
 		//Draw Health
-		if(combatant.HP > 100)
-		{
-			drawRect(x - nameLength/2 + 12, y + 10, x - nameLength/2 + 15, y + 11, 0xFF00FFFF);
-			drawRect(x - nameLength/2 + 8, y + 10, x - nameLength/2 + 11, y + 11, 0xFF00FF00);
-			drawRect(x - nameLength/2 + 4, y + 10, x - nameLength/2 + 7, y + 11, 0xFFFFFF00);
-			drawRect(x - nameLength/2, y + 10, x - nameLength/2 + 3, y + 11, 0xFFFF0000);
-			drawRect(x - nameLength/2, y + 9, x - nameLength/2 + (int)((combatant.HP - 100.0f) / 200.0f * (float)nameLength), y + 10, 0xFFFFFFFF);
-		}
-		else if (combatant.HP > 50)
-		{
-			drawRect(x - nameLength/2 + 8, y + 10, x - nameLength/2 + 11, y + 11, 0xFF00FF00);
-			drawRect(x - nameLength/2 + 4, y + 10, x - nameLength/2 + 7, y + 11, 0xFFFFFF00);
-			drawRect(x - nameLength/2, y + 10, x - nameLength/2 + 3, y + 11, 0xFFFF0000);
-			drawRect(x - nameLength/2, y + 9, x - nameLength/2 + (int)((combatant.HP - 50.0f) / 50.0f * (float)nameLength), y + 10, 0xFF00FFFF);
-		}
-		else if (combatant.HP > 20)
-		{
-			drawRect(x - nameLength/2 + 4, y + 10, x - nameLength/2 + 7, y + 11, 0xFFFFFF00);
-			drawRect(x - nameLength/2, y + 10, x - nameLength/2 + 3, y + 11, 0xFFFF0000);
-			drawRect(x - nameLength/2, y + 9, x - nameLength/2 + (int)((combatant.HP - 20.0f) / 30.0f * (float)nameLength), y + 10, 0xFF00FF00);
-		}
-		else if (combatant.HP > 10)
-		{
-			drawRect(x - nameLength/2, y + 10, x - nameLength/2 + 3, y + 11, 0xFFFF0000);
-			drawRect(x - nameLength/2, y + 9, x - nameLength/2 + (int)((combatant.HP - 10.0f) / 10.0f * (float)nameLength), y + 10, 0xFFFFFF00);
-		}
-		else
-		{
-			drawRect(x - nameLength/2, y + 9, x - nameLength/2 + (int)(combatant.HP / 10.0f * (float)nameLength), y + 10, 0xFFFF0000);
-		}
+		DrawHealth(combatant,x,y);
+	}
+
+	private void DrawHealth(EntityStats entity, int x, int y) {
+		DrawBattle draw= new DrawBattle();
+		draw.DrawHealth(entity, x, y);
 	}
 
 	/**
@@ -244,15 +250,15 @@ public class GuiBattle extends GuiScreen {
 			break;
 		case 0: //Main menu
 			info[0] = "What will you do?";
-			buttonList.add(new GuiBattleButton(1,"Fight"));
-			buttonList.add(new GuiBattleButton(2,"Flee"));
+			buttonList.add(new GuiButton(1, width*2/6 - 40, height - 72, 80, 20, "Fight"));
+			buttonList.add(new GuiButton(2, width*4/6 - 40, height - 72, 80, 20, "Flee"));
 			break;
 		case 1: //Fight menu
 			info[0] = "What will you do?";
-			buttonList.add(new GuiBattleButton(3,"Attack"));
-			//controlList.add(new  GuiBattleButton(5, width*2/5 - 40, height - 72, 80, 20, "Use Item"));
-			buttonList.add(new  GuiBattleButton(4,"Skills"));
-			buttonList.add(new  GuiBattleButton(0,"Cancel"));
+			buttonList.add(new GuiButton(3, width/6 - 40, height - 72, 80, 20, "Attack"));
+			//controlList.add(new GuiButton(5, width*2/5 - 40, height - 72, 80, 20, "Use Item"));
+			buttonList.add(new GuiButton(4, width*3/5 - 40, height - 72, 80, 20, "Skills"));
+			buttonList.add(new GuiButton(0, width*5/6 - 40, height - 72, 80, 20, "Cancel"));
 			break;
 		case 2: //Flee status
 			info[0] = "You attempt to flee!";
@@ -266,10 +272,10 @@ public class GuiBattle extends GuiScreen {
 			int i=0;
 			while(player.Skills.hasNext()) //Changed weapons to skills.
 			{
-				buttonList.add(new  GuiBattleButton(6, i * 20, 0, ""));
+				buttonList.add(new GuiButton(6, width/2 - 88 + i * 20, height - 19, ""));
 				i++;
 			}
-			buttonList.add(new  GuiBattleButton(0, width/2 - 40, height - 40, 80, 20, "Cancel"));
+			buttonList.add(new GuiButton(0, width/2 - 40, height - 40, 80, 20, "Cancel"));
 			break;
 		case 5: //Attack Phase (Handled by actionPerformed method)
 			info[0] = "You attack!";
@@ -344,4 +350,3 @@ public class GuiBattle extends GuiScreen {
 
 	}
 }
-
