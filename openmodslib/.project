@@ -4,18 +4,6 @@
 	<comment></comment>
 	<projects>
 	</projects>
-	<buildSpec>
-		<buildCommand>
-			<name>org.eclipse.jdt.core.javabuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-<<<<<<< HEAD
-	</buildSpec>
-=======
-	</buildSpec> 
->>>>>>> 8a7dae29f184adf91daf48bdcc8388652fbb5393
-	<natures>
-		<nature>org.eclipse.jdt.core.javanature</nature>
-	</natures>
+	<buildSpec> <buildCommand> <name>org.eclipse.jdt.core.javabuilder</name> <arguments> </arguments> </buildCommand> </buildSpec> 
+	<natures> <nature>org.eclipse.jdt.core.javanature</nature> </natures>
 </projectDescription>

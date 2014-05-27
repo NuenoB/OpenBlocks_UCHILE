@@ -431,7 +431,6 @@ public class Config {
 	@ConfigProperty(category = "fan", name = "isRedstoneActivated", comment = "Is fan force controlled by redstone current")
 	public static boolean redstoneActivatedFan = true;
 
-
 	/** Registrar un nuevo item**/
 	public static void register() {
 
@@ -730,6 +729,9 @@ public class Config {
 		if (itemSleepingBagId > 0 && EntityPlayerVisitor.IsInBedHookSuccess) {
 			OpenBlocks.Items.sleepingBag = new ItemSleepingBag();
 			recipeList.add(new ShapedOreRecipe(OpenBlocks.Items.sleepingBag, "cc ", "www", "ccw", 'c', Block.carpet, 'w', Block.cloth));
+		}
+		if (itemMPBottle > 0) {
+			OpenBlocks.Items.mpBottle = new ItemMPBottle(itemMPBottle);
 		}
 
 		if (itemPaintBrushId > 0) {

@@ -25,7 +25,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 /**
- * Entidad que representa el bloque Guía 
+ * Entidad que representa el bloque Guï¿½a 
  * @author OpenBlocks
  *
  */
@@ -75,7 +75,7 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 	}
 
 	/**
-	 * Método que devuelve la GuideShape que representa el modo actual
+	 * Mï¿½todo que devuelve la GuideShape que representa el modo actual
 	 * @return current GuideShape
 	 */
 	public GuideShape getCurrentMode() {
@@ -96,7 +96,7 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 	}
 
 	/**
-	 * Método que recrea la figura fantasma
+	 * Mï¿½todo que recrea la figura fantasma
 	 */
 	private void recreateShape() {
 		previousShape = shape;
@@ -116,7 +116,7 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 
 	
 	/**
-	 * Método que retorna la figura fantasma actual
+	 * Mï¿½todo que retorna la figura fantasma actual
 	 * @return La shape actual
 	 */
 	public boolean[][][] getShape() {
@@ -124,7 +124,7 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 	}
 
 	/**
-	 * Método que retorna la figura previa
+	 * Mï¿½todo que retorna la figura previa
 	 * @return La shape anterior
 	 */
 	public boolean[][][] getPreviousShape() {
@@ -139,8 +139,8 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 	}
 
 	/**
-	 * Método que cambia de modo, es decir, de GuideShape
-	 * @param player El jugador que efectuó el cambio
+	 * Mï¿½todo que cambia de modo, es decir, de GuideShape
+	 * @param player El jugador que efectuï¿½ el cambio
 	 */
 	private void switchMode(EntityPlayer player) {
 		switchMode();
@@ -148,7 +148,7 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 	}
 
 	/**
-	 * Método que itera sobre los distintos paramentros del GuideShape, cambiando de modo y recreando la figura 
+	 * Mï¿½todo que itera sobre los distintos paramentros del GuideShape, cambiando de modo y recreando la figura 
 	 */
 	private void switchMode() {
 		int nextMode = mode.getValue() + 1;
@@ -165,9 +165,9 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 	}
 
 	/**
-	 * Método que cambia las dimensiones de la figura fantasma
-	 * @param player El jugador que efectuó el cambio
-	 * @param orientation Lado del bloque que se seleccionó
+	 * Mï¿½todo que cambia las dimensiones de la figura fantasma
+	 * @param player El jugador que efectuï¿½ el cambio
+	 * @param orientation Lado del bloque que se seleccionï¿½
 	 */
 	private void changeDimensions(EntityPlayer player, ForgeDirection orientation) {
 		changeDimensions(orientation);
@@ -175,8 +175,8 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 	}
 
 	/**
-	 * Método que cambia las dimensiones de la figura fantasma según la orientación seleccionada
-	 * @param orientation Lado del bloque que se seleccionó
+	 * Mï¿½todo que cambia las dimensiones de la figura fantasma segï¿½n la orientaciï¿½n seleccionada
+	 * @param orientation Lado del bloque que se seleccionï¿½
 	 */
 	private void changeDimensions(ForgeDirection orientation) {
 		if (width.getValue() > 0 && orientation == ForgeDirection.EAST) {
@@ -241,8 +241,8 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 	}
 
 	/**
-	 * Método que rellena la figura fantasma con el tipo de bloque que tiene el jugador en la mano
-	 * @param player El jugador que efectuó el cambio
+	 * Mï¿½todo que rellena la figura fantasma con el tipo de bloque que tiene el jugador en la mano
+	 * @param player El jugador que efectuï¿½ el cambio
 	 */
 	private void fill(EntityPlayer player) {
 		ItemStack held = player.getHeldItem();
@@ -254,8 +254,6 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 
 		for (ChunkCoordinates coord : getShapeCoordinates()){
 			worldObj.setBlock(coord.posX, coord.posY, coord.posZ, itemBlock.getBlockID(), itemBlock.getMetadata(held.getItemDamage()), BlockNotifyFlags.ALL);
-		}
-		
 	}
 
 	@Override
@@ -263,7 +261,7 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 		if (worldObj.isRemote) return true;
 
 		if (player.isSneaking()) switchMode(player);
-		else if (player.capabilities.isCreativeMode && isInFillMode()) fill(player);
+		else if (player.capabilities.isCreativeMode && isInFillMode()) fill(player, side);
 		else changeDimensions(player, ForgeDirection.getOrientation(side));
 
 		return true;

@@ -309,8 +309,6 @@ public class OpenBlocks {
 		@RegisterItem(name = "fireIronHelmet", unlocalizedName= "fire_iron_helmet")
 		public static FireHelmet fireIronHelmet;
 
-
-		// -----------------------------------------------------------------------------------------
 	}
 
 	public static class ClassReferences {
@@ -476,7 +474,6 @@ public class OpenBlocks {
 
 	@EventHandler
 	public void init(FMLInitializationEvent evt) {
-		
 		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
 		proxy.init();
 		proxy.registerRenderInformation();

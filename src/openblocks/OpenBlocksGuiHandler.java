@@ -2,6 +2,7 @@ package openblocks;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import openblocks.client.gui.GuiBattle;
 import openblocks.client.gui.GuiInfoBook;
 import openblocks.client.gui.GuiLuggage;
 import openblocks.common.container.ContainerLuggage;
@@ -13,7 +14,8 @@ public class OpenBlocksGuiHandler implements IGuiHandler {
 
 	public static enum GuiId {
 		luggage,
-		infoBook;
+		infoBook,
+		battle;
 
 		public static final GuiId[] VALUES = GuiId.values();
 	}
@@ -41,6 +43,8 @@ public class OpenBlocksGuiHandler implements IGuiHandler {
 				return new GuiLuggage(new ContainerLuggage(player.inventory, (EntityLuggage)world.getEntityByID(x)));
 			case infoBook:
 				return new GuiInfoBook();
+			case battle:
+				return new GuiBattle();
 			default:
 				return null;
 		}
