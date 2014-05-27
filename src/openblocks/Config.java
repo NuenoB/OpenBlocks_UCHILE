@@ -401,6 +401,10 @@ public class Config {
 	@ConfigProperty(category = "fan", name = "isRedstoneActivated", comment = "Is fan force controlled by redstone current")
 	public static boolean redstoneActivatedFan = true;
 
+	@OnLineModifiable
+	@ConfigProperty(category = "")
+	public static int blockMyGuideId;
+
 	public static void register() {
 
 		MinecraftForge.EVENT_BUS.register(new EntityEventHandler());

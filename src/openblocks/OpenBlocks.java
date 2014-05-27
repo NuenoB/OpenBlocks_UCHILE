@@ -191,6 +191,9 @@ public class OpenBlocks {
 
 		@RegisterBlock(name = "goldenEgg", tileEntity = TileEntityGoldenEgg.class)
 		public static BlockGoldenEgg goldenEgg;
+		
+		@RegisterBlock(name= "myguide", tileEntity= TileEntityMyGuide.class)
+		public static Block myguide;
 	}
 
 	public static class Items {
@@ -320,6 +323,8 @@ public class OpenBlocks {
 	public static final StatBase brickStat = (new StatBasic(70998, "stat.openblocks.bricksDropped")).registerStat();
 
 	public static ItemStack changeLog;
+	
+	public static CreativeTabs ourBlockTab;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt) {
