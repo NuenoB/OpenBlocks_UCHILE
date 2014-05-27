@@ -1,68 +1,125 @@
+
 package openblocks.common.entity.math;
 
-import net.minecraft.entity.EntityLivingBase;
+import openblocks.common.item.ItemDamage;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
 
-public class PlayerStats extends EntityStats {
+public class PlayerStats extends Stats{
+
+	protected EntityPlayer player;
+	protected ItemStack[] itemStack;
+	protected double attack; // Cambios de float a double
+ 	protected double defense;
+ 	protected double magic;
+ 	protected double resistance;
+ 	protected int speed;
+
+ 	public PlayerStats(Entity entity){
+ 		player=(EntityPlayer) entity;
+		itemStack=player.inventory.armorInventory;
+ 	}
+ 	
+ 	/**
+ 	 * Se obtiene el item que tiene el personaje en la mano, y a partir de eso
+ 	 * se calcula el ataque
+ 	 */
+	@Override
+	void statsAllocte() {
+		ItemStack player_itemStack=player.getHeldItem();
+		Item heldItem = player_itemStack.getItem(); 
+		
+		attack=new ItemDamage(heldItem).getBonusDamage(); //m�todo agregado por el grupo de items.
+		defense=this.getTotalDefenseValue();
+		magic=this.getTotalMagicValue();
+		resistance=this.getTotalResistanceValue();
+		speed=this.getTotalSpeedValue();
+	}
 	
-	private EntityPlayer player;
 	
-	public PlayerStats(EntityPlayer player) {
-		this.player = player;
-		hitPoints = this.getMaxHP();
-		magicPoints = this.getMaxMP();
+	public double getAttack(){
+		return attack;
+	}
+	public double getDefense(){
+		return defense;
+	}
+	public double getMagic(){
+		return magic;
+	}
+	public double getResistance(){
+		return resistance;
+	}
+	public double getSpeed(){
+		return speed;
 	}
 
-	@Override
-	public float getMaxHP() {
-		int increment = 2*player.experienceLevel/2;
-		return 20.0F + (float)increment;
-	}
 	
-	@Override
-	public int getMaxMP() {
-		return 5 + 1*player.experienceLevel/5;
-	}
-	
-	@Override
-	public float getATK() {
-		return 2.0F + 1.0F*player.experienceLevel;
-	}
-	
-	@Override
-	public float getDEF() {
-		return 1.0F + 0.5F*player.experienceLevel;
-	}
-	
-	@Override
-	public float getMAG() {
-		int increment = 1*player.experienceLevel/3;
-		return 1.0F + (float)increment;
-	}
-	
-	@Override
-	public float getRES() {
-		int increment = 1*player.experienceLevel/3;
-		return 0.5F + 0.5F*increment;
-	}
-	
-	@Override
-	public int getSPD() {
-		return 3 + 1*player.experienceLevel;
-	}
-	
-	@Override
-	public void attackTo(EntityStats enemy) {
-		
-	}
-	
-	public EntityLivingBase getEntity() {
-		return player;
-	}
-	
-	@Override
-	public void beingDamaged(DamageType type, float baseDMG) {
-		
-	}
-	
+    public int getTotalDefenseValue()
+    {
+        int i = 0;
+
+        for (int j = 0; j < itemStack.length; ++j)
+        {
+            if (itemStack[j] != null && itemStack[j].getItem() instanceof ItemArmor)
+            {
+                int k = ((ItemArmor)itemStack[j].getItem()).damageReduceAmount;
+                i += k;
+            }
+        }
+
+        return i;
+    }
+    
+    public int getTotalMagicValue()
+    {
+        int i = 0;
+
+        for (int j = 0; j < itemStack.length; ++j)
+        {
+            if (itemStack[j] != null && itemStack[j].getItem() instanceof ItemArmor)
+            {
+                int k = ((ItemArmor)itemStack[j].getItem()).magicAmount; //ajustar accesor definido por desarrollo de items
+                i += k;
+            }
+        }
+
+        return i;
+    }
+    
+    public int getTotalResistanceValue()
+    {
+        int i = 0;
+
+        for (int j = 0; j < itemStack.length; ++j)
+        {
+            if (itemStack[j] != null && itemStack[j].getItem() instanceof ItemArmor)
+            {
+                int k = ((ItemArmor)itemStack[j].getItem()).resistanceAmount; //ajustar accesor definido por desarrollo de items
+                i += k;
+            }
+        }
+
+        return i;
+    }
+    
+    public int getTotalSpeedValue()
+    {
+        int i = 0;
+
+        for (int j = 0; j < itemStack.length; ++j)
+        {
+            if (itemStack[j] != null && itemStack[j].getItem() instanceof ItemArmor)
+            {
+                int k = ((ItemArmor)itemStack[j].getItem()).speedAmount; //ajustar accesor definido por desarrollo de items
+                i += k;
+            }
+        }
+
+        return i;
+    }
+
 }
+>>>>>>> refs/heads/alvarez
