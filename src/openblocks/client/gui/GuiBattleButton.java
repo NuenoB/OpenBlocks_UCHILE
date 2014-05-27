@@ -44,15 +44,7 @@ public class GuiBattleButton extends GuiButton{
 
 	private static int getPosXbyId(int idCasillero) {
 		switch(idCasillero){
-		case 0:
-			return height - 72;
-		case 1:
-			return height - 72;
-		case 2:
-			return height - 72;
-		case 3:
-			return height - 72;
-		case 4:
+		case 0:case 1: case 2: case 3: case 4:
 			return height - 72;
 		case 6:
 			return height - 19;

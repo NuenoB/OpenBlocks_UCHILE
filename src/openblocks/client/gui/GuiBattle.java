@@ -68,6 +68,35 @@ public class GuiBattle extends GuiScreen {
 		
 		
 	}
+	
+	protected enum InfoButton {
+		A,B,C,D,E,F,G
+}
+	
+	private InfoButton infoButton;
+	
+	protected String anInfoButton(InfoButton infoButton){
+		switch(infoButton){
+		case A:
+			return "Cancel";
+		case B:
+			return "Fight";
+		case C:
+			return "Flee";
+		case D:
+			return "Attack";
+		case E:
+			return "Use item";
+		case F:
+			return "Skills";
+		case G:
+			return "";
+		default:
+			return "";
+		}
+		
+		
+	}
     
 	
 	public void BattleGui(int battleID, EntityStats player)
@@ -244,46 +273,46 @@ public class GuiBattle extends GuiScreen {
 		switch(menu)
 		{
 		case -2: //Waiting on server
-			info[0] = "Waiting for server...";
+			info[0] = anInformation(inform.WAITING);
 			break;
 		case -1: //Empty menu
 			break;
 		case 0: //Main menu
-			info[0] = "What will you do?";
-			buttonList.add(new GuiButton(1, width*2/6 - 40, height - 72, 80, 20, "Fight"));
-			buttonList.add(new GuiButton(2, width*4/6 - 40, height - 72, 80, 20, "Flee"));
+			info[0] = anInformation(inform.ACTION);
+			buttonList.add(new GuiBattleButton(1,anInfoButton(infoButton.B)));
+			buttonList.add(new GuiBattleButton(2,anInfoButton(infoButton.C)));
 			break;
 		case 1: //Fight menu
-			info[0] = "What will you do?";
-			buttonList.add(new GuiButton(3, width/6 - 40, height - 72, 80, 20, "Attack"));
-			//controlList.add(new GuiButton(5, width*2/5 - 40, height - 72, 80, 20, "Use Item"));
-			buttonList.add(new GuiButton(4, width*3/5 - 40, height - 72, 80, 20, "Skills"));
-			buttonList.add(new GuiButton(0, width*5/6 - 40, height - 72, 80, 20, "Cancel"));
+			info[0] = anInformation(inform.ACTION);
+			buttonList.add(new GuiBattleButton(3,anInfoButton(infoButton.D)));
+			//controlList.add(new  GuiBattleButton(5, width*2/5 - 40, height - 72, 80, 20, anInfoButton(infoButton.E)));
+			buttonList.add(new  GuiBattleButton(4,anInfoButton(infoButton.F)));
+			buttonList.add(new  GuiBattleButton(0,anInfoButton(infoButton.A)));
 			break;
 		case 2: //Flee status
-			info[0] = "You attempt to flee!";
-			info[1] = "Waiting for server...";
+			info[0] = anInformation(inform.ATEMP_FLEE);
+			info[1] = anInformation(inform.WAITING);
 			break;
 		case 3: //Attack Selection (Handled by actionPerformed method)
-			info[0] = "Pick a target!";
+			info[0] = anInformation(inform.TARGET);
 			break;
 		case 4: //Skill menu
-			info[0] = "Pick a skill!";
+			info[0] = anInformation(inform.SELECT_SKILL);
 			int i=0;
 			while(player.Skills.hasNext()) //Changed weapons to skills.
 			{
-				buttonList.add(new GuiButton(6, width/2 - 88 + i * 20, height - 19, ""));
+				buttonList.add(new  GuiBattleButton(6, i * 20, 0, anInfoButton(infoButton.G)));
 				i++;
 			}
-			buttonList.add(new GuiButton(0, width/2 - 40, height - 40, 80, 20, "Cancel"));
+			buttonList.add(new  GuiBattleButton(0, width/2 - 40, height - 40, 80, 20, anInfoButton(infoButton.A)));
 			break;
 		case 5: //Attack Phase (Handled by actionPerformed method)
-			info[0] = "You attack!";
-			info[1] = "Waiting for server...";
+			info[0] = anInformation(inform.ATTACK);
+			info[1] = anInformation(inform.WAITING);
 			break;
 		case 6: //Weapon Changed
-			info[0] = "You used a skill!";
-			info[1] = "Waiting for server...";
+			info[0] = anInformation(inform.SKILL);
+			info[1] = anInformation(inform.WAITING);
 			break;
 		default:
 			break;
