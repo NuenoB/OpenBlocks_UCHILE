@@ -1,5 +1,8 @@
 package openblocks.common.entity.math;
 
+import java.util.UUID;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 
@@ -15,9 +18,8 @@ public class MobStats extends EntityStats {
 	private int SPD;
 	
 	
-	public MobStats (EntityMob enemy) {
-		mob = enemy;
-		
+	public MobStats (Entity enemy) {
+		mob = (EntityMob) enemy;
 		hitPoints = this.getMaxHP();
 		magicPoints = this.getMaxMP();
 	}
@@ -72,6 +74,11 @@ public class MobStats extends EntityStats {
 	@Override
 	public EntityLivingBase getEntity() {
 		return mob;
+	}
+
+	@Override
+	public int getId() {
+		return 0;
 	}
 
 }

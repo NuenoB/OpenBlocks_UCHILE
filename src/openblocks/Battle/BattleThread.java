@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import openblocks.common.entity.math.EntityStats;
+import openblocks.common.entity.math.MobStats;
 import openblocks.common.entity.math.PlayerStats;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;

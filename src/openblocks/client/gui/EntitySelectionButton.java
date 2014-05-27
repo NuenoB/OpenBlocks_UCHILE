@@ -1,20 +1,21 @@
 package openblocks.client.gui;
 
+import openblocks.common.entity.math.EntityStats;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 
 public class EntitySelectionButton extends GuiButton {
 	
-	private int entityID;
+	private EntityStats entityID;
 	
 	public EntitySelectionButton(int buttonID, int x, int y, String text, EntityStats entity) {
 		super(buttonID, x, y, text);
-		this.entityID= entity.getID();
+		this.entityID= entity;
 	}
 
 	public EntitySelectionButton(int buttonID, int x, int y, int width, int height, String text, EntityStats entity) {
 		super(buttonID, x, y, width, height, text);
-		this.entityID= entity.getID();
+		this.entityID= entity;
 	}
 	
 	@Override
@@ -29,7 +30,7 @@ public class EntitySelectionButton extends GuiButton {
 		}
 	}
 	
-	public int getEntityID(){
+	public EntityStats getEntityID(){
 		return this.entityID;
 	}
 

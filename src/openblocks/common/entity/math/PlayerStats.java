@@ -64,10 +64,5 @@ public class PlayerStats extends EntityStats {
 	public void beingDamaged(DamageType type, float baseDMG) {
 		
 	}
-
-	@Override
-	public EntityLivingBase getEntity() {
-		return this.entity;
-	}
 	
 }

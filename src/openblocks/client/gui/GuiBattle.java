@@ -10,6 +10,7 @@ import openblocks.Config;
 import openblocks.OpenBlocks;
 import openblocks.common.container.ContainerAutoEnchantmentTable;
 import openblocks.common.entity.math.*;
+import openblocks.common.entity.math.EntityStats.Action;
 import openblocks.common.skills.ISkill;
 import openmods.gui.BaseGuiContainer;
 
@@ -266,7 +267,7 @@ public class GuiBattle extends GuiScreen {
 		if(button.id == 2) //Flee
 		{
 			player.action = Action.FLEE;
-			player.target = player.getId();
+			player.target = player;
 			PacketDispatcher.sendPacketToServer(new BattleCommandPacket(battleID, player).makePacket());
 			turnChoiceSent = true;
 		}

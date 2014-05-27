@@ -4,10 +4,16 @@ import net.minecraft.entity.EntityLivingBase;
 
 public abstract class EntityStats{
 	
+	public enum Action{
+		ATTACK, USE_SKILL, FLEE
+	}
+	
 	protected float hitPoints;
 	protected int magicPoints;
 	protected int speed;
 	public EntityLivingBase entity;
+	public Action action;
+	public EntityStats target;
 	
 	public abstract float getMaxHP();
 	public abstract int getMaxMP();
@@ -17,6 +23,7 @@ public abstract class EntityStats{
 	public abstract float getRES();
 	public abstract int getSPD();
 	public abstract EntityLivingBase getEntity();
+	public abstract int getId();
 	
 	public float getHP() {
 		return hitPoints;
@@ -30,14 +37,19 @@ public abstract class EntityStats{
 	
 	public abstract void beingDamaged(DamageType type, float baseDMG);
 	
-	public abstract EntityLivingBase getEntity();
-	
 	public void healHP (float amount) {
 		hitPoints = Math.max(hitPoints+amount, this.getMaxHP());
 	}
 	
 	public void healMP (int amount) {
 		magicPoints = Math.max(magicPoints+amount, this.getMaxMP());
+	}
+	public void getAction() {
+		// TODO Auto-generated method stub
+		
+	}
+	public String name() {
+		return getEntity().getEntityName();
 	}
 	
 }
