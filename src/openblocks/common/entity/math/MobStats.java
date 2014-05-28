@@ -59,14 +59,14 @@ public class MobStats extends EntityStats {
 
 	@Override
 	public void attackTo(EntityStats enemy) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void beingDamaged(DamageType type, float baseDMG) {
-		// TODO Auto-generated method stub
+		float dmgTotal = baseDMG;
 		
+		hitPoints -= dmgTotal;
 	}
 
 	@Override
