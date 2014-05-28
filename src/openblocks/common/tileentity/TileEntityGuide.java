@@ -254,6 +254,7 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 
 		for (ChunkCoordinates coord : getShapeCoordinates()){
 			worldObj.setBlock(coord.posX, coord.posY, coord.posZ, itemBlock.getBlockID(), itemBlock.getMetadata(held.getItemDamage()), BlockNotifyFlags.ALL);
+		}
 	}
 
 	@Override
@@ -261,7 +262,7 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 		if (worldObj.isRemote) return true;
 
 		if (player.isSneaking()) switchMode(player);
-		else if (player.capabilities.isCreativeMode && isInFillMode()) fill(player, side);
+		else if (player.capabilities.isCreativeMode && isInFillMode()) fill(player);
 		else changeDimensions(player, ForgeDirection.getOrientation(side));
 
 		return true;

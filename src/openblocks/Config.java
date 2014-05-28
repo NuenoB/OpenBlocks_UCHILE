@@ -730,9 +730,6 @@ public class Config {
 			OpenBlocks.Items.sleepingBag = new ItemSleepingBag();
 			recipeList.add(new ShapedOreRecipe(OpenBlocks.Items.sleepingBag, "cc ", "www", "ccw", 'c', Block.carpet, 'w', Block.cloth));
 		}
-		if (itemMPBottle > 0) {
-			OpenBlocks.Items.mpBottle = new ItemMPBottle(itemMPBottle);
-		}
 
 		if (itemPaintBrushId > 0) {
 			OpenBlocks.Items.paintBrush = new ItemPaintBrush();

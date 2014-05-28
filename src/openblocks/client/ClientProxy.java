@@ -20,6 +20,8 @@ import openblocks.client.bindings.BrickBindings;
 import openblocks.client.fx.FXLiquidSpray;
 import openblocks.client.gui.GuiBattle;
 import openblocks.client.model.ModelCraneBackpack;
+import openblocks.client.model.ModelKnight;
+import openblocks.client.model.ModelLizard;
 import openblocks.client.radio.RadioManager;
 import openblocks.client.renderer.BlockRenderingHandler;
 import openblocks.client.renderer.entity.*;
@@ -173,9 +175,6 @@ public class ClientProxy implements IOpenBlocksProxy {
 
 		if (OpenBlocks.Blocks.elevator != null) {
 			MinecraftForge.EVENT_BUS.register(new ElevatorMovementHandler());
-		}
-		if (OpenBlocks.Items.mpBottle != null){
-			
 		}
 	}
 
