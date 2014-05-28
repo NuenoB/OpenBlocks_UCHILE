@@ -13,7 +13,8 @@ import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraftforge.common.ForgeDirection;
 import openblocks.api.IShapeProvider;
-import openblocks.shapes.GuideShape;
+import openblocks.shapes.BlockRepresentation;
+import openblocks.shapes.MyGuideShape;
 import openmods.Log;
 import openmods.api.IActivateAwareTile;
 import openmods.shapes.IShapeable;
@@ -29,7 +30,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  * @author OpenBlocks
  *
  */
-public class TileEntityGuide extends SyncedTileEntity implements IShapeable, IShapeProvider, IActivateAwareTile {
+public class TileEntityMyGuide extends SyncedTileEntity implements IShapeable, IShapeProvider, IActivateAwareTile {
 
 	private boolean shape[][][];
 	private boolean previousShape[][][];
@@ -40,13 +41,13 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 	protected SyncableInt depth;
 	protected SyncableInt mode;
 
-	public TileEntityGuide() {}
+	public TileEntityMyGuide() {}
 
 	@Override
 	protected void createSyncedFields() {
-		width = new SyncableInt(8);
-		height = new SyncableInt(8);
-		depth = new SyncableInt(8);
+		width = new SyncableInt(3);
+		height = new SyncableInt(12);
+		depth = new SyncableInt(3);
 		mode = new SyncableInt(0);
 	}
 
@@ -78,8 +79,8 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 	 * Método que devuelve la GuideShape que representa el modo actual
 	 * @return current GuideShape
 	 */
-	public GuideShape getCurrentMode() {
-		return GuideShape.values()[mode.getValue()];
+	public MyGuideShape getCurrentMode() {
+		return MyGuideShape.values()[mode.getValue()];
 	}
 
 	@Override
@@ -114,7 +115,7 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 		}
 	}
 
-	
+
 	/**
 	 * Método que retorna la figura fantasma actual
 	 * @return La shape actual
@@ -152,7 +153,7 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 	 */
 	private void switchMode() {
 		int nextMode = mode.getValue() + 1;
-		if (nextMode >= GuideShape.values().length) {
+		if (nextMode >= MyGuideShape.values().length) {
 			nextMode = 0;
 		}
 		mode.setValue(nextMode);
@@ -241,7 +242,7 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 	}
 
 	/**
-	 * Método que rellena la figura fantasma con el tipo de bloque que tiene el jugador en la mano
+	 * Método que rellena la figura fantasma con el tipo de bloque que tiene el jugador en la mano.
 	 * @param player El jugador que efectuó el cambio
 	 */
 	private void fill(EntityPlayer player) {
@@ -252,10 +253,29 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 		if (!(heldItem instanceof ItemBlock)) return;
 		final ItemBlock itemBlock = (ItemBlock)heldItem;
 
+		//Evitar construir bloques de esmeralda o de bloques que construyen bloques
+		if(itemBlock.getBlockID()==Block.blockEmerald.blockID || 
+				itemBlock.getBlockID()==openblocks.OpenBlocks.Blocks.guide.blockID ||
+				itemBlock.getBlockID()==openblocks.OpenBlocks.Blocks.myguide.blockID){
+			return;
+		}
+
+		//Eliminar los bloques necesarios para el llenado
+		for(BlockRepresentation b :getCurrentMode().fillConditions(new ChunkCoordinates(xCoord, yCoord, zCoord))){
+			worldObj.destroyBlock(b.getCoord().posX, b.getCoord().posY, b.getCoord().posZ, false);
+		}
+
+		//Construir Estructura Base
 		for (ChunkCoordinates coord : getShapeCoordinates()){
 			worldObj.setBlock(coord.posX, coord.posY, coord.posZ, itemBlock.getBlockID(), itemBlock.getMetadata(held.getItemDamage()), BlockNotifyFlags.ALL);
 		}
-		
+
+		//Construir Detalles
+		for(BlockRepresentation b :getCurrentMode().fill(new ChunkCoordinates(xCoord, yCoord, zCoord), worldObj)){
+			worldObj.setBlock(b.getCoord().posX, b.getCoord().posY, b.getCoord().posZ,
+					b.getBlockId(), b.getMetaData(), b.getFlags());
+		}		
+
 	}
 
 	@Override
@@ -263,10 +283,21 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 		if (worldObj.isRemote) return true;
 
 		if (player.isSneaking()) switchMode(player);
-		else if (player.capabilities.isCreativeMode && isInFillMode()) fill(player);
-		else changeDimensions(player, ForgeDirection.getOrientation(side));
+		else if (isInFillMode()) fill(player);
+		else if (player.capabilities.isCreativeMode) clearStructure();
 
 		return true;
+	}
+
+	private void clearStructure() {
+		for (ChunkCoordinates coord : getShapeCoordinates()){
+			worldObj.destroyBlock(coord.posX, coord.posY, coord.posZ,false);
+		}
+
+		for(BlockRepresentation b :getCurrentMode().fill(new ChunkCoordinates(xCoord, yCoord, zCoord), worldObj)){
+			worldObj.destroyBlock(b.getCoord().posX, b.getCoord().posY, b.getCoord().posZ, false);
+		}
+
 	}
 
 	/**
@@ -274,6 +305,12 @@ public class TileEntityGuide extends SyncedTileEntity implements IShapeable, ISh
 	 * @return True si se cumplen las condiciones
 	 */
 	private boolean isInFillMode() {
-		return worldObj.getBlockId(xCoord, yCoord + 1, zCoord) == Block.obsidian.blockID;
+		for(BlockRepresentation b :getCurrentMode().fillConditions(new ChunkCoordinates(xCoord, yCoord, zCoord))){
+			if(worldObj.getBlockId(b.getCoord().posX, b.getCoord().posY, b.getCoord().posZ)!= b.getBlockId()){
+				return false;
+			}
+		}
+
+		return true;
 	}
 }
