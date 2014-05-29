@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 
 public class Battle {
 	private boolean battleEnd;
+	private boolean nextTurn;
 	private ArrayList<EntityStats> battlers;
 	public Battle(ArrayList<EntityStats> ent, World world){
 		for (EntityStats entity : ent){
@@ -41,9 +42,14 @@ public class Battle {
 	public synchronized void update(){
 		this.blockMovement();
 		for (EntityStats entity : battlers){
-			entity.getAction();
-			entity.getEntity();
+			while (!nextTurn);
 		}
+	}
+	public void setNextTurn (Boolean b){
+		this.nextTurn= b;
+	}
+	public void battleEnded(){
+		this.battleEnd= true;
 	}
 }
 

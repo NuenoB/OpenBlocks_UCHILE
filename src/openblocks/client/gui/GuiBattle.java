@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import openblocks.Config;
 import openblocks.OpenBlocks;
+import openblocks.Battle.Battle;
 import openblocks.common.container.ContainerAutoEnchantmentTable;
 import openblocks.common.entity.math.*;
 import openblocks.common.entity.math.EntityStats.Action;
@@ -22,6 +23,7 @@ public class GuiBattle extends GuiScreen {
 	private Map<Integer,EntityStats> combatants;
 	private int serverBattleSize;
 	private boolean updatingCombatants;
+	private Battle currentBattle;
 
 	private int bgColor = 0x000000;
 	private String info[] = new String[2];
@@ -209,6 +211,7 @@ public class GuiBattle extends GuiScreen {
 		info[0] = "";
 		info[1] = "";
 		currentMenu = menu;
+		currentBattle.setNextTurn(false);
 		switch(menu)
 		{
 		case -2: //Waiting on server
@@ -266,9 +269,6 @@ public class GuiBattle extends GuiScreen {
 	protected void actionPerformed(GuiButton button) {
 		if(button.id == 2) //Flee
 		{
-			player.action = Action.FLEE;
-			player.target = player;
-			PacketDispatcher.sendPacketToServer(new BattleCommandPacket(battleID, player).makePacket());
 			turnChoiceSent = true;
 		}
 
@@ -289,19 +289,14 @@ public class GuiBattle extends GuiScreen {
 
 		if(button.id == 5) //Attack phase
 		{
-			player.target = ((EntitySelectionButton)button).entityID;
-			player.action = Action.ATTACK;
-			PacketDispatcher.sendPacketToServer(new BattleCommandPacket(battleID, player).makePacket());
-			turnChoiceSent = true;
+			EntityStats target = ((EntitySelectionButton)button).entityID;
+			player.attackTo(target);
+			currentBattle.setNextTurn(true);
 		}
 
 		if(button.id == 6)
 		{
 			int itemStackID = ((SkillSelectionButton)button).getSkillID();
-
-			player.action = Action.USE_SKILL;
-			player.target = player.getId();
-			PacketDispatcher.sendPacketToServer(new BattleCommandPacket(battleID, player).makePacket());
 			turnChoiceSent = true;
 		}
 

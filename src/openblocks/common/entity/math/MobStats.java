@@ -75,10 +75,4 @@ public class MobStats extends EntityStats {
 	public EntityLivingBase getEntity() {
 		return mob;
 	}
-
-	@Override
-	public int getId() {
-		return 0;
-	}
-
 }
