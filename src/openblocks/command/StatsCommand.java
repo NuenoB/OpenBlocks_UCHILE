@@ -1,11 +1,12 @@
 package openblocks.command;
 
 import openblocks.common.entity.math.PlayerItemStats;
+import openblocks.common.entity.math.PlayerStats;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 
-public class StatsComand extends CommandBase{
+public class StatsCommand extends CommandBase{
 
 	@Override
 	public String getCommandName() {
@@ -21,14 +22,13 @@ public class StatsComand extends CommandBase{
 	public void processCommand(ICommandSender icommandsender, String[] astring) {
 		if(icommandsender instanceof EntityPlayer){
 			EntityPlayer player=(EntityPlayer) icommandsender;
-			PlayerItemStats stats=new PlayerItemStats(player);
-			stats.statsAllocte();
+			PlayerStats stats=new PlayerStats(player);
 			player.addChatMessage("Player stats:");
-			player.addChatMessage("Bonus Damage: "+stats.getAttack());
-			player.addChatMessage("Defense: "+stats.getDefense());
-			player.addChatMessage("Magic: "+stats.getMagic());
-			player.addChatMessage("Resistance: "+stats.getResistance());
-			player.addChatMessage("Speed: "+stats.getSpeed());
+			player.addChatMessage("Bonus Damage: "+stats.getATK());
+			player.addChatMessage("Defense: "+stats.getDEF());
+			player.addChatMessage("Magic: "+stats.getMAG());
+			player.addChatMessage("Resistance: "+stats.getRES());
+			player.addChatMessage("Speed: "+stats.getSPD());
 		}
 	}
 
