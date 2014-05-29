@@ -1,7 +1,9 @@
 package openblocks.common.entity.math;
 
+import openblocks.common.item.AbstractCuttingWeapon;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 
 public class PlayerStats extends EntityStats {
 	
@@ -26,7 +28,13 @@ public class PlayerStats extends EntityStats {
 	
 	@Override
 	public float getATK() {
-		return 2.0F + 1.0F*player.experienceLevel;
+		float attack = 2.0F + 1.0F*player.experienceLevel;
+		Item held = player.getHeldItem().getItem();
+		if (held instanceof AbstractCuttingWeapon) {
+			AbstractCuttingWeapon weapon = (AbstractCuttingWeapon) held;
+			attack += weapon.getBonusDamage();
+		}
+		return attack;
 	}
 	
 	@Override
@@ -52,17 +60,13 @@ public class PlayerStats extends EntityStats {
 	}
 	
 	@Override
-	public void attackTo(EntityStats enemy) {
-		
+	public DamageType getDMGType() {
+		//TODO agregar valor del arma
+		return DamageType.PHYSICAL;
 	}
 	
 	public EntityLivingBase getEntity() {
 		return player;
-	}
-	
-	@Override
-	public void beingDamaged(DamageType type, float baseDMG) {
-		
 	}
 	
 }
