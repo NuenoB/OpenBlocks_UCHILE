@@ -20,9 +20,9 @@ import openmods.utils.render.GeometryUtils;
  * @author Agustin Antoine
  *
  */
-public class StairsGen implements IShapeGen {
+public class StairsGen extends AShape {
 
-	private int floors = 3;
+	private int floors;
 	private int orientation=0;
 	
 	private final int[] xArr = {0,-1,
@@ -41,6 +41,7 @@ public class StairsGen implements IShapeGen {
 	 * @param orientation Hacia adonde apuntan las puertas 
 	 */
 	public StairsGen(int floors, int orientation){
+		super(new OneBlockSt());
 		this.floors = floors;
 		//this.orientation=orientation;
 	}
@@ -87,18 +88,6 @@ public class StairsGen implements IShapeGen {
 		
 		return array;
 		
-	}
-
-
-	@Override
-	public ArrayList<BlockRepresentation> fillConditions(
-			ChunkCoordinates entityPos) {
-		
-		ArrayList<BlockRepresentation> array = new ArrayList<BlockRepresentation>();
-		
-		array.add(new BlockRepresentation(entityPos.posX, entityPos.posY+1, entityPos.posZ,
-				Block.blockEmerald.blockID));
-		return array;
 	}
 
 }

@@ -32,6 +32,7 @@ import openmods.utils.ColorUtils.ColorMeta;
 
 public class Config {
 
+	/** Tipo de item junto a su ID**/
 	@BlockId(description = "The id of the ladder")
 	public static int blockLadderId = 2540;
 
@@ -229,6 +230,29 @@ public class Config {
 	@ItemId(description = "The id of wallpaper")
 	public static int itemWallpaperId = 15000;
 
+	//---------------------------------------------------------------------------------------------
+	//Daga
+	@ItemId(description = "The id of a dagger")
+	private static int itemDaggerId=15001;
+	
+	//Daga de Fuego
+	@ItemId(description = "The id of a fire dagger")
+	private static int itemFireDaggerId=15002;
+	
+	//Espada pesada
+	@ItemId(description = "The id of a heavy sword")
+	private static int itemHeavySwordId=15003;
+	
+	//Espada Normal
+	@ItemId(description = "The id of a normal sword")
+	private static int itemNormalSwordId=15004;
+	
+	@ItemId(description = "the id of a fire resistive iron helmet")
+	private static int fireIronHelmetId=15005;
+	
+	@ItemId(description = "the id of a monster placer")
+	private static int monsterPlacerId=15006;
+	//---------------------------------------------------------------------------------------------
 	@OnLineModifiable
 	@ConfigProperty(category = "dropblock", name = "searchDistance", comment = "The range of the drop block")
 	public static int elevatorTravelDistance = 20;
@@ -403,6 +427,7 @@ public class Config {
 	@ConfigProperty(category = "fan", name = "isRedstoneActivated", comment = "Is fan force controlled by redstone current")
 	public static boolean redstoneActivatedFan = true;
 
+	/** Registrar un nuevo item**/
 	public static void register() {
 
 		MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
@@ -808,6 +833,13 @@ public class Config {
 
 		}
 
+		//New Items ------------------------------------------------------------------------------
+		OpenBlocks.Items.dagger = new ItemDagger(itemDaggerId);
+		OpenBlocks.Items.fireDagger = new ItemFireDagger(itemFireDaggerId);
+		OpenBlocks.Items.heavySword = new ItemHeavySword(itemHeavySwordId);
+		OpenBlocks.Items.normalSword = new ItemNormalSword(itemNormalSwordId);
+		OpenBlocks.Items.fireIronHelmet = new FireIronHelmet(fireIronHelmetId);
+		//----------------------------------------------------------------------------------------
 		final String modId = "openblocks";
 		ConfigProcessing.registerItems(OpenBlocks.Items.class, modId);
 		ConfigProcessing.registerBlocks(OpenBlocks.Blocks.class, modId);
