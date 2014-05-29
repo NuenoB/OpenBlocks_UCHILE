@@ -17,7 +17,7 @@ public class MobStats extends EntityStats {
 	
 	public MobStats (EntityMob enemy) {
 		mob = enemy;
-		
+		//TODO forma de sacar stats de enemigos
 		hitPoints = this.getMaxHP();
 		magicPoints = this.getMaxMP();
 	}
@@ -58,20 +58,13 @@ public class MobStats extends EntityStats {
 	}
 
 	@Override
-	public void attackTo(EntityStats enemy) {
-		
-	}
-
-	@Override
-	public void beingDamaged(DamageType type, float baseDMG) {
-		float dmgTotal = baseDMG;
-		
-		hitPoints -= dmgTotal;
-	}
-
-	@Override
 	public EntityLivingBase getEntity() {
 		return mob;
+	}
+
+	@Override
+	public DamageType getDMGType() {
+		return DamageType.PHYSICAL;
 	}
 
 }
