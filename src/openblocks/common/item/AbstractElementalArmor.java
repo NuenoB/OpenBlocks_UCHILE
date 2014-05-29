@@ -49,6 +49,8 @@ public abstract class AbstractElementalArmor extends ItemArmor implements IEleme
 	@Override
 	public abstract String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer);
 	
-
+	public int getDefense(){
+		return this.damageReduceAmount;
+	}
 
 }
