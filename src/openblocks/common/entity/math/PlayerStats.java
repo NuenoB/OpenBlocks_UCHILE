@@ -8,14 +8,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
-public class PlayerStats extends Stats{
+public class PlayerStats extends EntityStats{
 
 	protected EntityPlayer player;
 	protected ItemStack[] itemStack;
-	protected double attack; // Cambios de float a double
- 	protected double defense;
- 	protected double magic;
- 	protected double resistance;
+	protected float attack; // Cambios de float a double
+ 	protected float defense;
+ 	protected float magic;
+ 	protected float resistance;
  	protected int speed;
 
  	public PlayerStats(Entity entity){
@@ -40,19 +40,19 @@ public class PlayerStats extends Stats{
 	}
 	
 	
-	public double getAttack(){
+	public float getAttack(){
 		return attack;
 	}
-	public double getDefense(){
+	public float getDefense(){
 		return defense;
 	}
-	public double getMagic(){
+	public float getMagic(){
 		return magic;
 	}
-	public double getResistance(){
+	public float getResistance(){
 		return resistance;
 	}
-	public double getSpeed(){
+	public int getSpeed(){
 		return speed;
 	}
 
