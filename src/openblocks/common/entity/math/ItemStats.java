@@ -3,7 +3,7 @@ package openblocks.common.entity.math;
  
  import net.minecraft.entity.Entity;
  
- public abstract class Stats {
+ public abstract class ItemStats {
  	abstract void statsAllocte();
  	public abstract float getAttack();
  	public abstract float getDefense();

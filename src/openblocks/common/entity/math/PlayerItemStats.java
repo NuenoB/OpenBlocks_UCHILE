@@ -6,7 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
  
- public class PlayerStats extends Stats{
+ public class PlayerItemStats extends ItemStats{
  
  	protected EntityPlayer player;
  	protected ItemStack[] itemStack;
@@ -17,7 +17,7 @@ import net.minecraft.item.ItemStack;
   	protected float resistance;
   	protected int speed;
  
-  	public PlayerStats(Entity entity){
+  	public PlayerItemStats(Entity entity){
   		player=(EntityPlayer) entity;
  		itemStack=player.inventory.armorInventory;
  		weapon=player.getHeldItem();
@@ -25,7 +25,7 @@ import net.minecraft.item.ItemStack;
   	
   //todos los valores son cero por el momento.
  	@Override
- 	void statsAllocte() {
+ 	public void statsAllocte() {
  		attack=0; //attack=weapon.getBonusDamage();
  		defense=this.getTotalValue(new DefenseStrategy());
  		magic=this.getTotalValue(new MagicStrategy());

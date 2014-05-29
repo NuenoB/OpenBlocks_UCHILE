@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
  
- public class LivingStats extends Stats{
+ public class LivingItemStats extends ItemStats{
  	
  
  	protected EntityLiving entityLiving;
@@ -20,7 +20,7 @@ import net.minecraft.item.ItemStack;
   	protected int speed;
   	
   	
-  	public LivingStats(Entity entity){
+  	public LivingItemStats(Entity entity){
   		this.entityLiving=(EntityLiving) entity;
   		this.heldItem=entityLiving.getHeldItem();
   	}
