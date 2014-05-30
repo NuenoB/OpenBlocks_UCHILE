@@ -1,8 +1,9 @@
 package openblocks.common.block;
 
-import openblocks.Config;
-import openblocks.common.block.BlockGuide.Icons;
-import openblocks.shapes.BlockRepresentation;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -10,13 +11,14 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import openblocks.Config;
 
 public class BlockScreenPrinter extends OpenBlock{
-	
-	private int width = 4;
-	private int depth = 4;
-	private int height = 2;
-	
+
+	private int width = 5;
+	private int depth = 5;
+	private int height = 10;
+
 	public static class Icons {
 		public static Icon ends;
 		public static Icon side;
@@ -30,7 +32,7 @@ public class BlockScreenPrinter extends OpenBlock{
 	public boolean shouldRenderBlock() {
 		return true;
 	}
-	
+
 	@Override
 	public boolean canBeReplacedByLeaves(World world, int x, int y, int z) {
 		return false;
@@ -40,7 +42,7 @@ public class BlockScreenPrinter extends OpenBlock{
 	public boolean isFlammable(IBlockAccess world, int x, int y, int z, int metadata, ForgeDirection face) {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube() {
 		return true;
@@ -50,8 +52,8 @@ public class BlockScreenPrinter extends OpenBlock{
 	public boolean useTESRForInventory() {
 		return false;
 	}
-	
-	
+
+
 	@Override
 	public void registerIcons(IconRegister registry) {
 		Icons.ends = registry.registerIcon("openblocks:grave");
@@ -65,26 +67,42 @@ public class BlockScreenPrinter extends OpenBlock{
 		setTexture(ForgeDirection.SOUTH, Icons.side);
 		setDefaultTexture(Icons.ends);
 	}
-	
+
 	@Override
 	public void onBlockAdded(World worldObj, int xCoord, int yCoord ,int zCoord){
 		String res = "";
-		for(int x=-width; x<=width;x++){
-			for(int y=-height; y<=height;y++){
-				for(int z=-depth; z<=depth;z++){
-					if((y>=0 && worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z)==0) ||
-							(y==0 && x==0 && z==0) ||
-							worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z)==12){
-						//nada
-					}
-					else{
-						res+="array.add(new BlockRepresentation(entityPos.posX+"+x+", entityPos.posY+"+y+", entityPos.posZ+"+z+", "
-								+worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z)+", "+worldObj.getBlockMetadata(xCoord+x, yCoord+y, zCoord+z)+", 3));     ";
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter("the-file-name.txt", "UTF-8");
+
+			for(int x=-width; x<=width;x++){
+				for(int y=-height; y<=1;y++){
+					for(int z=-depth; z<=depth;z++){
+						if(blockConditions(worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z))){
+							//nada
+						}
+						else{
+							writer.println("array.add(new BlockRepresentation(entityPos.posX+"+x+", entityPos.posY+"+y+", entityPos.posZ+"+z+", "
+									+worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z)+", "+worldObj.getBlockMetadata(xCoord+x, yCoord+y, zCoord+z)+", 3));     ");
+							//						res+="array.add(new BlockRepresentation(entityPos.posX+"+x+", entityPos.posY+"+y+", entityPos.posZ+"+z+", "
+							//								+worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z)+", "+worldObj.getBlockMetadata(xCoord+x, yCoord+y, zCoord+z)+", 3));     ";
+						}
 					}
 				}
 			}
+			writer.close();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		System.out.println(res);
+	}
+
+	public boolean blockConditions(int id){
+		return (id==Block.stone.blockID);
 	}
 
 }
