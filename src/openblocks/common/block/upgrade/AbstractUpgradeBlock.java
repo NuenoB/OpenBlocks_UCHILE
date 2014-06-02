@@ -1,10 +1,13 @@
 package openblocks.common.block.upgrade;
 
 import java.util.ArrayList;
+import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
@@ -62,15 +65,13 @@ public abstract class AbstractUpgradeBlock extends OpenBlock {
 	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ){
-		if(world.getBlockId(x, y-1, z)==1234 &&
-				world.getBlockMetadata(x, y-1, z)==metadata){
+		if(world.getBlockId(x, y-1, z)==Block.stone.blockID){// &&
+				//world.getBlockMetadata(x, y-1, z)==metadata){
 			
 			for(BlockRepresentation b : upgradeList){
 				world.setBlock(b.getCoord().posX+x, b.getCoord().posY+y, b.getCoord().posZ+z, b.getBlockId(), b.getMetaData(), 2);
 			}
-			
-			
-			//world.destroyBlock(x, y, z, par4)
+			world.destroyBlock(x, y, z, false);
 			
 		}
 		else{
@@ -82,7 +83,7 @@ public abstract class AbstractUpgradeBlock extends OpenBlock {
 	public abstract void abstResgisterIcons(IconRegister registry);
 	
 	public abstract ArrayList<BlockRepresentation> getList(ChunkCoordinates entityPos);
-
+	
 	
 
 }

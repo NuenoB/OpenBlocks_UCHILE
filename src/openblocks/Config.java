@@ -22,6 +22,7 @@ import openblocks.common.EntityEventHandler;
 import openblocks.common.Stencil;
 import openblocks.common.TrophyHandler;
 import openblocks.common.block.*;
+import openblocks.common.block.upgrade.WellUpgradeBlock;
 import openblocks.common.item.*;
 import openblocks.common.item.ItemImaginationGlasses.ItemCrayonGlasses;
 import openblocks.common.recipe.*;
@@ -146,6 +147,9 @@ public class Config {
 
 	@BlockId(description = "The id of the xp shower")
 	public static int blockXPShowerId = 2579;
+	
+	@BlockId(description = "The id of the Well Upgrade block")
+	public static int blockWellUpgrade = 2677;
 	
 	@BlockId(description = "The id of the Screen Printer block")
 	public static int blockScreenPrinter = 2678;
@@ -460,6 +464,10 @@ public class Config {
 		if (ConfigProcessing.canRegisterBlock(blockMyGuideId)) {
 			OpenBlocks.Blocks.myguide = new BlockMyGuide();
 			recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.myguide, "ggg", "gtg", "ggg", 'g', Block.glass, 't', Block.torchWood));
+		}
+		if (ConfigProcessing.canRegisterBlock(blockWellUpgrade)) {
+			OpenBlocks.Blocks.wellupgradeblock = new WellUpgradeBlock();
+			//recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.wellupgradeblock, "ggg", "gtg", "ggg", 'g', Block.glass, 't', Block.torchWood));
 		}
 		if (ConfigProcessing.canRegisterBlock(blockScreenPrinter)) {
 			OpenBlocks.Blocks.screenprinter = new BlockScreenPrinter();

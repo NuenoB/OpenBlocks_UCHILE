@@ -18,6 +18,7 @@ import openblocks.api.FlimFlamRegistry;
 import openblocks.client.radio.RadioManager;
 import openblocks.common.*;
 import openblocks.common.block.*;
+import openblocks.common.block.upgrade.WellUpgradeBlock;
 import openblocks.common.entity.*;
 import openblocks.common.item.*;
 import openblocks.common.item.ItemImaginationGlasses.ItemCrayonGlasses;
@@ -76,6 +77,9 @@ public class OpenBlocks {
 	public static IOpenBlocksProxy proxy;
 
 	public static class Blocks {
+		@RegisterBlock(name = "wellupgradeblock")
+		public static WellUpgradeBlock wellupgradeblock;
+		
 		@RegisterBlock(name = "screenprinter")
 		public static BlockScreenPrinter screenprinter;
 		
