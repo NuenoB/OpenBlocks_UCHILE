@@ -18,6 +18,7 @@ import openblocks.api.FlimFlamRegistry;
 import openblocks.client.radio.RadioManager;
 import openblocks.common.*;
 import openblocks.common.block.*;
+import openblocks.common.block.upgrade.CanBeUpgradedBlock;
 import openblocks.common.block.upgrade.WellUpgradeBlock;
 import openblocks.common.entity.*;
 import openblocks.common.item.*;
@@ -77,6 +78,9 @@ public class OpenBlocks {
 	public static IOpenBlocksProxy proxy;
 
 	public static class Blocks {
+		@RegisterBlock(name = "canbeupgradedblock")
+		public static CanBeUpgradedBlock canbeupgradedblock;
+		
 		@RegisterBlock(name = "wellupgradeblock")
 		public static WellUpgradeBlock wellupgradeblock;
 		

@@ -1,6 +1,7 @@
 package openblocks.common.block.upgrade;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -8,11 +9,13 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import openblocks.OpenBlocks.Blocks;
 import openblocks.common.block.OpenBlock;
 import openblocks.common.block.BlockScreenPrinter.Icons;
 import openblocks.shapes.BlockRepresentation;
@@ -65,7 +68,7 @@ public abstract class AbstractUpgradeBlock extends OpenBlock {
 	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ){
-		if(world.getBlockId(x, y-1, z)==Block.stone.blockID){// &&
+		if(world.getBlockId(x, y-1, z)==Blocks.canbeupgradedblock.blockID){// &&
 				//world.getBlockMetadata(x, y-1, z)==metadata){
 			
 			for(BlockRepresentation b : upgradeList){
@@ -84,6 +87,6 @@ public abstract class AbstractUpgradeBlock extends OpenBlock {
 	
 	public abstract ArrayList<BlockRepresentation> getList(ChunkCoordinates entityPos);
 	
-	
+	public abstract void setRecipe(List<IRecipe> recipeList);
 
 }

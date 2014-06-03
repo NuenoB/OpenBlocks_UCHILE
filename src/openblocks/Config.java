@@ -14,6 +14,7 @@ import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import openblocks.OpenBlocks.Blocks;
 import openblocks.OpenBlocks.Enchantments;
 import openblocks.asm.EntityPlayerVisitor;
 import openblocks.client.radio.RadioManager;
@@ -21,13 +22,94 @@ import openblocks.client.radio.RadioManager.RadioStation;
 import openblocks.common.EntityEventHandler;
 import openblocks.common.Stencil;
 import openblocks.common.TrophyHandler;
-import openblocks.common.block.*;
+import openblocks.common.block.BlockAutoAnvil;
+import openblocks.common.block.BlockAutoEnchantmentTable;
+import openblocks.common.block.BlockBearTrap;
+import openblocks.common.block.BlockBigButton;
+import openblocks.common.block.BlockBlockBreaker;
+import openblocks.common.block.BlockBlockPlacer;
+import openblocks.common.block.BlockCannon;
+import openblocks.common.block.BlockCanvas;
+import openblocks.common.block.BlockCanvasGlass;
+import openblocks.common.block.BlockDonationStation;
+import openblocks.common.block.BlockDrawingTable;
+import openblocks.common.block.BlockElevator;
+import openblocks.common.block.BlockFan;
+import openblocks.common.block.BlockFlag;
+import openblocks.common.block.BlockGrave;
+import openblocks.common.block.BlockGuide;
+import openblocks.common.block.BlockHeal;
+import openblocks.common.block.BlockImaginary;
+import openblocks.common.block.BlockItemDropper;
+import openblocks.common.block.BlockLadder;
+import openblocks.common.block.BlockMyGuide;
+import openblocks.common.block.BlockPaintCan;
+import openblocks.common.block.BlockPaintMixer;
+import openblocks.common.block.BlockPath;
+import openblocks.common.block.BlockProjector;
+import openblocks.common.block.BlockRadio;
+import openblocks.common.block.BlockRopeLadder;
+import openblocks.common.block.BlockScreenPrinter;
+import openblocks.common.block.BlockSky;
+import openblocks.common.block.BlockSponge;
+import openblocks.common.block.BlockSprinkler;
+import openblocks.common.block.BlockTank;
+import openblocks.common.block.BlockTarget;
+import openblocks.common.block.BlockTrophy;
+import openblocks.common.block.BlockVacuumHopper;
+import openblocks.common.block.BlockVillageHighlighter;
+import openblocks.common.block.BlockXPBottler;
+import openblocks.common.block.BlockXPDrain;
+import openblocks.common.block.BlockXPShower;
+import openblocks.common.block.upgrade.CanBeUpgradedBlock;
 import openblocks.common.block.upgrade.WellUpgradeBlock;
-import openblocks.common.item.*;
+import openblocks.common.item.ItemCartographer;
+import openblocks.common.item.ItemCraneBackpack;
+import openblocks.common.item.ItemCraneControl;
+import openblocks.common.item.ItemCursor;
+import openblocks.common.item.ItemDagger;
+import openblocks.common.item.ItemEmptyMap;
+import openblocks.common.item.ItemFilledBucket;
+import openblocks.common.item.ItemFireDagger;
+import openblocks.common.item.ItemGoldenEye;
+import openblocks.common.item.ItemHangGlider;
+import openblocks.common.item.ItemHeavySword;
+import openblocks.common.item.ItemHeightMap;
+import openblocks.common.item.ItemImaginary;
+import openblocks.common.item.ItemImaginationGlasses;
 import openblocks.common.item.ItemImaginationGlasses.ItemCrayonGlasses;
-import openblocks.common.recipe.*;
-import openblocks.enchantments.*;
-import openmods.config.*;
+import openblocks.common.item.ItemInfoBook;
+import openblocks.common.item.ItemLuggage;
+import openblocks.common.item.ItemNormalSword;
+import openblocks.common.item.ItemOBGeneric;
+import openblocks.common.item.ItemOBGenericUnstackable;
+import openblocks.common.item.ItemPaintBrush;
+import openblocks.common.item.ItemSleepingBag;
+import openblocks.common.item.ItemSlimalyzer;
+import openblocks.common.item.ItemSonicGlasses;
+import openblocks.common.item.ItemSqueegee;
+import openblocks.common.item.ItemStencil;
+import openblocks.common.item.ItemTastyClay;
+import openblocks.common.item.ItemTunedCrystal;
+import openblocks.common.item.MetasBucket;
+import openblocks.common.item.MetasGeneric;
+import openblocks.common.item.MetasGenericUnstackable;
+import openblocks.common.recipe.CrayonGlassesRecipe;
+import openblocks.common.recipe.CrayonMixingRecipe;
+import openblocks.common.recipe.GoldenEyeRechargeRecipe;
+import openblocks.common.recipe.MapCloneRecipe;
+import openblocks.common.recipe.MapResizeRecipe;
+import openblocks.enchantments.EnchantmentExplosive;
+import openblocks.enchantments.EnchantmentFlimFlam;
+import openblocks.enchantments.EnchantmentLastStand;
+import openblocks.enchantments.ExplosiveEnchantmentsHandler;
+import openblocks.enchantments.FlimFlamEnchantmentsHandler;
+import openblocks.enchantments.LastStandEnchantmentsHandler;
+import openmods.config.BlockId;
+import openmods.config.ConfigProcessing;
+import openmods.config.ConfigProperty;
+import openmods.config.ItemId;
+import openmods.config.OnLineModifiable;
 import openmods.utils.ColorUtils;
 import openmods.utils.ColorUtils.ColorMeta;
 
@@ -147,6 +229,9 @@ public class Config {
 
 	@BlockId(description = "The id of the xp shower")
 	public static int blockXPShowerId = 2579;
+	
+	@BlockId(description = "The id of the Can Be Upgraded Block")
+	public static int blockCanBeUpgraded = 2676;
 	
 	@BlockId(description = "The id of the Well Upgrade block")
 	public static int blockWellUpgrade = 2677;
@@ -463,15 +548,18 @@ public class Config {
 		}
 		if (ConfigProcessing.canRegisterBlock(blockMyGuideId)) {
 			OpenBlocks.Blocks.myguide = new BlockMyGuide();
-			recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.myguide, "ggg", "gtg", "ggg", 'g', Block.glass, 't', Block.torchWood));
+			recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.myguide, "ggg", "gtg", "ggg", 'g', Block.wood, 't', Block.cobblestone));
 		}
 		if (ConfigProcessing.canRegisterBlock(blockWellUpgrade)) {
 			OpenBlocks.Blocks.wellupgradeblock = new WellUpgradeBlock();
-			//recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.wellupgradeblock, "ggg", "gtg", "ggg", 'g', Block.glass, 't', Block.torchWood));
+			//OpenBlocks.Blocks.wellupgradeblock.setRecipe(recipeList);
+			recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.wellupgradeblock, "   ", " g ", "mam", 'g', Block.blockGold, 'm', Block.wood, 'a', Item.bucketWater));
+		}
+		if (ConfigProcessing.canRegisterBlock(blockCanBeUpgraded)) {
+			OpenBlocks.Blocks.canbeupgradedblock = new CanBeUpgradedBlock();
 		}
 		if (ConfigProcessing.canRegisterBlock(blockScreenPrinter)) {
 			OpenBlocks.Blocks.screenprinter = new BlockScreenPrinter();
-			recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.screenprinter, "ggg", "gtg", "ggg", 'g', Block.glass, 't', Block.torchWood));
 		}
 		if (ConfigProcessing.canRegisterBlock(blockElevatorId)) {
 			OpenBlocks.Blocks.elevator = new BlockElevator();

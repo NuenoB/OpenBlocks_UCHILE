@@ -1,11 +1,18 @@
 package openblocks.common.block.upgrade;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import openblocks.Config;
+import openblocks.OpenBlocks;
+import openblocks.OpenBlocks.Blocks;
 import openblocks.common.block.BlockScreenPrinter.Icons;
 import openblocks.shapes.BlockRepresentation;
 
@@ -37,6 +44,12 @@ public class WellUpgradeBlock extends AbstractUpgradeBlock {
 		ArrayList<BlockRepresentation> array = new ArrayList<BlockRepresentation>();
 		
 		return array;
+	}
+
+	@Override
+	public void setRecipe(List<IRecipe> recipeList) {
+//		recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.canbeupgradedblock, "  ", " g ", "mam", 'g', Blocks.myguide, 'm', Block.wood, 'a', Item.bucketWater));
+		
 	}
 
 }
