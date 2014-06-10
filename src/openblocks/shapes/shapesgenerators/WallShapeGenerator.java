@@ -16,6 +16,7 @@ import openblocks.shapes.shapesgenerators.simpleShapeFactory.SimpleWallGenerator
 import openblocks.shapes.shapesgenerators.simpleShapeFactory.SimpleWallGeneratorNSFancy;
 import openblocks.shapes.shapesgenerators.simpleShapeFactory.SimpleWallGeneratorOE;
 import openblocks.shapes.shapesgenerators.simpleShapeFactory.SimpleWallGeneratorOEFancy;
+import openblocks.shapes.shapesgenerators.towers.TurretGenerator;
 import openmods.shapes.IShapeGenerator;
 import openmods.shapes.IShapeable;
 import openmods.utils.MathUtils;

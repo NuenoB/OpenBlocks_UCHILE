@@ -13,6 +13,7 @@ import openblocks.shapes.shapesgenerators.simpleShapeFactory.FactorySimpleWallGe
 import openblocks.shapes.shapesgenerators.simpleShapeFactory.FactorySimpleWallGeneratorOE;
 import openblocks.shapes.shapesgenerators.simpleShapeFactory.FactorySimpleWallGeneratorOEFancy;
 import openblocks.shapes.shapesgenerators.simpleShapeFactory.IFactorySimpleShapeGeneratorXX;
+import openblocks.shapes.shapesgenerators.towers.BridgeTurrentGeneretor;
 import openmods.shapes.IShapeable;
 
 public class BridgShapeGenerator extends AbstractShape

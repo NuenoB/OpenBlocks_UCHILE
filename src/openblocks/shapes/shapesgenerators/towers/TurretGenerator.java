@@ -1,4 +1,4 @@
-package openblocks.shapes.shapesgenerators;
+package openblocks.shapes.shapesgenerators.towers;
 
 import java.util.ArrayList;
 
@@ -8,6 +8,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import openblocks.shapes.BlockRepresentation;
 import openblocks.shapes.IShapeGen;
+import openblocks.shapes.shapesgenerators.AbstractShapeGeneratorMove;
 import openmods.shapes.IShapeable;
  
 public class TurretGenerator extends AbstractShapeGeneratorMove {
