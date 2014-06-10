@@ -27,7 +27,7 @@ public class LivingStats extends Stats{
  	
 	@Override
 	void statsAllocte() {
-		attack=heldItem.getBonusDamage(); //método agregado por el grupo de items.
+		//attack=heldItem.getBonusDamage(); //mï¿½todo agregado por el grupo de items.
 		defense=this.getTotalDefenseValue();
 		magic=this.getTotalMagicValue();
 		resistance=this.getTotalResistanceValue();
@@ -75,8 +75,8 @@ public class LivingStats extends Stats{
         {
             if (entityLiving.getCurrentItemOrArmor(j) != null && entityLiving.getCurrentItemOrArmor(j).getItem() instanceof ItemArmor)
             {
-                int k = ((ItemArmor)entityLiving.getCurrentItemOrArmor(j).getItem()).magicAmount; //ajustar accesor definido por desarrollo de items
-                i += k;
+                //int k = ((ItemArmor)entityLiving.getCurrentItemOrArmor(j).getItem()).magicAmount; //ajustar accesor definido por desarrollo de items
+                //i += k;
             }
         }
 
@@ -91,8 +91,8 @@ public class LivingStats extends Stats{
         {
             if (entityLiving.getCurrentItemOrArmor(j) != null && entityLiving.getCurrentItemOrArmor(j).getItem() instanceof ItemArmor)
             {
-                int k = ((ItemArmor)entityLiving.getCurrentItemOrArmor(j).getItem()).resistanceAmount; //ajustar accesor definido por desarrollo de items
-                i += k;
+                //int k = ((ItemArmor)entityLiving.getCurrentItemOrArmor(j).getItem()).resistanceAmount; //ajustar accesor definido por desarrollo de items
+                //i += k;
             }
         }
 
@@ -107,8 +107,8 @@ public class LivingStats extends Stats{
         {
             if (entityLiving.getCurrentItemOrArmor(j) != null && entityLiving.getCurrentItemOrArmor(j).getItem() instanceof ItemArmor)
             {
-                int k = ((ItemArmor)entityLiving.getCurrentItemOrArmor(j).getItem()).speedAmount; //ajustar accesor definido por desarrollo de items
-                i += k;
+                //int k = ((ItemArmor)entityLiving.getCurrentItemOrArmor(j).getItem()).speedAmount; //ajustar accesor definido por desarrollo de items
+                //i += k;
             }
         }
 

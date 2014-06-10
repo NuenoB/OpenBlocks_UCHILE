@@ -22,7 +22,7 @@ public class PlayerStats extends Stats{
  	
 	@Override
 	void statsAllocte() {
-		attack=player.getHeldItem().getBonusDamage(); //método agregado por el grupo de items.
+		//attack=player.getHeldItem().getBonusDamage(); //mï¿½todo agregado por el grupo de items.
 		defense=this.getTotalDefenseValue();
 		magic=this.getTotalMagicValue();
 		resistance=this.getTotalResistanceValue();
@@ -71,8 +71,8 @@ public class PlayerStats extends Stats{
         {
             if (itemStack[j] != null && itemStack[j].getItem() instanceof ItemArmor)
             {
-                int k = ((ItemArmor)itemStack[j].getItem()).magicAmount; //ajustar accesor definido por desarrollo de items
-                i += k;
+                /*int k = ((ItemArmor)itemStack[j].getItem()).magicAmount; //ajustar accesor definido por desarrollo de items
+                i += k;*/
             }
         }
 
@@ -87,8 +87,8 @@ public class PlayerStats extends Stats{
         {
             if (itemStack[j] != null && itemStack[j].getItem() instanceof ItemArmor)
             {
-                int k = ((ItemArmor)itemStack[j].getItem()).resistanceAmount; //ajustar accesor definido por desarrollo de items
-                i += k;
+                /*int k = ((ItemArmor)itemStack[j].getItem()).resistanceAmount; //ajustar accesor definido por desarrollo de items
+                i += k;*/
             }
         }
 
@@ -103,8 +103,8 @@ public class PlayerStats extends Stats{
         {
             if (itemStack[j] != null && itemStack[j].getItem() instanceof ItemArmor)
             {
-                int k = ((ItemArmor)itemStack[j].getItem()).speedAmount; //ajustar accesor definido por desarrollo de items
-                i += k;
+                /*int k = ((ItemArmor)itemStack[j].getItem()).speedAmount; //ajustar accesor definido por desarrollo de items
+                i += k;*/
             }
         }
 
