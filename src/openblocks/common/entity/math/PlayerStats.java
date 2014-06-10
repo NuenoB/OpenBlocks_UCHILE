@@ -4,6 +4,8 @@ import openblocks.common.item.AbstractCuttingWeapon;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
 
 public class PlayerStats extends EntityStats {
 	
@@ -39,7 +41,14 @@ public class PlayerStats extends EntityStats {
 	
 	@Override
 	public float getDEF() {
-		return 1.0F + 0.5F*player.experienceLevel;
+		float baseDEF = 1.0F + 0.5F*player.experienceLevel;
+		ItemStack[] inventory = player.inventory.armorInventory;
+		for (ItemStack armor : inventory) {
+			Item item = armor.getItem();
+			if (item instanceof ItemArmor)
+				baseDEF += ((ItemArmor) item).damageReduceAmount;
+		}
+		return baseDEF;
 	}
 	
 	@Override
@@ -56,7 +65,21 @@ public class PlayerStats extends EntityStats {
 	
 	@Override
 	public int getSPD() {
-		return 3 + 1*player.experienceLevel;
+		int baseSPD = 3 + 1*player.experienceLevel;
+		Item held = player.getHeldItem().getItem();
+		if (held instanceof AbstractCuttingWeapon) {
+			AbstractCuttingWeapon weapon = (AbstractCuttingWeapon) held;
+			EnumBonusEffects effect = weapon.getBonusEffect();
+			switch (effect) {
+			case FAST:
+				baseSPD += 5;
+			case SLOW:
+				baseSPD -= 5;
+			default:
+				break;
+			}
+		}
+		return baseSPD;
 	}
 	
 	@Override
@@ -69,4 +92,9 @@ public class PlayerStats extends EntityStats {
 		return player;
 	}
 	
+	@Override
+	public double beingDamaged(DamageType type, float baseDMG, int enemySPD) {
+		player.inventory.damageArmor(4.0F);
+		return super.beingDamaged(type, baseDMG, enemySPD);
+	}
 }
