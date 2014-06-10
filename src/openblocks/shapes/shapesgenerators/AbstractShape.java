@@ -33,11 +33,9 @@ public abstract class AbstractShape extends AbstractShapeGeneratorMove
 	{				
 		//the two turret are define
 		mListOfConstructions = new ArrayList<IShapeGenenratorMove>();
-		mListOfConstructions.add(mInitialTower);
-		mListOfConstructions.add(mFinealTower);
+		
 		turents();
-		mFinealTower.generateShape(xSize, ySize, zSize, shapeable);
-		mInitialTower.generateShape(0, 0, 0, shapeable);
+		
 		// the angle that forms the distance vetor between them and the x axis, and set the values between pi/2 and -pi/2
 		mAngleBetweenTower = angleBetweenm180p180(Math.atan2(zSize,xSize));
 		// the coordinates of the simple wall
@@ -65,6 +63,11 @@ public abstract class AbstractShape extends AbstractShapeGeneratorMove
 		{
 			oeLeft(shapeable);
 		}
+		
+		mFinealTower.generateShape(xSize, ySize, zSize, shapeable);
+		mInitialTower.generateShape(0, 0, 0, shapeable);
+		mListOfConstructions.add(mInitialTower);
+		mListOfConstructions.add(mFinealTower);
 
 		if( Math.abs(zSize) >= mFinealTower.getSpaceToLimit() || Math.abs(xSize) > mFinealTower.getSpaceToLimit())
 			wallParts(ySize, initX, initZ, finX, finZ, mWall, mFancyWall, shapeable);
@@ -101,6 +104,7 @@ public abstract class AbstractShape extends AbstractShapeGeneratorMove
 	{
 		ArrayList<BlockRepresentation> objectList = new ArrayList<BlockRepresentation>();
 		for(IShapeGenenratorMove construction : mListOfConstructions)
+			
 			objectList.addAll(construction.fillConditions(entityPos));
 		
 		return objectList;
@@ -114,7 +118,7 @@ public abstract class AbstractShape extends AbstractShapeGeneratorMove
 
 
 	@Override
-	public Block getBlockToConstruct() 
+	public int getBlockToConstruct() 
 	{
 		return mFinealTower.getBlockToConstruct();
 	}

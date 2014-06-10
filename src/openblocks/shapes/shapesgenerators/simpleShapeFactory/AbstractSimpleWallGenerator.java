@@ -62,9 +62,9 @@ public abstract class AbstractSimpleWallGenerator extends AbstractShapeGenerator
 	}
 
 	@Override
-	public Block getBlockToConstruct() 
+	public int getBlockToConstruct() 
 	{
-		return null;
+		return 0;
 	}
 	
 

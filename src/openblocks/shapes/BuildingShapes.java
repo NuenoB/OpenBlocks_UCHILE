@@ -3,13 +3,15 @@ package openblocks.shapes;
 import net.minecraft.util.StatCollector;
 import openblocks.shapes.shapesgenerators.BridgShapeGenerator;
 import openblocks.shapes.shapesgenerators.IShapeGenenratorMove;
+import openblocks.shapes.shapesgenerators.SubwayShapeGenerator;
 import openblocks.shapes.shapesgenerators.WallShapeGenerator;
 import openmods.shapes.IShapeGenerator;
  
 	
 public enum BuildingShapes{
 	Wall(false, new WallShapeGenerator(), "wall"),
-	Bridge(false, new BridgShapeGenerator(), "bridge");
+	Bridge(false, new BridgShapeGenerator(), "bridge"),
+	Subway(false, new SubwayShapeGenerator(), "subway");
 	
 	
 	public final String unlocalizedName;

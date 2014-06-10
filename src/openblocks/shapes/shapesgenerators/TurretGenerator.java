@@ -50,9 +50,9 @@ public class TurretGenerator extends AbstractShapeGeneratorMove {
 	}
 
 	@Override
-	public Block getBlockToConstruct() 
+	public int getBlockToConstruct() 
 	{
-		return Block.stoneBrick;
+		return Block.stoneBrick.blockID;
 	}
 
 	@Override

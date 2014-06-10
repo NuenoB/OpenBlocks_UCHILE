@@ -11,7 +11,7 @@ public interface IShapeGenenratorMove extends IShapeGen
 	public int getSpaceToLimit();
 	public int getSpaceToTop();
 	
-	public Block getBlockToConstruct();
+	public int getBlockToConstruct();
 	public void setBlockAux(int xSize, int ySize, int zSize, int y, int z, IShapeable shapeable);
 	
 

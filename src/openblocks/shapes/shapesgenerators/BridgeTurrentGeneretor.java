@@ -19,9 +19,9 @@ public class BridgeTurrentGeneretor extends AbstractShapeGeneratorMove
 	}
 
 	@Override
-	public Block getBlockToConstruct() 
+	public int getBlockToConstruct() 
 	{
-		return Block.wood;
+		return Block.wood.blockID;
 	}
 
 	@Override
