@@ -30,7 +30,7 @@ public abstract class EntityStats {
 		return enemy.beingDamaged(this.getDMGType(), this.getATK(), this.getSPD());
 	}
 	
-	public final double beingDamaged(DamageType type, float baseDMG, int enemySPD) {
+	public double beingDamaged(DamageType type, float baseDMG, int enemySPD) {
 		// calculo de evasion
 		double avo = (enemySPD-this.getSPD())/100.0;
 		if (avo > (new Random()).nextGaussian()) {
