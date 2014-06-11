@@ -22,7 +22,6 @@ import openblocks.shapes.BlockRepresentation;
 
 public abstract class AbstractUpgradeBlock extends OpenBlock {
 	
-	protected ArrayList<BlockRepresentation> upgradeList;
 	protected int metadata;
 	
 	public static class Icons {
@@ -30,10 +29,9 @@ public abstract class AbstractUpgradeBlock extends OpenBlock {
 		public static Icon side;
 	}
 
-	protected AbstractUpgradeBlock(int id, int metadata, int dx, int dy, int dz) {
+	protected AbstractUpgradeBlock(int id, int metadata) {
 		super(id, Material.ground);
 		this.metadata=metadata;
-		this.upgradeList=getList(new ChunkCoordinates(dx, dy, dz));
 	}
 	
 	@Override
@@ -70,8 +68,12 @@ public abstract class AbstractUpgradeBlock extends OpenBlock {
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ){
 		if(world.getBlockId(x, y-1, z)==Blocks.canbeupgradedblock.blockID){// &&
 				//world.getBlockMetadata(x, y-1, z)==metadata){
-			
-			for(BlockRepresentation b : upgradeList){
+			System.out.println("x: "+x);
+			System.out.println("y: "+y);
+			System.out.println("z: "+z);
+			for(BlockRepresentation b : getList(setDeltas())){
+				int xx = b.getCoord().posX+x;
+				System.out.println("nx= "+ xx);
 				world.setBlock(b.getCoord().posX+x, b.getCoord().posY+y, b.getCoord().posZ+z, b.getBlockId(), b.getMetaData(), 2);
 			}
 			world.destroyBlock(x, y, z, false);
@@ -88,5 +90,7 @@ public abstract class AbstractUpgradeBlock extends OpenBlock {
 	public abstract ArrayList<BlockRepresentation> getList(ChunkCoordinates entityPos);
 	
 	public abstract void setRecipe(List<IRecipe> recipeList);
+	
+	public abstract ChunkCoordinates setDeltas();
 
 }
