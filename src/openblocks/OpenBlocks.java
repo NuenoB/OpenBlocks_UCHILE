@@ -481,7 +481,9 @@ public class OpenBlocks {
 		HolyPigRegister.setInfo(EntityHolyPig.class, "HolyPig", "Holy Pig");
 		HolyPigRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
 						
-				
+		IEntityRegister TreeRegister = USEntityRegister.getInstance();
+		HolyPigRegister.setInfo(EntityAttackingTree.class, "AttackingTree", "Attacking Tree");
+		HolyPigRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));		
 		
 		if (Config.enableChangelogBooks) changeLog = ChangelogBuilder.createChangeLog();
 
