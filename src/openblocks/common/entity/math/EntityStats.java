@@ -1,5 +1,7 @@
 package openblocks.common.entity.math;
 
+import java.util.LinkedList;
+
 import net.minecraft.entity.EntityLivingBase;
 
 public abstract class EntityStats{
@@ -12,6 +14,7 @@ public abstract class EntityStats{
 	protected int magicPoints;
 	protected int speed;
 	public EntityLivingBase entity;
+	public LinkedList<Integer> Skills;
 	
 	public abstract float getMaxHP();
 	public abstract int getMaxMP();

@@ -45,7 +45,6 @@ public class GuiBattle extends GuiScreen {
 	{
 		this.battleID = battleID;
 		this.player = player;
-		player.ready = true;
 
 		combatants = new TreeMap<Integer,EntityStats>();
 		updateTick = updateWaitTime;
@@ -81,7 +80,7 @@ public class GuiBattle extends GuiScreen {
 		{
 			EntityStats combatant = combatants.get(entityID);
 			if(combatant != null)
-				combatant.updateHealth(health);
+				health= combatant.getHP();
 		}
 	}
 
@@ -134,7 +133,6 @@ public class GuiBattle extends GuiScreen {
 		updateTick--;
 		if(updateTick==0)
 		{
-			PacketDispatcher.sendPacketToServer(new BattleQueryPacket(battleID,(short) 0).makePacket());
 			updateTick = updateWaitTime;
 		}
 	}
@@ -147,7 +145,7 @@ public class GuiBattle extends GuiScreen {
 		int x, y1 = height/5, y2 = height/5;
 		for(EntityStats combatant : combatants.values())
 		{
-			if(combatant.isPlayer)
+			if(combatant instanceof PlayerStats)
 			{
 				y1 += nameHeightInterval;
 				x = width/8;
@@ -181,10 +179,10 @@ public class GuiBattle extends GuiScreen {
 			if(!combatantButtonPopulated)
 			{
 				if (useSkill){
-					buttonList.add(new EntitySelectionButton(6, combatant.getId(), x - nameLength/2, y, nameLength + 2, 8, combatant.name()));
+					buttonList.add(new EntitySelectionButton(6, x - nameLength/2, y, nameLength + 2, 8, combatant.name(), combatant));
 				}
 				else{
-					buttonList.add(new EntitySelectionButton(5, combatant.getId(), x - nameLength/2, y, nameLength + 2, 8, combatant.name()));
+					buttonList.add(new EntitySelectionButton(5, x - nameLength/2, y, nameLength + 2, 8, combatant.name(), combatant));
 				}
 			}
 		}
@@ -241,7 +239,7 @@ public class GuiBattle extends GuiScreen {
 		case 4: //Skill menu
 			info[0] = "Pick a skill!";
 			int i=0;
-			while(player.Skills.hasNext()) //Changed weapons to skills.
+			while(!player.Skills.isEmpty()) //Changed weapons to skills.
 			{
 				buttonList.add(new GuiButton(6, width/2 - 88 + i * 20, height - 19, ""));
 				i++;
@@ -289,7 +287,7 @@ public class GuiBattle extends GuiScreen {
 
 		if(button.id == 5) //Attack phase
 		{
-			EntityStats target = ((EntitySelectionButton)button).entityID;
+			EntityStats target = ((EntitySelectionButton)button).getEntityID();
 			player.attackTo(target);
 			currentBattle.setNextTurn(true);
 		}
