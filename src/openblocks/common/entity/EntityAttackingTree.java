@@ -1,14 +1,15 @@
 package openblocks.common.entity;
 
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 public class EntityAttackingTree extends EntityMob {
 	
 	public EntityAttackingTree(World par1World) {
 		super(par1World);
-		par1World.setBlock(super.chunkCoordX+1, super.chunkCoordY+1,super.chunkCoordZ+1, 2546);
-		
+		par1World.setBlock(super.chunkCoordX+2, super.chunkCoordY+2,super.chunkCoordZ+2, 2546);
+
 	}
 	
 	 /**
@@ -21,5 +22,24 @@ public class EntityAttackingTree extends EntityMob {
     }
 	
 	
+	@Override
+	public boolean isInvisible()
+    {
+        return true;
+    }
+	
+	public void setInvisible(boolean par1)
+    {
+        this.setFlag(5, true);
+    }
+	@Override
+	public boolean isInvisibleToPlayer(EntityPlayer par1EntityPlayer)
+    {
+        return true;
+    }
+	
+	
+	@Override
+	public void onLivingUpdate(){}
 
 }
