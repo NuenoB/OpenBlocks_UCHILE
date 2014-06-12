@@ -68,12 +68,8 @@ public abstract class AbstractUpgradeBlock extends OpenBlock {
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ){
 		if(world.getBlockId(x, y-1, z)==Blocks.canbeupgradedblock.blockID){// &&
 				//world.getBlockMetadata(x, y-1, z)==metadata){
-			System.out.println("x: "+x);
-			System.out.println("y: "+y);
-			System.out.println("z: "+z);
+
 			for(BlockRepresentation b : getList(setDeltas())){
-				int xx = b.getCoord().posX+x;
-				System.out.println("nx= "+ xx);
 				world.setBlock(b.getCoord().posX+x, b.getCoord().posY+y, b.getCoord().posZ+z, b.getBlockId(), b.getMetaData(), 2);
 			}
 			world.destroyBlock(x, y, z, false);

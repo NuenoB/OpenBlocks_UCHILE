@@ -22,10 +22,10 @@ public class WellUpgradeBlock extends AbstractUpgradeBlock {
 
 	public WellUpgradeBlock() {
 		super(Config.blockWellUpgrade, 1);
-		this.x0=-6;
-		this.z0=-6;
-		this.x1=6;
-		this.z1=6;
+		this.x0=-12;
+		this.z0=-12;
+		this.x1=13;
+		this.z1=13;
 		this.y=2;
 		// TODO Auto-generated constructor stub
 	}
@@ -78,24 +78,33 @@ public class WellUpgradeBlock extends AbstractUpgradeBlock {
 			for(int b = z0-1;b<=z1+1;b++){
 				for(a=x0-1;a<=x0+1;a++){
 					array.add(new BlockRepresentation(a+entityPos.posX, entityPos.posY-(y+1), b+entityPos.posZ, Block.stoneBrick.blockID));
-					array.add(new BlockRepresentation(a+entityPos.posX, entityPos.posY-h, b+entityPos.posZ, Block.waterStill.blockID));
+					array.add(new BlockRepresentation(a+entityPos.posX, entityPos.posY-h, b+entityPos.posZ, Block.lavaStill.blockID));
 				}
 				for(a=x1-1;a<=x1+1;a++){
 					array.add(new BlockRepresentation(a+entityPos.posX, entityPos.posY-(y+1), b+entityPos.posZ, Block.stoneBrick.blockID));
-					array.add(new BlockRepresentation(a+entityPos.posX, entityPos.posY-h, b+entityPos.posZ, Block.waterStill.blockID));
+					array.add(new BlockRepresentation(a+entityPos.posX, entityPos.posY-h, b+entityPos.posZ, Block.lavaStill.blockID));
 				}				
 			}
 			
 			for(int b = x0+1;b<=x1-1;b++){
 				for(a=z0-1;a<=z0+1;a++){
 					array.add(new BlockRepresentation(b+entityPos.posX, entityPos.posY-(y+1), a+entityPos.posZ, Block.stoneBrick.blockID));
-					array.add(new BlockRepresentation(b+entityPos.posX, entityPos.posY-h, a+entityPos.posZ, Block.waterStill.blockID));
+					array.add(new BlockRepresentation(b+entityPos.posX, entityPos.posY-h, a+entityPos.posZ, Block.lavaStill.blockID));
 				}
 				for(a=z1-1;a<=z1+1;a++){
 					array.add(new BlockRepresentation(b+entityPos.posX, entityPos.posY-(y+1), a+entityPos.posZ, Block.stoneBrick.blockID));
-					array.add(new BlockRepresentation(b+entityPos.posX, entityPos.posY-h, a+entityPos.posZ, Block.waterStill.blockID));					
+					array.add(new BlockRepresentation(b+entityPos.posX, entityPos.posY-h, a+entityPos.posZ, Block.lavaStill.blockID));					
 				}				
 			}
+			
+			//Puente
+			array.add(new BlockRepresentation(entityPos.posX+((x0+x1)/2), entityPos.posY-h, entityPos.posZ+z0+1, Block.stoneBrick.blockID));
+			array.add(new BlockRepresentation(entityPos.posX+((x0+x1)/2), entityPos.posY-h, entityPos.posZ+z0, Block.stoneBrick.blockID));
+			array.add(new BlockRepresentation(entityPos.posX+((x0+x1)/2), entityPos.posY-h, entityPos.posZ+z0-1, Block.stoneBrick.blockID));
+			
+			array.add(new BlockRepresentation(entityPos.posX+((x0+x1)/2)+1, entityPos.posY-h, entityPos.posZ+z0+1, Block.stoneBrick.blockID));
+			array.add(new BlockRepresentation(entityPos.posX+((x0+x1)/2)+1, entityPos.posY-h, entityPos.posZ+z0, Block.stoneBrick.blockID));
+			array.add(new BlockRepresentation(entityPos.posX+((x0+x1)/2)+1, entityPos.posY-h, entityPos.posZ+z0-1, Block.stoneBrick.blockID));
 			
 		}
 		
@@ -110,7 +119,7 @@ public class WellUpgradeBlock extends AbstractUpgradeBlock {
 
 	@Override
 	public ChunkCoordinates setDeltas() {
-		return new ChunkCoordinates(0,-1,0);
+		return new ChunkCoordinates(0,-9,0);
 	}
 
 }

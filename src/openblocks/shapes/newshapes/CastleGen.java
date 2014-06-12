@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
+import openblocks.OpenBlocks.Blocks;
 import openblocks.shapes.AShape;
 import openblocks.shapes.BlockRepresentation;
 import openblocks.shapes.IShapeGen;
@@ -54,7 +55,8 @@ public class CastleGen extends AShape {
 		array.addAll(tower2.fill(entityPos, worldObj));
 		array.addAll(tower3.fill(entityPos, worldObj));
 		array.addAll(tower4.fill(entityPos, worldObj));
-		array.addAll(roofRoom.fill(entityPos, worldObj));	
+		array.addAll(roofRoom.fill(entityPos, worldObj));
+		worldObj.setBlock(entityPos.posX, entityPos.posY+8, entityPos.posZ, Blocks.canbeupgradedblock.blockID);
 		
 		
 		//entradas para los torreones
