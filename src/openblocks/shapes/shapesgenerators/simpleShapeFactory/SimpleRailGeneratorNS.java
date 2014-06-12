@@ -31,18 +31,85 @@ public class SimpleRailGeneratorNS extends AbstractSimpleHoleGenerator{
 		oList.add(new BlockRepresentation(entityPos.posX + moriginX ,
 										  entityPos.posY + moriginY - holeHeight, 
 										  entityPos.posZ + moriginZ + holeDepth, 
-										  Block.rail.blockID, 
+										  getRailId(), 
 										  0x0,
 										  0));
 		oList.add(new BlockRepresentation(entityPos.posX + moriginX ,
 										  entityPos.posY + moriginY - holeHeight, 
 										  entityPos.posZ + moriginZ - holeDepth, 
-										  Block.rail.blockID, 
+										  getRailId(), 
 										  0x0,
 										  0));
+		
+		for(int cont = -1; cont <= hight;cont++){
+			oList.add(new BlockRepresentation(
+					  entityPos.posX + moriginX ,
+					  entityPos.posY + moriginY - holeHeight + cont, 
+					  entityPos.posZ + moriginZ + holeDepth + 1, 
+					  getWallId(), 
+					  0x0,
+					  0));
+			oList.add(new BlockRepresentation(
+					  entityPos.posX + moriginX ,
+					  entityPos.posY + moriginY - holeHeight + cont, 
+					  entityPos.posZ + moriginZ - holeDepth - 1, 
+					  getWallId(), 
+					  0x0,
+					  0));
+		}
+		
+		for(int cont = -holeDepth; cont <= holeDepth; cont++){
+			oList.add(new BlockRepresentation(
+					  entityPos.posX + moriginX ,
+					  entityPos.posY + moriginY - holeHeight + hight, 
+					  entityPos.posZ + moriginZ + cont, 
+					  getWallId(), 
+					  0x0,
+					  0));
+		}
+		
+		oList.add(new BlockRepresentation(entityPos.posX + moriginX ,
+				  entityPos.posY + moriginY - holeHeight - 1, 
+				  entityPos.posZ + moriginZ + holeDepth, 
+				  getUnderRailId(), 
+				  0x0,
+				  0));
+
+		oList.add(new BlockRepresentation(entityPos.posX + moriginX ,
+			  	  entityPos.posY + moriginY - holeHeight - 1, 
+			  	  entityPos.posZ + moriginZ - holeDepth, 
+			  	  getUnderRailId(), 
+			  	  0x0,
+			  	  0));
+		oList.add(new BlockRepresentation(entityPos.posX + moriginX ,
+				  entityPos.posY + moriginY - holeHeight - 1, 
+				  entityPos.posZ + moriginZ + holeDepth - 1, 
+				  getWallId(), 
+				  0x0,
+				  0));
+
+		oList.add(new BlockRepresentation(entityPos.posX + moriginX ,
+			  	  entityPos.posY + moriginY - holeHeight - 1, 
+			  	  entityPos.posZ + moriginZ - holeDepth + 1, 
+			  	  getWallId(), 
+			  	  0x0,
+			  	  0));
+
 		return oList;
 		
 		
+	}
+	
+	protected int getRailId(){
+		return Block.rail.blockID;
+	}
+	
+	protected int getWallId(){
+		return Block.brick.blockID;
+	}
+	
+	protected int getUnderRailId(){
+		return getWallId();
 	}
 	
 

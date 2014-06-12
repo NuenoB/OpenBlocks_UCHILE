@@ -1,6 +1,7 @@
 package openblocks.shapes.shapesgenerators;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.ChunkCoordinates;
@@ -17,34 +18,44 @@ public abstract class AbstractShape extends AbstractShapeGeneratorMove
 {
 	protected IShapeGenenratorMove mFinealTower;
 	protected IShapeGenenratorMove mInitialTower;
-	protected IFactorySimpleShapeGeneratorXX mWall;
-	protected IFactorySimpleShapeGeneratorXX mFancyWall;
+	protected IShapeGenenratorMove mMiddleTower;
+	protected List <IFactorySimpleShapeGeneratorXX> mWall;
+
 	protected ArrayList<IShapeGenenratorMove> mListOfConstructions;
 	//this value defines in which side of the tower the wall begins;
 	protected double mAngleBetweenTower;
 	
+	protected int minitX = 0, minitY = 0, minitZ = 0;
 	protected int initX, initY, initZ;
 	protected int finX, finY, finZ;
+	protected int midX,midY,midZ;
 	
 	protected Block mMaterialToBuild;
+	
+	public void setRelativeOrigin(int x, int y, int z){
+		minitX = x;
+		minitY = y;
+		minitZ = z;
+	}
 	
 	@Override
 	public void generateShape(int xSize, int ySize, int zSize, IShapeable shapeable) 
 	{				
 		//the two turret are define
 		mListOfConstructions = new ArrayList<IShapeGenenratorMove>();
+		mWall = new ArrayList <IFactorySimpleShapeGeneratorXX>();
 		
 		turents();
 		
 		// the angle that forms the distance vetor between them and the x axis, and set the values between pi/2 and -pi/2
 		mAngleBetweenTower = angleBetweenm180p180(Math.atan2(zSize,xSize));
 		// the coordinates of the simple wall
-		initX = 0;
-		initZ = 0;
-		initY = 0;
-		finX = xSize;
-		finY = ySize;
-		finZ = zSize;
+		initX = 0 + minitX;
+		initZ = 0 + minitZ;
+		initY = 0 + minitY;
+		finX = xSize + minitX;
+		finY = ySize + minitY;
+		finZ = zSize + minitZ;
 		
 		// the orientation of the wall
 		if(Math.abs(mAngleBetweenTower) <= Math.PI/4 )
@@ -64,13 +75,13 @@ public abstract class AbstractShape extends AbstractShapeGeneratorMove
 			oeLeft(shapeable);
 		}
 		
-		mFinealTower.generateShape(xSize, ySize, zSize, shapeable);
+		mFinealTower.generateShape(xSize + minitX, ySize + minitY, zSize + minitZ, shapeable);
 		mInitialTower.generateShape(0, 0, 0, shapeable);
 		mListOfConstructions.add(mInitialTower);
 		mListOfConstructions.add(mFinealTower);
 
 		if( Math.abs(zSize) >= mFinealTower.getSpaceToLimit() || Math.abs(xSize) > mFinealTower.getSpaceToLimit())
-			wallParts(ySize, initX, initZ, finX, finZ, mWall, mFancyWall, shapeable);
+			wallParts(ySize, initX, initZ, finX, finZ, mWall, shapeable);
 		
 	}
 	
@@ -123,12 +134,13 @@ public abstract class AbstractShape extends AbstractShapeGeneratorMove
 		return mFinealTower.getBlockToConstruct();
 	}
 
-	protected void wallParts(int y, int x0, int z0, int x1, int z1, IFactorySimpleShapeGeneratorXX wall, IFactorySimpleShapeGeneratorXX fancyWall,IShapeable shapeable) 
+	protected void wallParts(int y, int x0, int z0, int x1, int z1, List <IFactorySimpleShapeGeneratorXX> wall,IShapeable shapeable) 
 	{
 		int dx = Math.abs(x1 - x0), sx = x0 < x1? 1 : -1;
 		int dy = -Math.abs(z1 - z0), sy = z0 < z1? 1 : -1;
 		int err = dx + dy, e2;
-		IShapeGenenratorMove drawMe = wall.generateAWall();
+		int selectOne = 0;
+		IShapeGenenratorMove drawMe = wall.get(selectOne).generateAWall();
 		
 		int cambio = 1;
 
@@ -146,10 +158,9 @@ public abstract class AbstractShape extends AbstractShapeGeneratorMove
 				z0 += sy;
 			} /* e_xy+e_y < 0 */
 			cambio*=-1;
-			if(cambio > 0)
-				drawMe = wall.generateAWall();
-			else
-				drawMe = fancyWall.generateAWall();
+			selectOne = (selectOne + 1) % wall.size();
+			drawMe = wall.get(selectOne).generateAWall();
+			
 		}
 	}
 

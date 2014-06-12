@@ -35,8 +35,7 @@ public class BridgShapeGenerator extends AbstractShape
 	{
 		initX-= mFinealTower.getSpaceToLimit();
 		finX += mFinealTower.getSpaceToLimit();
-		mWall = new FactorySimpleBridgeGeneratorNS();
-		mFancyWall = new FactorySimpleBridgeGeneratorNS();
+		mWall.add(new FactorySimpleBridgeGeneratorNS());
 		for(int cont = -1; cont <= 1; cont++)
 		{
 			shapeable.setBlock( initX + 1, initY + 1, initZ + cont);
@@ -49,8 +48,7 @@ public class BridgShapeGenerator extends AbstractShape
 	{
 		initZ-= mFinealTower.getSpaceToLimit();
 		finZ += mFinealTower.getSpaceToLimit();
-		mWall = new FactorySimpleBridgeGeneratorOE();
-		mFancyWall = new FactorySimpleBridgeGeneratorOE();
+		mWall.add(new FactorySimpleBridgeGeneratorOE());
 		for(int cont = -1; cont <= 1; cont++)
 		{
 			shapeable.setBlock( initX + cont, initY + 1, initZ + 1);
@@ -63,8 +61,7 @@ public class BridgShapeGenerator extends AbstractShape
 	{
 		initX+= mFinealTower.getSpaceToLimit();
 		finX -= mFinealTower.getSpaceToLimit();
-		mWall = new FactorySimpleBridgeGeneratorNS();
-		mFancyWall = new FactorySimpleBridgeGeneratorNS();
+		mWall.add(new FactorySimpleBridgeGeneratorNS());
 		for(int cont = -1; cont <= 1; cont++)
 		{
 			shapeable.setBlock( initX - 1, initY + 1, initZ + cont);
@@ -77,8 +74,7 @@ public class BridgShapeGenerator extends AbstractShape
 	{
 		initZ+= mFinealTower.getSpaceToLimit();
 		finZ -= mFinealTower.getSpaceToLimit();
-		mWall = new FactorySimpleBridgeGeneratorOE();
-		mFancyWall = new FactorySimpleBridgeGeneratorOE();
+		mWall.add(new FactorySimpleBridgeGeneratorOE());
 		for(int cont = -1; cont <= 1; cont++)
 		{
 			shapeable.setBlock( initX + cont, initY + 1, initZ - 1);

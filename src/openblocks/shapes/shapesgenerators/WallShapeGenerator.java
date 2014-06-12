@@ -30,8 +30,8 @@ public class WallShapeGenerator extends AbstractShape
 	{
 		initX+= -3;
 		finX += 4;
-		mWall = new FactorySimpleWallGeneratorNS();
-		mFancyWall = new FactorySimpleWallGeneratorNSFancy();
+		mWall.add(new FactorySimpleWallGeneratorNS());
+		mWall.add(new FactorySimpleWallGeneratorNSFancy());
 	}
 
 	@Override
@@ -39,8 +39,8 @@ public class WallShapeGenerator extends AbstractShape
 	{
 		initZ+=-2;
 		finZ += 5;
-		mWall = new FactorySimpleWallGeneratorOE();
-		mFancyWall = new FactorySimpleWallGeneratorOEFancy();
+		mWall.add(new FactorySimpleWallGeneratorOE());
+		mWall.add(new FactorySimpleWallGeneratorOEFancy());
 	}
 
 	@Override
@@ -48,8 +48,8 @@ public class WallShapeGenerator extends AbstractShape
 	{
 		initX+= 4;
 		finX +=-3;
-		mWall = new FactorySimpleWallGeneratorNS();
-		mFancyWall = new FactorySimpleWallGeneratorNSFancy();
+		mWall.add(new FactorySimpleWallGeneratorNS());
+		mWall.add(new FactorySimpleWallGeneratorNSFancy());
 	}
 
 	@Override
@@ -57,8 +57,8 @@ public class WallShapeGenerator extends AbstractShape
 	{
 		initZ+= 5;
 		finZ +=-2;
-		mWall = new FactorySimpleWallGeneratorOE();
-		mFancyWall = new FactorySimpleWallGeneratorOEFancy();
+		mWall.add(new FactorySimpleWallGeneratorOE());
+		mWall.add(new FactorySimpleWallGeneratorOEFancy());
 	}
 
 	@Override

@@ -34,7 +34,6 @@ public class HoleStationShapeGenerator extends AbstractShapeGeneratorMove{
 	@Override
 	public void setBlockAux(int xSize, int ySize, int zSize, int y, int z,
 			IShapeable shapeable) {
-		// TODO Auto-generated method stub
 		
 	}
 
