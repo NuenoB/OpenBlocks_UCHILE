@@ -4,11 +4,14 @@ import java.io.File;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.command.ICommandManager;
+import net.minecraft.command.ServerCommandManager;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.stats.Achievement;
 import net.minecraft.stats.StatBase;
 import net.minecraft.stats.StatBasic;
@@ -17,6 +20,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.*;
 import openblocks.api.FlimFlamRegistry;
 import openblocks.client.radio.RadioManager;
+import openblocks.command.StatsCommand;
 import openblocks.common.*;
 import openblocks.common.block.*;
 import openblocks.common.entity.*;
@@ -528,6 +532,10 @@ public class OpenBlocks {
 	public void severStart(FMLServerStartingEvent evt) {
 		evt.registerServerCommand(new CommandFlimFlam());
 		evt.registerServerCommand(new CommandLuck());
+		MinecraftServer server = MinecraftServer.getServer();
+		ICommandManager command = server.getCommandManager();
+		ServerCommandManager manager = (ServerCommandManager) command;
+		manager.registerCommand(new StatsCommand());
 	}
 
 	public static String getModId() {
