@@ -17,6 +17,10 @@ public class PlayerStats extends EntityStats {
 		magicPoints = this.getMaxMP();
 	}
 
+	public int getLV() {
+		return player.experienceLevel;
+	}
+	
 	@Override
 	public float getMaxHP() {
 		int increment = 2*player.experienceLevel/2;
@@ -83,11 +87,6 @@ public class PlayerStats extends EntityStats {
 	}
 	
 	@Override
-	public DamageType getDMGType() {
-		//TODO agregar valor del arma
-		return DamageType.PHYSICAL;
-	}
-	
 	public EntityLivingBase getEntity() {
 		return player;
 	}
