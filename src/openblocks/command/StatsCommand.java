@@ -9,22 +9,25 @@ import net.minecraft.entity.player.EntityPlayer;
 public class StatsCommand extends CommandBase{
 
 	@Override
+	//En este metodo se asigna el nombre del comando. El comando se llama con /(nombre del comando)
 	public String getCommandName() {
 		return "stats";
 	}
 
 	@Override
+	//Este metodo entrega la descripcion del comando cuando se escribe /help (nombre del comando)
 	public String getCommandUsage(ICommandSender icommandsender) {
 		return "stats actuales del personaje";
 	}
 
 	@Override
+	//Este metodo realiza las acciones del metodo.
 	public void processCommand(ICommandSender icommandsender, String[] astring) {
 		if(icommandsender instanceof EntityPlayer){
 			EntityPlayer player=(EntityPlayer) icommandsender;
 			PlayerStats stats=new PlayerStats(player);
 			player.addChatMessage("Player stats:");
-			player.addChatMessage("Bonus Damage: "+stats.getATK());
+			player.addChatMessage("Attack: "+stats.getATK());
 			player.addChatMessage("Defense: "+stats.getDEF());
 			player.addChatMessage("Magic: "+stats.getMAG());
 			player.addChatMessage("Resistance: "+stats.getRES());
@@ -32,9 +35,11 @@ public class StatsCommand extends CommandBase{
 		}
 	}
 
+	
 	@Override
+	//metodo necesario para extender CommandBase que compara el nombre del comando con el nombre
+	//del comando recibido
 	public int compareTo(Object o) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
