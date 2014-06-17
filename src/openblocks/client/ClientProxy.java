@@ -29,6 +29,7 @@ import openblocks.client.renderer.item.*;
 import openblocks.client.renderer.tileentity.*;
 import openblocks.common.entity.*;
 import openblocks.common.tileentity.*;
+import openblocks.common.entity.math.*;
 import openmods.binding.KeyDispatcherBuilder;
 import openmods.entity.EntityBlock;
 import openmods.entity.renderer.EntityBlockRenderer;
@@ -195,6 +196,12 @@ public class ClientProxy implements IOpenBlocksProxy {
 	public void spawnLiquidSpray(World worldObj, FluidStack water, double x, double y, double z, float scale, float gravity, Vec3 vec) {
 		FXLiquidSpray spray = new FXLiquidSpray(worldObj, water, x, y, z, scale, gravity, vec);
 		Minecraft.getMinecraft().effectRenderer.addEffect(spray);
+	}
+	
+	public void newGui(int battleID, EntityStats player)
+	{
+		GuiBattle bg = new GuiBattle();
+		Minecraft.getMinecraft().displayGuiScreen(bg);
 	}
 
 	@Override

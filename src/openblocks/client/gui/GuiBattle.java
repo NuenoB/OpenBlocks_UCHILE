@@ -41,7 +41,7 @@ public class GuiBattle extends GuiScreen {
 	private final int nameHeightInterval = 14;
 	private boolean useSkill= false;
 
-	public void BattleGui(int battleID, EntityStats player)
+	public GuiBattle()
 	{
 		this.battleID = battleID;
 		this.player = player;
