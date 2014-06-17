@@ -9,7 +9,6 @@ public class BattleCombatantPacket extends BattlePacket {
 
 	@Override
 	public void write(ByteArrayDataOutput out) {
-		// TODO Auto-generated method stub
 		
 	}
 
