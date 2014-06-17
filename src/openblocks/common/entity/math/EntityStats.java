@@ -16,7 +16,6 @@ public abstract class EntityStats {
 	public abstract float getMAG();
 	public abstract float getRES();
 	public abstract int getSPD();
-	public abstract DamageType getDMGType();
 	
 	public float getHP() {
 		return hitPoints;
@@ -26,8 +25,13 @@ public abstract class EntityStats {
 		return magicPoints;
 	}
 	
-	public final double attackTo(EntityStats enemy) {
-		return enemy.beingDamaged(this.getDMGType(), this.getATK(), this.getSPD());
+	public final double attackTo(EntityStats enemy, DamageType type) {
+		switch (type) {
+		case FIRE:
+			return enemy.beingDamaged(type, this.getMAG(), this.getSPD());
+		default:
+			return enemy.beingDamaged(type, this.getATK(), this.getSPD());
+		}
 	}
 	
 	public double beingDamaged(DamageType type, float baseDMG, int enemySPD) {

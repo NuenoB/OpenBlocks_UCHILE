@@ -62,9 +62,4 @@ public class MobStats extends EntityStats {
 		return mob;
 	}
 
-	@Override
-	public DamageType getDMGType() {
-		return DamageType.PHYSICAL;
-	}
-
 }
