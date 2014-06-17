@@ -1,10 +1,14 @@
 package openblocks.common.entity;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.world.World;
 
-public class EntityAttackingTree extends EntityMob {
+public class EntityAttackingTree extends EntityMob implements IRangedAttackMob{
 	
 	public EntityAttackingTree(World par1World) {
 		super(par1World);
@@ -41,5 +45,26 @@ public class EntityAttackingTree extends EntityMob {
 	
 	@Override
 	public void onLivingUpdate(){}
+	
 
+	@Override 
+	public boolean attackEntityAsMob(Entity enemy){
+		Entity en = this.findPlayerToAttack();
+		double enemyX=en.posX;
+		double enemyY=en.posY;
+		double enemyZ=en.posZ;
+		
+		return true;}
+
+	@Override
+	public void attackEntityWithRangedAttack(EntityLivingBase enemy,
+			float f) {
+		double directionX = enemy.posX + enemy.motionX - this.posX;
+        double directionY = enemy.posY + enemy.motionY - this.posY;
+        double directionZ = enemy.posZ + enemy.motionZ - this.posZ;
+		EntityLargeFireball fireball = new EntityLargeFireball(this.worldObj, this, directionX, directionY, directionZ);
+		
+		
+		this.worldObj.spawnEntityInWorld(fireball);
+	}
 }
