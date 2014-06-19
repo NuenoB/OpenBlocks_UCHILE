@@ -11,7 +11,6 @@ import openblocks.OpenBlocks;
 import openblocks.Battle.Battle;
 import openblocks.common.container.ContainerAutoEnchantmentTable;
 import openblocks.common.entity.math.*;
-import openblocks.common.entity.math.EntityStats.Action;
 import openblocks.common.skills.ISkill;
 import openmods.gui.BaseGuiContainer;
 

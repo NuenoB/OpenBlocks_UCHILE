@@ -1,20 +1,14 @@
 package openblocks.common.entity.math;
 
 import java.util.LinkedList;
+import java.util.Random;
 
 import net.minecraft.entity.EntityLivingBase;
 
-public abstract class EntityStats{
-	
-	public enum Action{
-		ATTACK, USE_SKILL, FLEE
-	}
+public abstract class EntityStats {
 	
 	protected float hitPoints;
 	protected int magicPoints;
-	protected int speed;
-	public EntityLivingBase entity;
-	public LinkedList<Integer> Skills;
 	
 	public abstract float getMaxHP();
 	public abstract int getMaxMP();
@@ -23,7 +17,6 @@ public abstract class EntityStats{
 	public abstract float getMAG();
 	public abstract float getRES();
 	public abstract int getSPD();
-	public abstract EntityLivingBase getEntity();
 	
 	public float getHP() {
 		return hitPoints;
@@ -33,9 +26,32 @@ public abstract class EntityStats{
 		return magicPoints;
 	}
 	
-	public abstract void attackTo(EntityStats enemy);
 	
-	public abstract void beingDamaged(DamageType type, float baseDMG);
+	public double beingDamaged(DamageType type, float baseDMG, int enemySPD) {
+		// calculo de evasion
+		double avo = (enemySPD-this.getSPD())/100.0;
+		if (avo > (new Random()).nextGaussian()) {
+			return -1;
+		}
+		// uso de DEF/RES segun tipo de ataque
+		if (type == DamageType.PHYSICAL) {
+			baseDMG -= this.getDEF();
+		}
+		else {
+			baseDMG -= this.getRES();
+		}
+		// calculo daño final
+		baseDMG = baseDMG * (85 + (new Random()).nextInt(16));
+		baseDMG = Math.min(baseDMG, this.hitPoints);
+		// causar daño
+		this.hitPoints -= baseDMG;
+		if (this.hitPoints <= 0) {
+			this.getEntity().setDead();
+		}
+		return baseDMG;
+	}
+	
+	public abstract EntityLivingBase getEntity();
 	
 	public void healHP (float amount) {
 		hitPoints = Math.max(hitPoints+amount, this.getMaxHP());
@@ -44,8 +60,17 @@ public abstract class EntityStats{
 	public void healMP (int amount) {
 		magicPoints = Math.max(magicPoints+amount, this.getMaxMP());
 	}
+	
+	public final double attackTo(EntityStats enemy, DamageType type) {
+		switch (type) {
+		case FIRE:
+			return enemy.beingDamaged(type, this.getMAG(), this.getSPD());
+		default:
+			return enemy.beingDamaged(type, this.getATK(), this.getSPD());
+		}
+	}
+	
 	public String name() {
 		return getEntity().getEntityName();
 	}
-	
 }

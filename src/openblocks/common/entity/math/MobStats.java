@@ -20,6 +20,10 @@ public class MobStats extends EntityStats {
 	
 	public MobStats (Entity enemy) {
 		mob = (EntityMob) enemy;
+	}
+	public MobStats (EntityMob enemy) {
+		mob = enemy;
+		//TODO forma de sacar stats de enemigos
 		hitPoints = this.getMaxHP();
 		magicPoints = this.getMaxMP();
 	}
@@ -57,18 +61,6 @@ public class MobStats extends EntityStats {
 	@Override
 	public int getSPD() {
 		return SPD;
-	}
-
-	@Override
-	public void attackTo(EntityStats enemy) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void beingDamaged(DamageType type, float baseDMG) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
