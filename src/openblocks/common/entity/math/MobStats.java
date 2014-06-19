@@ -1,65 +1,64 @@
 package openblocks.common.entity.math;
 
+import openblocks.common.item.AbstractCuttingWeapon;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
 
 public class MobStats extends EntityStats {
 
 	private EntityMob mob;
-	private float maxHP;
-	private int maxMP;
-	private int ATK;
-	private int MAG;
-	private int DEF;
-	private int RES;
-	private int SPD;
+	private int level;
+	private int factor;
 	
-	
-	public MobStats (EntityMob enemy) {
+	public MobStats (EntityMob enemy, PlayerStats player) {
 		mob = enemy;
-		//TODO forma de sacar stats de enemigos
+		level = player.getLV();
+		factor = (level/5) + 1;
 		hitPoints = this.getMaxHP();
 		magicPoints = this.getMaxMP();
 	}
 	
 	@Override
 	public float getMaxHP() {
-		return maxHP;
+		return factor*7.0F + 3.0F*level;
 	}
-
+	
 	@Override
 	public int getMaxMP() {
-		return maxMP;
+		return level-1;
 	}
-
+	
 	@Override
 	public float getATK() {
-		return ATK;
+		return factor*2.0F + level;
 	}
-
+	
 	@Override
 	public float getDEF() {
-		return DEF;
+		return factor*1.5F + level;
 	}
-
+	
 	@Override
 	public float getMAG() {
-		return MAG;
+		return factor + level;
 	}
-
+	
 	@Override
 	public float getRES() {
-		return RES;
+		return factor*0.5F + level;
 	}
-
+	
 	@Override
 	public int getSPD() {
-		return SPD;
+		return (factor*2 + level);
 	}
-
+	
 	@Override
 	public EntityLivingBase getEntity() {
 		return mob;
 	}
-
+	
 }
