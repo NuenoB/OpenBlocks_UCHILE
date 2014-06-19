@@ -21,6 +21,7 @@ public class BattleThread implements Runnable {
 	PlayerStats player;
 	MobStats mob;
 	ArrayList<EntityStats> battlers;
+	Minecraft minecraft = Minecraft.getMinecraft();
 
 	/* (non-Javadoc)
 	 * @see java.lang.Runnable#run()
@@ -38,8 +39,8 @@ public class BattleThread implements Runnable {
 
 	@Override
 	public synchronized void run() {
-		Battle battle= new Battle(battlers, null);
-		while (Minecraft.getMinecraft().running){
+		Battle battle= new Battle(battlers, minecraft);
+		while (minecraft.running){
 			battle.update();
 			try {
 				Thread.sleep(500);

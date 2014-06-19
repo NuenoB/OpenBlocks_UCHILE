@@ -23,7 +23,6 @@ public class InitiateBattlePacket extends BattlePacket {
 
 	@Override
 	public void read(ByteArrayDataInput in) throws ProtocolException {
-		// TODO Auto-generated method stub
 		
 	}
 

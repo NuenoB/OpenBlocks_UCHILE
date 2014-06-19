@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLiving;
 import openblocks.common.entity.math.*;
 import net.minecraft.world.World;
@@ -13,7 +14,7 @@ public class Battle {
 	private boolean battleEnd;
 	private boolean nextTurn;
 	private ArrayList<EntityStats> battlers;
-	public Battle(ArrayList<EntityStats> ent, World world){
+	public Battle(ArrayList<EntityStats> ent, Minecraft minecraft){
 		for (EntityStats entity : ent){
 			battlers.add(entity);
 		}
