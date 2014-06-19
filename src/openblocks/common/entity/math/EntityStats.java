@@ -28,6 +28,9 @@ public abstract class EntityStats {
 	public final double attackTo(EntityStats enemy, DamageType type) {
 		switch (type) {
 		case FIRE:
+			if (magicPoints <= 0)
+				return -1;
+			this.magicPoints--;
 			return enemy.beingDamaged(type, this.getMAG(), this.getSPD());
 		default:
 			return enemy.beingDamaged(type, this.getATK(), this.getSPD());

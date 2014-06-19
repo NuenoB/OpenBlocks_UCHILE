@@ -23,7 +23,7 @@ public class PlayerStats extends EntityStats {
 	
 	@Override
 	public float getMaxHP() {
-		int increment = 2*player.experienceLevel/2;
+		int increment = 2*player.experienceLevel;
 		return 20.0F + (float)increment;
 	}
 	
