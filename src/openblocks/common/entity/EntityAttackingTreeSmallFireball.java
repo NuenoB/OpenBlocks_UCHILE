@@ -10,7 +10,12 @@ public class EntityAttackingTreeSmallFireball extends AbstractAttackingTree {
 
 	public EntityAttackingTreeSmallFireball(World par1World) {
 		super(par1World);
+	}
+	
+	@Override
+	public boolean attackEntityAsMob(Entity enemy){
 		fireball = new EntitySmallFireball(this.worldObj, this, 1,1,1);
+		return super.attackEntityAsMob(enemy);
 	}
 
 }

@@ -13,11 +13,15 @@ public class EntityAttackingTreeBigFireball extends AbstractAttackingTree{
 	
 	public EntityAttackingTreeBigFireball(World par1World) {
 		super(par1World);
-		fireball = new EntityLargeFireball(this.worldObj, this, 1,1,1);
+		
 
 	}
 	
-
+	@Override
+	public boolean attackEntityAsMob(Entity enemy){
+		fireball = new EntityLargeFireball(this.worldObj, this, 1,1,1);
+		return super.attackEntityAsMob(enemy);
+	}
 	
 	
 }
