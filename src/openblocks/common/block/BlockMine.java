@@ -1,6 +1,7 @@
 package openblocks.common.block;
 
 import openblocks.Config;
+import openblocks.OpenBlocks;
 import openblocks.common.block.BlockGuide.Icons;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -8,10 +9,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public class BlockMine extends OpenBlock{
+public class BlockMine extends AbstractOurBlock{
 
 	public BlockMine() {
-		super(Config.blockMineId, Material.iron);
+		super(Config.blockMineId, Material.iron);		
 	}
 
 	@Override

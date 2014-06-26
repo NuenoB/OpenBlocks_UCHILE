@@ -16,6 +16,8 @@ public class RailIntermedioShapeGenerator extends HoleStationShapeGenerator{
 	final protected int wide   = 2;
 	
 	
+	
+	
 
 	@Override
 	public void generateShape(int xSize, int ySize, int zSize,

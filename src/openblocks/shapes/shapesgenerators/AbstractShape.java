@@ -28,7 +28,7 @@ public abstract class AbstractShape extends AbstractShapeGeneratorMove
 	protected int minitX = 0, minitY = 0, minitZ = 0;
 	protected int initX, initY, initZ;
 	protected int finX, finY, finZ;
-	protected int midX,midY,midZ;
+
 	
 	protected Block mMaterialToBuild;
 	

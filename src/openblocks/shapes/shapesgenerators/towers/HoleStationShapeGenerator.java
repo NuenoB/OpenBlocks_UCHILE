@@ -9,7 +9,7 @@ import openblocks.shapes.BlockRepresentation;
 import openblocks.shapes.shapesgenerators.AbstractShapeGeneratorMove;
 import openmods.shapes.IShapeable;
 
-public class HoleStationShapeGenerator extends AbstractShapeGeneratorMove{
+public abstract class HoleStationShapeGenerator extends AbstractShapeGeneratorMove{
 
 	final protected int height = 6;
 	final protected int wide   = 2;
