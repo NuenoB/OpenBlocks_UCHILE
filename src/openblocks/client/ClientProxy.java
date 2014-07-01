@@ -168,6 +168,9 @@ public class ClientProxy implements IOpenBlocksProxy {
 		if (OpenBlocks.Blocks.elevator != null) {
 			MinecraftForge.EVENT_BUS.register(new ElevatorMovementHandler());
 		}
+		if (OpenBlocks.Items.mpBottle != null){
+			
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -191,7 +194,11 @@ public class ClientProxy implements IOpenBlocksProxy {
 
 	@Override
 	public void setGui(GuiBattle guiBattle) {
+<<<<<<< HEAD
 		// TODO Auto-generated method stub
 		
+=======
+		guiBattle.initGui();	
+>>>>>>> refs/heads/origin/Ritto
 	}
 }
