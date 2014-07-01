@@ -5,6 +5,7 @@ import java.util.List;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.OpenBlocks;
+import openblocks.common.entity.math.EnumBonusEffects;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,6 +20,7 @@ public abstract class AbstractCuttingWeapon extends Item implements CuttingWeapo
 	protected int durability;
 	protected int maxQuantity=1; //Todos los items van a estar a lo mas una vez en el inventario 
 	protected String name;
+	protected EnumBonusEffects effect;
 	
 	/**
 	 * Class Constructor
@@ -74,5 +76,10 @@ public abstract class AbstractCuttingWeapon extends Item implements CuttingWeapo
 	/** Entrega el bonus de ataque que entrega un arma **/
 	public double getBonusDamage(){
 		return damage;
+	}
+	
+	/** Entrega el efecto que afecta la personaje al ocupar el arma **/
+	public EnumBonusEffects getBonusEffect(){
+		return effect;
 	}
 }

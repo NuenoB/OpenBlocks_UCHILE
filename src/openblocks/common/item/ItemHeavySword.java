@@ -1,5 +1,6 @@
 package openblocks.common.item;
 
+import openblocks.common.entity.math.EnumBonusEffects;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -9,6 +10,7 @@ public class ItemHeavySword extends AbstractCuttingWeapon{
 
 	public ItemHeavySword(int id) {
 		super(id,10.5,72000,"heavy_sword");
+		effect= EnumBonusEffects.SLOW;
 	}
 	
 	@Override

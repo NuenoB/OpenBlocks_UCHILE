@@ -31,6 +31,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import openblocks.Config;
 import openblocks.OpenBlocks;
+import openblocks.common.entity.math.EnumBonusEffects;
 import openmods.utils.EnchantmentUtils;
 import openmods.utils.ItemUtils;
 import cpw.mods.fml.relauncher.Side;
@@ -46,6 +47,7 @@ public class ItemDagger extends AbstractCuttingWeapon{
 	
 	public ItemDagger(int idItem, String name) {
 		super(idItem,1.5,100000,name);
+		effect= EnumBonusEffects.FAST;
 	}
 	
 	@Override
