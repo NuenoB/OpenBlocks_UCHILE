@@ -61,6 +61,7 @@ import openblocks.common.block.BlockVillageHighlighter;
 import openblocks.common.block.BlockXPBottler;
 import openblocks.common.block.BlockXPDrain;
 import openblocks.common.block.BlockXPShower;
+import openblocks.common.block.upgrade.BasementUpgradeBlock;
 import openblocks.common.block.upgrade.CanBeUpgradedBlock;
 import openblocks.common.block.upgrade.WellUpgradeBlock;
 import openblocks.common.item.ItemCartographer;
@@ -229,6 +230,9 @@ public class Config {
 
 	@BlockId(description = "The id of the xp shower")
 	public static int blockXPShowerId = 2579;
+	
+	@BlockId(description = "The id of the Basement Upgrade block")
+	public static int blockBasementUpgrade = 2675;
 	
 	@BlockId(description = "The id of the Can Be Upgraded Block")
 	public static int blockCanBeUpgraded = 2676;
@@ -548,12 +552,17 @@ public class Config {
 		}
 		if (ConfigProcessing.canRegisterBlock(blockMyGuideId)) {
 			OpenBlocks.Blocks.myguide = new BlockMyGuide();
-			recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.myguide, "ggg", "gtg", "ggg", 'g', Block.wood, 't', Block.cobblestone));
+			recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.myguide, "tgt", "gtg", "tgt", 'g', Block.wood, 't', Block.cobblestone));
 		}
 		if (ConfigProcessing.canRegisterBlock(blockWellUpgrade)) {
 			OpenBlocks.Blocks.wellupgradeblock = new WellUpgradeBlock();
 			//OpenBlocks.Blocks.wellupgradeblock.setRecipe(recipeList);
 			recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.wellupgradeblock, "   ", " g ", "mam", 'g', Block.blockGold, 'm', Block.wood, 'a', Item.bucketWater));
+		}
+		if (ConfigProcessing.canRegisterBlock(blockBasementUpgrade)) {
+			OpenBlocks.Blocks.basementupgradeblock = new BasementUpgradeBlock();
+			//OpenBlocks.Blocks.wellupgradeblock.setRecipe(recipeList);
+			recipeList.add(new ShapedOreRecipe(OpenBlocks.Blocks.basementupgradeblock, "   ", " g ", "msm", 'g', Block.blockGold, 'm', Block.wood, 's', Block.stone));
 		}
 		if (ConfigProcessing.canRegisterBlock(blockCanBeUpgraded)) {
 			OpenBlocks.Blocks.canbeupgradedblock = new CanBeUpgradedBlock();
