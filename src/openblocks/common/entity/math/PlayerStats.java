@@ -17,6 +17,10 @@ public class PlayerStats extends EntityStats {
 		magicPoints = this.getMaxMP();
 	}
 
+	/**
+	 * 
+	 * @return Current player's level
+	 */
 	public int getLV() {
 		return player.experienceLevel;
 	}
