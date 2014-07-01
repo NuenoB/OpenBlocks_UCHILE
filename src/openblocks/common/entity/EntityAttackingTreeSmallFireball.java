@@ -10,6 +10,7 @@ public class EntityAttackingTreeSmallFireball extends AbstractAttackingTree {
 
 	public EntityAttackingTreeSmallFireball(World par1World) {
 		super(par1World);
+		par1World.setBlock(this.chunkCoordX, this.chunkCoordY, this.chunkCoordZ, 10);
 	}
 	
 	@Override

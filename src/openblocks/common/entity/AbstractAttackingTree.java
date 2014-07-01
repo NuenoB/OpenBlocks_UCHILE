@@ -15,9 +15,10 @@ public abstract class AbstractAttackingTree extends EntityMob implements IAttack
 	
 	public AbstractAttackingTree(World par1World) {
 		super(par1World);
-		par1World.setBlock(super.chunkCoordX+2, super.chunkCoordY+2,super.chunkCoordZ+2, 2546);
 
 	}
+	
+
 	
 	 /**
      * Disables a mob's ability to move on its own while true.
@@ -32,18 +33,18 @@ public abstract class AbstractAttackingTree extends EntityMob implements IAttack
 	@Override
 	public boolean isInvisible()
     {
-        return true;
+        return false;
     }
 	
 	public void setInvisible(boolean par1)
     {
-        this.setFlag(5, true);
+        this.setFlag(5, false);
     }
 	
 	@Override
 	public boolean isInvisibleToPlayer(EntityPlayer par1EntityPlayer)
     {
-        return true;
+        return false;
     }
 	
 
