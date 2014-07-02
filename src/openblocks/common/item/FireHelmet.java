@@ -1,5 +1,6 @@
 package openblocks.common.item;
 
+import openblocks.client.model.ModelFireIronHelmet;
 import openblocks.client.model.ModelSonicGlasses;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -15,8 +16,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class FireHelmet extends AbstractElementalArmor {
 	
-	@SideOnly(Side.CLIENT)
-	private ModelFireHelmet model;
 	private boolean ready = false;
 	
 	public FireHelmet(int armorId, EnumArmorMaterial material, int renderMaterial) {
