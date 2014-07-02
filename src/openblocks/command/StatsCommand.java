@@ -50,6 +50,7 @@ public class StatsCommand extends CommandBase{
 	}
 
 	
+	
 	@Override
 	/**
 	 * Compares the name of this command to the name of the given command(not needed on this command)
