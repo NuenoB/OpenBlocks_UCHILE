@@ -26,6 +26,7 @@ public class StatsCommand extends CommandBase{
 		return "stats actuales del personaje";
 	}
 
+	
 	@Override
 	/**
 	 * Method called when the command is typed in
