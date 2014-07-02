@@ -485,9 +485,20 @@ public class OpenBlocks {
 		proxy.postInit();
 		 
 		//Se registra el cerdo
-		IEntityRegister HolyPigRegister = USEntityRegister.getInstance();
-		HolyPigRegister.setInfo(EntityHolyPig.class, "HolyPig", "Holy Pig");
-		HolyPigRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
+		IEntityRegister Register = USEntityRegister.getInstance();
+		Register.setInfo(EntityHolyPig.class, "HolyPig", "Holy Pig");
+	    Register.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
+		
+		Register.setInfo(EntityAttackingTreeBigFireball.class, "AttackingTreeBigFireballl", "Attacking Tree Big Fireball");
+		Register.register(10, 3, 10000, EnumCreatureType.creature, 200<<16, (20<<16));
+		RenderManager render = RenderManager.instance;
+		
+		Render renderAttackingTree =  new RenderAttackingTree(new ModelAttackingTree(),0.7F);
+		renderAttackingTree.setRenderManager(render);
+		render.entityRenderMap.put(EntityAttackingTreeBigFireball.class, renderAttackingTree);
+		
+		Register.setInfo(EntityAttackingTreeSmallFireball.class, "AttackingTreeSmallFireballl", "Attacking Tree Small Fireball");
+		Register.register(10, 3, 10000, EnumCreatureType.creature, 10<<16, (240<<16)+(190<<8));
 		/*
 		//Registro del caballero
 		IEntityRegister KnightRegister = USEntityRegister.getInstance();
