@@ -39,23 +39,29 @@ public class PlayerStats extends EntityStats {
 	@Override
 	public float getATK() {
 		float attack = 2.0F + 1.0F*player.experienceLevel;
-		Item held = player.getHeldItem().getItem();
-		if (held instanceof AbstractCuttingWeapon) {
-			AbstractCuttingWeapon weapon = (AbstractCuttingWeapon) held;
-			attack += weapon.getBonusDamage();
+		try {
+			Item held = player.getHeldItem().getItem();
+			if (held instanceof AbstractCuttingWeapon) {
+				AbstractCuttingWeapon weapon = (AbstractCuttingWeapon) held;
+				attack += weapon.getBonusDamage();
+			}
 		}
+		catch (Exception e) {}
 		return attack;
 	}
 	
 	@Override
 	public float getDEF() {
 		float baseDEF = 1.0F + 0.5F*player.experienceLevel;
-		ItemStack[] inventory = player.inventory.armorInventory;
-		for (ItemStack armor : inventory) {
-			Item item = armor.getItem();
-			if (item instanceof ItemArmor)
-				baseDEF += ((ItemArmor) item).damageReduceAmount;
+		try {
+			ItemStack[] inventory = player.inventory.armorInventory;
+			for (ItemStack armor : inventory) {
+				Item item = armor.getItem();
+				if (item instanceof ItemArmor)
+					baseDEF += ((ItemArmor) item).damageReduceAmount;
+			}
 		}
+		catch (Exception e) {}
 		return baseDEF;
 	}
 	
@@ -74,19 +80,22 @@ public class PlayerStats extends EntityStats {
 	@Override
 	public int getSPD() {
 		int baseSPD = 3 + 1*player.experienceLevel;
-		Item held = player.getHeldItem().getItem();
-		if (held instanceof AbstractCuttingWeapon) {
-			AbstractCuttingWeapon weapon = (AbstractCuttingWeapon) held;
-			EnumBonusEffects effect = weapon.getBonusEffect();
-			switch (effect) {
-			case FAST:
-				baseSPD += 5;
-			case SLOW:
-				baseSPD -= 5;
-			default:
-				break;
+		try {
+			Item held = player.getHeldItem().getItem();
+			if (held instanceof AbstractCuttingWeapon) {
+				AbstractCuttingWeapon weapon = (AbstractCuttingWeapon) held;
+				EnumBonusEffects effect = weapon.getBonusEffect();
+				switch (effect) {
+				case FAST:
+					baseSPD += 5;
+				case SLOW:
+					baseSPD -= 5;
+				default:
+					break;
+				}
 			}
 		}
+		catch (Exception e) {}
 		return baseSPD;
 	}
 	
