@@ -529,12 +529,15 @@ public class OpenBlocks {
 	}
 
 	@EventHandler
+	/*Aqui se registran los comandos*/
 	public void severStart(FMLServerStartingEvent evt) {
 		evt.registerServerCommand(new CommandFlimFlam());
 		evt.registerServerCommand(new CommandLuck());
 		MinecraftServer server = MinecraftServer.getServer();
 		ICommandManager command = server.getCommandManager();
 		ServerCommandManager manager = (ServerCommandManager) command;
+		
+		//se registra el comando StatsCommand
 		manager.registerCommand(new StatsCommand());
 	}
 
