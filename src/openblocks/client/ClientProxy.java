@@ -20,8 +20,10 @@ import openblocks.client.bindings.BrickBindings;
 import openblocks.client.fx.FXLiquidSpray;
 import openblocks.client.gui.GuiBattle;
 import openblocks.client.model.ModelCraneBackpack;
+import openblocks.client.model.ModelDragonKnight;
 import openblocks.client.model.ModelKnight;
 import openblocks.client.model.ModelLizard;
+import openblocks.client.model.ModelRobotGeneral;
 import openblocks.client.radio.RadioManager;
 import openblocks.client.renderer.BlockRenderingHandler;
 import openblocks.client.renderer.entity.*;
@@ -92,8 +94,10 @@ public class ClientProxy implements IOpenBlocksProxy {
 		RenderingRegistry.registerBlockHandler(new BlockRenderingHandler());
 
 		/*registrar nuevos renderer para nuevas criaturas*/
-		RenderingRegistry.registerEntityRenderingHandler(EntityKnight.class, new EntityKnightRenderer(new ModelKnight(), 0.8f));
+		//RenderingRegistry.registerEntityRenderingHandler(EntityKnight.class, new EntityKnightRenderer(new ModelKnight(), 0.8f));
 		RenderingRegistry.registerEntityRenderingHandler(EntityLizard.class, new EntityLizardRenderer(new ModelLizard(), 0.2f));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDragonKnight.class, new EntityDragonKnightRenderer(new ModelDragonKnight(), 0.2f));
+		RenderingRegistry.registerEntityRenderingHandler(EntityRobotGeneral.class, new EntityRobotGeneralRenderer(new ModelRobotGeneral(), 0.2f));
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMine.class, new TileEntityMineRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMyGuide.class, new TileEntityMyGuideRenderer());

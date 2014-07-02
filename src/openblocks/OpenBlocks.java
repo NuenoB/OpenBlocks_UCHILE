@@ -488,15 +488,25 @@ public class OpenBlocks {
 		IEntityRegister HolyPigRegister = USEntityRegister.getInstance();
 		HolyPigRegister.setInfo(EntityHolyPig.class, "HolyPig", "Holy Pig");
 		HolyPigRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
-		
+		/*
 		//Registro del caballero
 		IEntityRegister KnightRegister = USEntityRegister.getInstance();
 		KnightRegister.setInfo(EntityKnight.class, "Knight", "Knight");
 		KnightRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
-		
+		*/
 		//Registro del lagarto
 		IEntityRegister LizardRegister = USEntityRegister.getInstance();
 		LizardRegister.setInfo(EntityLizard.class, "Lizard", "Lizard");
+		LizardRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
+		
+		//Registro del caballero dragon
+		IEntityRegister DragonKnightRegister = USEntityRegister.getInstance();
+		LizardRegister.setInfo(EntityDragonKnight.class, "DragonKnight", "DragonKnight");
+		LizardRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
+		
+		//Registro del caballero dragon
+		IEntityRegister RobotGeneralRegister = USEntityRegister.getInstance();
+		LizardRegister.setInfo(EntityRobotGeneral.class, "RobotGeneral", "RobotGeneral");
 		LizardRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
 				
 		
