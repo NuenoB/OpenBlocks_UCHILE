@@ -1,6 +1,9 @@
 package openblocks.common.entity.math;
 
 import openblocks.common.item.AbstractCuttingWeapon;
+import java.util.UUID;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.item.Item;

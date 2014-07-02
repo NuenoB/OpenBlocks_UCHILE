@@ -1,3 +1,4 @@
+
 package openblocks.common.entity.math;
 
 import openblocks.common.item.AbstractCuttingWeapon;
@@ -10,6 +11,7 @@ import net.minecraft.item.ItemStack;
 public class PlayerStats extends EntityStats {
 	
 	private EntityPlayer player;
+	private ItemStack[] itemStack;
 	
 	public PlayerStats(EntityPlayer player) {
 		this.player = player;

@@ -18,7 +18,12 @@ import openblocks.IOpenBlocksProxy;
 import openblocks.OpenBlocks;
 import openblocks.client.bindings.BrickBindings;
 import openblocks.client.fx.FXLiquidSpray;
+import openblocks.client.gui.GuiBattle;
 import openblocks.client.model.ModelCraneBackpack;
+import openblocks.client.model.ModelDragonKnight;
+import openblocks.client.model.ModelKnight;
+import openblocks.client.model.ModelLizard;
+import openblocks.client.model.ModelRobotGeneral;
 import openblocks.client.radio.RadioManager;
 import openblocks.client.renderer.BlockRenderingHandler;
 import openblocks.client.renderer.entity.*;
@@ -26,6 +31,7 @@ import openblocks.client.renderer.item.*;
 import openblocks.client.renderer.tileentity.*;
 import openblocks.common.entity.*;
 import openblocks.common.tileentity.*;
+import openblocks.common.entity.math.*;
 import openmods.binding.KeyDispatcherBuilder;
 import openmods.entity.EntityBlock;
 import openmods.entity.renderer.EntityBlockRenderer;
@@ -87,6 +93,13 @@ public class ClientProxy implements IOpenBlocksProxy {
 		OpenBlocks.renderId = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(new BlockRenderingHandler());
 
+		/*registrar nuevos renderer para nuevas criaturas*/
+		//RenderingRegistry.registerEntityRenderingHandler(EntityKnight.class, new EntityKnightRenderer(new ModelKnight(), 0.8f));
+		RenderingRegistry.registerEntityRenderingHandler(EntityLizard.class, new EntityLizardRenderer(new ModelLizard(), 0.2f));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDragonKnight.class, new EntityDragonKnightRenderer(new ModelDragonKnight(), 0.2f));
+		RenderingRegistry.registerEntityRenderingHandler(EntityRobotGeneral.class, new EntityRobotGeneralRenderer(new ModelRobotGeneral(), 0.2f));
+		
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMine.class, new TileEntityMineRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMyGuide.class, new TileEntityMyGuideRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGuide.class, new TileEntityGuideRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTarget.class, new TileEntityTargetRenderer());
@@ -187,5 +200,16 @@ public class ClientProxy implements IOpenBlocksProxy {
 	public void spawnLiquidSpray(World worldObj, FluidStack water, double x, double y, double z, float scale, float gravity, Vec3 vec) {
 		FXLiquidSpray spray = new FXLiquidSpray(worldObj, water, x, y, z, scale, gravity, vec);
 		Minecraft.getMinecraft().effectRenderer.addEffect(spray);
+	}
+	
+	public void newGui(int battleID, EntityStats player)
+	{
+		GuiBattle bg = new GuiBattle();
+		Minecraft.getMinecraft().displayGuiScreen(bg);
+	}
+
+	@Override
+	public void setGui(GuiBattle guiBattle) {
+		guiBattle.initGui();	
 	}
 }

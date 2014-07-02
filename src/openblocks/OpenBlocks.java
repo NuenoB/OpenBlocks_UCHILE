@@ -6,6 +6,8 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.command.ICommandManager;
 import net.minecraft.command.ServerCommandManager;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EnumCreatureType;
@@ -19,10 +21,13 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.*;
 import openblocks.api.FlimFlamRegistry;
+import openblocks.client.model.ModelAttackingTree;
 import openblocks.client.radio.RadioManager;
 import openblocks.command.StatsCommand;
+import openblocks.client.renderer.entity.RenderAttackingTree;
 import openblocks.common.*;
 import openblocks.common.block.*;
+import openblocks.common.block.upgrade.*;
 import openblocks.common.entity.*;
 import openblocks.common.item.*;
 import openblocks.common.item.ItemImaginationGlasses.ItemCrayonGlasses;
@@ -36,6 +41,7 @@ import openblocks.rubbish.BrickManager;
 import openblocks.rubbish.CommandFlimFlam;
 import openblocks.rubbish.CommandLuck;
 import openblocks.utils.ChangelogBuilder;
+import openblocks.Battle.*;
 import openmods.Log;
 import openmods.Mods;
 import openmods.OpenMods;
@@ -62,6 +68,7 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION, dependencies = ModInfo.DEPENDENCIES)
 @NetworkMod(serverSideRequired = true, clientSideRequired = true)
 public class OpenBlocks {
@@ -84,6 +91,18 @@ public class OpenBlocks {
 	public static IOpenBlocksProxy proxy;
 
 	public static class Blocks {
+		@RegisterBlock(name = "canbeupgradedblock")
+		public static CanBeUpgradedBlock canbeupgradedblock;
+		
+		@RegisterBlock(name = "wellupgradeblock")
+		public static WellUpgradeBlock wellupgradeblock;
+		
+		@RegisterBlock(name = "basementupgradeblock")
+		public static BasementUpgradeBlock basementupgradeblock;
+		
+		@RegisterBlock(name = "screenprinter")
+		public static BlockScreenPrinter screenprinter;
+		
 		@RegisterBlock(name = "ladder")
 		public static BlockLadder ladder;
 
@@ -92,6 +111,10 @@ public class OpenBlocks {
 		
 		@RegisterBlock(name = "myguide", tileEntity = TileEntityMyGuide.class)
 		public static BlockMyGuide myguide;
+		
+		@RegisterBlock(name = "mine", tileEntity = TileEntityMine.class)
+		public static BlockMine mine;
+		
 
 		@RegisterBlock(name = "elevator", tileEntity = TileEntityElevator.class)
 		public static BlockElevator elevator;
@@ -304,8 +327,6 @@ public class OpenBlocks {
 		@RegisterItem(name = "fireIronHelmet", unlocalizedName= "fire_iron_helmet")
 		public static FireHelmet fireIronHelmet;
 
-
-		// -----------------------------------------------------------------------------------------
 	}
 
 	public static class ClassReferences {
@@ -452,7 +473,9 @@ public class OpenBlocks {
 		if (!Config.soSerious) {
 			MinecraftForge.EVENT_BUS.register(new BrickManager());
 		}
-
+		
+		MinecraftForge.EVENT_BUS.register(new BattleEventListener());
+		
 		if (Config.blockElevatorId > 0) {
 			MinecraftForge.EVENT_BUS.register(ElevatorBlockRules.instance);
 		}
@@ -469,7 +492,6 @@ public class OpenBlocks {
 
 	@EventHandler
 	public void init(FMLInitializationEvent evt) {
-		
 		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
 		proxy.init();
 		proxy.registerRenderInformation();
@@ -481,11 +503,41 @@ public class OpenBlocks {
 		proxy.postInit();
 		 
 		//Se registra el cerdo
-		IEntityRegister HolyPigRegister = USEntityRegister.getInstance();
-		HolyPigRegister.setInfo(EntityHolyPig.class, "HolyPig", "Holy Pig");
-		HolyPigRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
-						
-				
+		IEntityRegister Register = USEntityRegister.getInstance();
+		Register.setInfo(EntityHolyPig.class, "HolyPig", "Holy Pig");
+	    Register.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
+		
+		Register.setInfo(EntityAttackingTreeBigFireball.class, "AttackingTreeBigFireballl", "Attacking Tree Big Fireball");
+		Register.register(10, 3, 10000, EnumCreatureType.creature, 200<<16, (20<<16));
+		RenderManager render = RenderManager.instance;
+		
+		Render renderAttackingTree =  new RenderAttackingTree(new ModelAttackingTree(),0.7F);
+		renderAttackingTree.setRenderManager(render);
+		render.entityRenderMap.put(EntityAttackingTreeBigFireball.class, renderAttackingTree);
+		
+		Register.setInfo(EntityAttackingTreeSmallFireball.class, "AttackingTreeSmallFireballl", "Attacking Tree Small Fireball");
+		Register.register(10, 3, 10000, EnumCreatureType.creature, 10<<16, (240<<16)+(190<<8));
+		/*
+		//Registro del caballero
+		IEntityRegister KnightRegister = USEntityRegister.getInstance();
+		KnightRegister.setInfo(EntityKnight.class, "Knight", "Knight");
+		KnightRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
+		*/
+		//Registro del lagarto
+		IEntityRegister LizardRegister = USEntityRegister.getInstance();
+		LizardRegister.setInfo(EntityLizard.class, "Lizard", "Lizard");
+		LizardRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
+		
+		//Registro del caballero dragon
+		IEntityRegister DragonKnightRegister = USEntityRegister.getInstance();
+		LizardRegister.setInfo(EntityDragonKnight.class, "DragonKnight", "DragonKnight");
+		LizardRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
+		
+		//Registro del caballero dragon
+		IEntityRegister RobotGeneralRegister = USEntityRegister.getInstance();
+		LizardRegister.setInfo(EntityRobotGeneral.class, "RobotGeneral", "RobotGeneral");
+		LizardRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
+
 		
 		if (Config.enableChangelogBooks) changeLog = ChangelogBuilder.createChangeLog();
 

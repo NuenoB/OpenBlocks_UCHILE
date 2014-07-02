@@ -45,9 +45,9 @@ public class TileEntityMyGuide extends SyncedTileEntity implements IShapeable, I
 
 	@Override
 	protected void createSyncedFields() {
-		width = new SyncableInt(3);
-		height = new SyncableInt(12);
-		depth = new SyncableInt(3);
+		width = new SyncableInt(20);
+		height = new SyncableInt(20);
+		depth = new SyncableInt(20);
 		mode = new SyncableInt(0);
 	}
 
@@ -253,8 +253,8 @@ public class TileEntityMyGuide extends SyncedTileEntity implements IShapeable, I
 		if (!(heldItem instanceof ItemBlock)) return;
 		final ItemBlock itemBlock = (ItemBlock)heldItem;
 
-		//Evitar construir bloques de esmeralda o de bloques que construyen bloques
-		if(itemBlock.getBlockID()==Block.blockEmerald.blockID || 
+		//Evitar construir bloques de oro o de bloques que construyen bloques
+		if(itemBlock.getBlockID()==Block.blockGold.blockID || 
 				itemBlock.getBlockID()==openblocks.OpenBlocks.Blocks.guide.blockID ||
 				itemBlock.getBlockID()==openblocks.OpenBlocks.Blocks.myguide.blockID){
 			return;
@@ -285,6 +285,9 @@ public class TileEntityMyGuide extends SyncedTileEntity implements IShapeable, I
 		if (player.isSneaking()) switchMode(player);
 		else if (isInFillMode()) fill(player);
 		else if (player.capabilities.isCreativeMode) clearStructure();
+		
+//		System.out.println("Id: "+worldObj.getBlockId(xCoord, yCoord, zCoord+1)+
+//				" meta: "+worldObj.getBlockMetadata(xCoord, yCoord, zCoord+1));
 
 		return true;
 	}

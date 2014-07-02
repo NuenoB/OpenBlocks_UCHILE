@@ -1,5 +1,6 @@
 package openblocks.common.item;
 
+import openblocks.client.model.ModelFireIronHelmet;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBiped;
@@ -12,7 +13,7 @@ import net.minecraft.item.ItemStack;
 public class FireIronHelmet extends FireHelmet {
 	
 	@SideOnly(Side.CLIENT)
-	private ModelFireHelmet model;
+	private ModelFireIronHelmet model;
 
 	public FireIronHelmet(int armorId) {
 		super(armorId, EnumArmorMaterial.IRON, 2);
@@ -37,7 +38,7 @@ public class FireIronHelmet extends FireHelmet {
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer) {
-		return "openblocks:textures/models/fire_iron_helmet.png";
+		return "openblocks:textures/models/fire__helmet.png";
 	}
 
 }

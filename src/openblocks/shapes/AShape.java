@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
+import openblocks.shapes.cond.ICondStrategy;
 import openmods.shapes.IShapeable;
 
 public abstract class AShape implements IShapeGen {

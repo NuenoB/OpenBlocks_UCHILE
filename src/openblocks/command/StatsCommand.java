@@ -38,6 +38,8 @@ public class StatsCommand extends CommandBase{
 			PlayerStats stats=new PlayerStats(player);
 			player.addChatMessage("Player stats:");
 			player.addChatMessage("Lvl: "+stats.getLV());
+			player.addChatMessage("HP: "+stats.getMaxHP());
+			player.addChatMessage("MP: "+stats.getMaxMP());
 			player.addChatMessage("Attack: "+stats.getATK());
 			player.addChatMessage("Defense: "+stats.getDEF());
 			player.addChatMessage("Magic: "+stats.getMAG());
