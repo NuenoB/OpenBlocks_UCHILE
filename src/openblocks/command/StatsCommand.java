@@ -42,5 +42,10 @@ public class StatsCommand extends CommandBase{
 	public int compareTo(Object o) {
 		return 0;
 	}
+	
+	@Override
+	public boolean canCommandSenderUseCommand(ICommandSender icommandsender){
+	    return true;
+	}
 
 }
