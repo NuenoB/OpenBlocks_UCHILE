@@ -23,6 +23,7 @@ import openblocks.client.radio.RadioManager;
 import openblocks.client.renderer.entity.RenderAttackingTree;
 import openblocks.common.*;
 import openblocks.common.block.*;
+import openblocks.common.block.upgrade.*;
 import openblocks.common.entity.*;
 import openblocks.common.item.*;
 import openblocks.common.item.ItemImaginationGlasses.ItemCrayonGlasses;
@@ -86,6 +87,15 @@ public class OpenBlocks {
 	public static IOpenBlocksProxy proxy;
 
 	public static class Blocks {
+		@RegisterBlock(name = "canbeupgradedblock")
+		public static CanBeUpgradedBlock canbeupgradedblock;
+		
+		@RegisterBlock(name = "wellupgradeblock")
+		public static WellUpgradeBlock wellupgradeblock;
+		
+		@RegisterBlock(name = "basementupgradeblock")
+		public static BasementUpgradeBlock basementupgradeblock;
+		
 		@RegisterBlock(name = "screenprinter")
 		public static BlockScreenPrinter screenprinter;
 		

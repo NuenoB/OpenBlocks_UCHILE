@@ -6,7 +6,6 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import openblocks.shapes.newshapes.*;
-import openblocks.shapes.simpleshapes.CopyShape;
 import openblocks.shapes.simpleshapes.FloorShape;
 import openblocks.shapes.simpleshapes.FourWallGen;
 import openblocks.shapes.simpleshapes.ShapeXPlaneGen;
