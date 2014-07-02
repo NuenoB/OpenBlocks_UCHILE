@@ -10,6 +10,13 @@ import net.minecraft.entity.EntityLiving;
 import openblocks.common.entity.math.*;
 import net.minecraft.world.World;
 
+/**
+ * 
+ * @author Jaime
+ * Creates an instance of battle based on the current entities involved and game session.
+ * @param ent Array list containing all EntityStats of the combatants.
+ * @param minecraft Current session of Minecraft.
+ */
 public class Battle {
 	private boolean battleEnd;
 	private boolean nextTurn;
@@ -22,7 +29,14 @@ public class Battle {
 	public void sortTurn(){
 		Collections.sort(battlers, new determinePriority());
 	}
-
+	/**
+	 * 
+	 * @author Jaime
+	 * New comparator to define the turn order based on each entity's speed.
+	 * @param o1 First entity
+	 * @param o2 Second entity
+	 *
+	 */
 	public class determinePriority implements Comparator<EntityStats>{
 
 		@Override
@@ -31,7 +45,9 @@ public class Battle {
 			else return 0;
 		}
 	}
-
+	/** Stops movement of entities to simulate turn-based action.
+	 * 
+	 */
 	public void blockMovement(){
 		for (EntityStats entity : battlers){
 			entity.getEntity().setJumping(false);
@@ -39,7 +55,9 @@ public class Battle {
 			entity.getEntity().moveForward = 0.0F;
 		}
 	}
-
+	/**
+	 * Updates the state of the battle and each entity. Must add packets.
+	 */
 	public synchronized void update(){
 		this.blockMovement();
 		for (EntityStats entity : battlers){

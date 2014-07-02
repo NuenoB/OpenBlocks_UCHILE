@@ -164,8 +164,7 @@ public class GuiBattle extends GuiScreen {
 
 	/**
 	 * Draws a combatant on the GUIScreen based on the given parameters.
-	 * @param id entityID of the combatant.
-	 * @param sideOne True if the combatant is on side One.
+	 * @param combatant EntityStats corresponding to current Entity.
 	 * @param x X coordinate of the drawn information.
 	 * @param y Y coordinate of the drawn information.
 	 * @param color The color of the drawn information (when applicable).

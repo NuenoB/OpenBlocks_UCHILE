@@ -36,6 +36,11 @@ public class BattleThread implements Runnable {
 		}
 		return false;
 	}
+	
+	/**
+	 * Runs the current battle in the new thread making a new instance of Battle.
+	 * Calls update method of class Battle.
+	 */
 
 	@Override
 	public synchronized void run() {
