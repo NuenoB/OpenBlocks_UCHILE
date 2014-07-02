@@ -503,7 +503,6 @@ public class OpenBlocks {
 		
 		Register.setInfo(EntityAttackingTreeSmallFireball.class, "AttackingTreeSmallFireballl", "Attacking Tree Small Fireball");
 		Register.register(10, 3, 10000, EnumCreatureType.creature, 10<<16, (240<<16)+(190<<8));
-
 		/*
 		//Registro del caballero
 		IEntityRegister KnightRegister = USEntityRegister.getInstance();
@@ -524,7 +523,7 @@ public class OpenBlocks {
 		IEntityRegister RobotGeneralRegister = USEntityRegister.getInstance();
 		LizardRegister.setInfo(EntityRobotGeneral.class, "RobotGeneral", "RobotGeneral");
 		LizardRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
-				
+
 		
 		if (Config.enableChangelogBooks) changeLog = ChangelogBuilder.createChangeLog();
 
