@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EnumCreatureType;
@@ -16,7 +18,9 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.*;
 import openblocks.api.FlimFlamRegistry;
+import openblocks.client.model.ModelAttackingTree;
 import openblocks.client.radio.RadioManager;
+import openblocks.client.renderer.entity.RenderAttackingTree;
 import openblocks.common.*;
 import openblocks.common.block.*;
 import openblocks.common.entity.*;
@@ -499,6 +503,7 @@ public class OpenBlocks {
 		
 		Register.setInfo(EntityAttackingTreeSmallFireball.class, "AttackingTreeSmallFireballl", "Attacking Tree Small Fireball");
 		Register.register(10, 3, 10000, EnumCreatureType.creature, 10<<16, (240<<16)+(190<<8));
+
 		/*
 		//Registro del caballero
 		IEntityRegister KnightRegister = USEntityRegister.getInstance();
