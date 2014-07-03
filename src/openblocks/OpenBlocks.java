@@ -24,7 +24,8 @@ import openblocks.api.FlimFlamRegistry;
 import openblocks.client.model.ModelAttackingTree;
 import openblocks.client.radio.RadioManager;
 import openblocks.command.StatsCommand;
-import openblocks.client.renderer.entity.RenderAttackingTree;
+import openblocks.client.renderer.entity.RenderAttackingTreeBigFireBall;
+import openblocks.client.renderer.entity.RenderAttackingTreeSmallFireBall;
 import openblocks.common.*;
 import openblocks.common.block.*;
 import openblocks.common.block.upgrade.*;
@@ -511,7 +512,7 @@ public class OpenBlocks {
 		Register.register(10, 3, 10000, EnumCreatureType.creature, 200<<16, (20<<16));
 		RenderManager render = RenderManager.instance;
 		
-		Render renderAttackingTree =  new RenderAttackingTree(new ModelAttackingTree(),0.7F);
+		Render renderAttackingTree =  new RenderAttackingTreeBigFireBall(new ModelAttackingTree(),0.7F);
 		renderAttackingTree.setRenderManager(render);
 		render.entityRenderMap.put(EntityAttackingTreeBigFireball.class, renderAttackingTree);
 		
@@ -538,6 +539,10 @@ public class OpenBlocks {
 		LizardRegister.setInfo(EntityRobotGeneral.class, "RobotGeneral", "RobotGeneral");
 		LizardRegister.register(10, 3, 10000, EnumCreatureType.creature, 255<<16, (255<<16)+(200<<8));
 
+		
+		Render renderAttackingTreeSmallFireball =  new RenderAttackingTreeSmallFireBall(new ModelAttackingTree(),0.7F);
+		renderAttackingTreeSmallFireball.setRenderManager(render);
+		render.entityRenderMap.put(EntityAttackingTreeSmallFireball.class, renderAttackingTreeSmallFireball);
 		
 		if (Config.enableChangelogBooks) changeLog = ChangelogBuilder.createChangeLog();
 
