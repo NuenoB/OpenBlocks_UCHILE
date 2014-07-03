@@ -48,7 +48,7 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 		width = new SyncableInt(8);
 		height = new SyncableInt(13);
 		depth = new SyncableInt(8);
-		mode = new SyncableInt(1);
+		mode = new SyncableInt(2);
 		mnMoveW = new SyncableInt(0);
 		mnMoveH = new SyncableInt(0); 
 		mnMoveD = new SyncableInt(0);
@@ -236,7 +236,7 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 
 	private void fill(EntityPlayer player, int side) {
 
-		final Block itemBlock = getCurrentMode().generator.getBlockToConstruct();
+		final int itemBlock = getCurrentMode().generator.getBlockToConstruct();
 		
 		int cont = 1;
 		ArrayList<BlockRepresentation> conditions = getCurrentMode().generator.fillConditions(new ChunkCoordinates(xCoord,yCoord,zCoord)); 
@@ -248,7 +248,7 @@ public class TileEntityMine extends SyncedTileEntity implements IShapeable, ISha
 		}
 
 		for (ChunkCoordinates coord : getShapeCoordinates())
-			worldObj.setBlock(coord.posX, coord.posY, coord.posZ, itemBlock.blockID, 0, BlockNotifyFlags.ALL);
+			worldObj.setBlock(coord.posX, coord.posY, coord.posZ, itemBlock, 0, BlockNotifyFlags.ALL);
 		
 		for(BlockRepresentation iteratorBlock:getCurrentMode().generator.fill( new ChunkCoordinates(xCoord,yCoord,zCoord) , worldObj))
 			worldObj.setBlock(iteratorBlock.getCoord().posX, iteratorBlock.getCoord().posY, iteratorBlock.getCoord().posZ, 

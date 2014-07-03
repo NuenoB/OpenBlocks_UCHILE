@@ -1,114 +1,114 @@
-
 package openblocks.common.entity.math;
 
-import openblocks.common.item.AbstractCuttingWeapon;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
-public class PlayerStats extends EntityStats {
-	
-	private EntityPlayer player;
-	private ItemStack[] itemStack;
-	
-	public PlayerStats(EntityPlayer player) {
-		this.player = player;
-		hitPoints = this.getMaxHP();
-		magicPoints = this.getMaxMP();
-	}
+public class PlayerStats extends Stats{
 
-	/**
-	 * 
-	 * @return Current player's level
-	 */
-	public int getLV() {
-		return player.experienceLevel;
+	protected EntityPlayer player;
+	protected ItemStack[] itemStack;
+	protected float attack;
+ 	protected float defense;
+ 	protected float magic;
+ 	protected float resistance;
+ 	protected int speed;
+
+ 	public PlayerStats(Entity entity){
+ 		player=(EntityPlayer) entity;
+		itemStack=player.inventory.armorInventory;
+ 	}
+ 	
+	@Override
+	void statsAllocte() {
+		attack=player.getHeldItem().getBonusDamage(); //método agregado por el grupo de items.
+		defense=this.getTotalDefenseValue();
+		magic=this.getTotalMagicValue();
+		resistance=this.getTotalResistanceValue();
+		speed=this.getTotalSpeedValue();
 	}
 	
-	@Override
-	public float getMaxHP() {
-		int increment = 2*player.experienceLevel;
-		return 20.0F + (float)increment;
-	}
 	
-	@Override
-	public int getMaxMP() {
-		return 5 + 1*player.experienceLevel/5;
-	}
-	
-	@Override
-	public float getATK() {
-		float attack = 2.0F + 1.0F*player.experienceLevel;
-		try {
-			Item held = player.getHeldItem().getItem();
-			if (held instanceof AbstractCuttingWeapon) {
-				AbstractCuttingWeapon weapon = (AbstractCuttingWeapon) held;
-				attack += weapon.getBonusDamage();
-			}
-		}
-		catch (Exception e) {}
+	public float getAttack(){
 		return attack;
 	}
-	
-	@Override
-	public float getDEF() {
-		float baseDEF = 1.0F + 0.5F*player.experienceLevel;
-		try {
-			ItemStack[] inventory = player.inventory.armorInventory;
-			for (ItemStack armor : inventory) {
-				Item item = armor.getItem();
-				if (item instanceof ItemArmor)
-					baseDEF += ((ItemArmor) item).damageReduceAmount;
-			}
-		}
-		catch (Exception e) {}
-		return baseDEF;
+	public float getDefense(){
+		return defense;
 	}
-	
-	@Override
-	public float getMAG() {
-		int increment = 1*player.experienceLevel/3;
-		return 1.0F + (float)increment;
+	public float getMagic(){
+		return magic;
 	}
-	
-	@Override
-	public float getRES() {
-		int increment = 1*player.experienceLevel/3;
-		return 0.5F + 0.5F*increment;
+	public float getResistance(){
+		return resistance;
 	}
-	
-	@Override
-	public int getSPD() {
-		int baseSPD = 3 + 1*player.experienceLevel;
-		try {
-			Item held = player.getHeldItem().getItem();
-			if (held instanceof AbstractCuttingWeapon) {
-				AbstractCuttingWeapon weapon = (AbstractCuttingWeapon) held;
-				EnumBonusEffects effect = weapon.getBonusEffect();
-				switch (effect) {
-				case FAST:
-					baseSPD += 5;
-				case SLOW:
-					baseSPD -= 5;
-				default:
-					break;
-				}
-			}
-		}
-		catch (Exception e) {}
-		return baseSPD;
+	public float getSpeed(){
+		return speed;
 	}
+
 	
-	@Override
-	public EntityLivingBase getEntity() {
-		return player;
-	}
-	
-	@Override
-	public double beingDamaged(DamageType type, float baseDMG, int enemySPD) {
-		player.inventory.damageArmor(4.0F);
-		return super.beingDamaged(type, baseDMG, enemySPD);
-	}
+    public int getTotalDefenseValue()
+    {
+        int i = 0;
+
+        for (int j = 0; j < itemStack.length; ++j)
+        {
+            if (itemStack[j] != null && itemStack[j].getItem() instanceof ItemArmor)
+            {
+                int k = ((ItemArmor)itemStack[j].getItem()).damageReduceAmount;
+                i += k;
+            }
+        }
+
+        return i;
+    }
+    
+    public int getTotalMagicValue()
+    {
+        int i = 0;
+
+        for (int j = 0; j < itemStack.length; ++j)
+        {
+            if (itemStack[j] != null && itemStack[j].getItem() instanceof ItemArmor)
+            {
+                int k = ((ItemArmor)itemStack[j].getItem()).magicAmount; //ajustar accesor definido por desarrollo de items
+                i += k;
+            }
+        }
+
+        return i;
+    }
+    
+    public int getTotalResistanceValue()
+    {
+        int i = 0;
+
+        for (int j = 0; j < itemStack.length; ++j)
+        {
+            if (itemStack[j] != null && itemStack[j].getItem() instanceof ItemArmor)
+            {
+                int k = ((ItemArmor)itemStack[j].getItem()).resistanceAmount; //ajustar accesor definido por desarrollo de items
+                i += k;
+            }
+        }
+
+        return i;
+    }
+    
+    public int getTotalSpeedValue()
+    {
+        int i = 0;
+
+        for (int j = 0; j < itemStack.length; ++j)
+        {
+            if (itemStack[j] != null && itemStack[j].getItem() instanceof ItemArmor)
+            {
+                int k = ((ItemArmor)itemStack[j].getItem()).speedAmount; //ajustar accesor definido por desarrollo de items
+                i += k;
+            }
+        }
+
+        return i;
+    }
+
 }
