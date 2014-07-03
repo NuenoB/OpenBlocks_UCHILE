@@ -17,6 +17,7 @@ public class BattleEventListener {
 	@ForgeSubscribe
 	public void entityAttacked(LivingAttackEvent event)
 	{
+		try{
 		if(event.entity.worldObj.isRemote)
 			return;
 		
@@ -37,6 +38,9 @@ public class BattleEventListener {
 		}
 		System.out.println(event.source.getEntity().getEntityName() + "(" + event.source.getEntity().entityId
 				+ ") hit " + event.entity.getEntityName() + "(" + event.entity.entityId + ").");
+		}catch(Exception e){
+			//TODO
+		}
 	}
 
 }
