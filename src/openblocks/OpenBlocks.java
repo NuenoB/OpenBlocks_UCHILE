@@ -20,7 +20,8 @@ import net.minecraftforge.fluids.*;
 import openblocks.api.FlimFlamRegistry;
 import openblocks.client.model.ModelAttackingTree;
 import openblocks.client.radio.RadioManager;
-import openblocks.client.renderer.entity.RenderAttackingTree;
+import openblocks.client.renderer.entity.RenderAttackingTreeBigFireBall;
+import openblocks.client.renderer.entity.RenderAttackingTreeSmallFireBall;
 import openblocks.common.*;
 import openblocks.common.block.*;
 import openblocks.common.entity.*;
@@ -489,12 +490,16 @@ public class OpenBlocks {
 		Register.register(10, 3, 10000, EnumCreatureType.creature, 200<<16, (20<<16));
 		RenderManager render = RenderManager.instance;
 		
-		Render renderAttackingTree =  new RenderAttackingTree(new ModelAttackingTree(),0.7F);
+		Render renderAttackingTree =  new RenderAttackingTreeBigFireBall(new ModelAttackingTree(),0.7F);
 		renderAttackingTree.setRenderManager(render);
 		render.entityRenderMap.put(EntityAttackingTreeBigFireball.class, renderAttackingTree);
 		
 		Register.setInfo(EntityAttackingTreeSmallFireball.class, "AttackingTreeSmallFireballl", "Attacking Tree Small Fireball");
 		Register.register(10, 3, 10000, EnumCreatureType.creature, 10<<16, (240<<16)+(190<<8));
+		
+		Render renderAttackingTreeSmallFireball =  new RenderAttackingTreeSmallFireBall(new ModelAttackingTree(),0.7F);
+		renderAttackingTreeSmallFireball.setRenderManager(render);
+		render.entityRenderMap.put(EntityAttackingTreeSmallFireball.class, renderAttackingTreeSmallFireball);
 		
 		if (Config.enableChangelogBooks) changeLog = ChangelogBuilder.createChangeLog();
 

@@ -13,11 +13,11 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderAttackingTree extends RenderLiving {
+public class RenderAttackingTreeBigFireBall extends RenderLiving {
 	
 	private static final ResourceLocation attackingTreeTextures = new ResourceLocation("openblocks:textures/models/attackingtree.png");
 	
-	public RenderAttackingTree(ModelAttackingTree modelAttackingTree, float par2) {
+	public RenderAttackingTreeBigFireBall(ModelAttackingTree modelAttackingTree, float par2) {
 		super(modelAttackingTree, par2);
 	}
 
